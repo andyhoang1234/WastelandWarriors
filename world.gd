@@ -27,7 +27,7 @@ func _on_single_player_button_pressed():
 	add_player(multiplayer.get_unique_id())
 
 func _on_quit_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().quit()
 
 func add_player(peer_id):
 	player = Player.instantiate()
