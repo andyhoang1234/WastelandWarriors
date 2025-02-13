@@ -10,7 +10,8 @@ signal health_changed(health_value)
 var health = 3
 
 const SPEED = 10.0
-const JUMP_VELOCITY = 10.0
+const JUMP_VELOCITY = 11.0
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -88,3 +89,5 @@ func receive_damage():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "shoot":
 		anim_player.play("idle")
+		
+		# Test comment
