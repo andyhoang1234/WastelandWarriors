@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bluoo8q6y51hr"]
+
+[node name="PauseMenu" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 553.0
+offset_top = 172.0
+offset_right = 598.0
+offset_bottom = 195.0
+text = "Menu"
+
+[node name="ContinueButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Button2" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="MainmenuButton3" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
