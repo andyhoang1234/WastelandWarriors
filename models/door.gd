@@ -1,23 +1,18 @@
 extends Node
-var toggle = false 
-@export var animation_player: AnimationPlayer
 
-fumc interact():
-var door_opening = false
-var door_animation_duration = 2.0  # Time for door to fully open
-var open_rotation = 90.0  # Degrees to rotate door
-var door_closed_rotation = 0.0  # Initial rotation (closed position)
+@export var toggle: bool = true
+@onready var Door: MeshInstance3D = $MeshInstance3d
 
-onready var Door = $MeshInstance
+func _ready():
+	pass
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta):
 	
-	if Input.is_action_just_pressed("Door")
-	
+	if Input.is_action_just_pressed("door"):
+		print("Door Toggle")
+		if toggle:
+			toggle = true
+			self.visible = false
+		else:
+			self.visible = true
+			toggle = false
