@@ -11,8 +11,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("door"):
 		print("Door Toggle")
 		if toggle:
-			toggle = true
+			toggle = false
 			self.visible = false
 		else:
+			toggle = true
 			self.visible = true
-			toggle = false
