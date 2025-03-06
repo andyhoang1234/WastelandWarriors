@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtqn74o2v5qm2"]
+
+[ext_resource type="ArrayMesh" uid="uid://yujgqtmj6t10" path="res://models/Door Frame.obj" id="1_3tesx"]
+[ext_resource type="ArrayMesh" uid="uid://desawgc2dscc5" path="res://models/Door.obj" id="2_fe2kk"]
+
+[node name="Door" type="Node3D"]
+
+[node name="DoorFrame" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_3tesx")
+
+[node name="Door" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -3.94418e-10, -1.77949e-12, 3.94418e-10, 0.999959, 0.00902323, -1.77949e-12, -0.00902323, 0.999959, -0.239198, -0.136194, 0.0548012)
+mesh = ExtResource("2_fe2kk")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
