@@ -1,45 +1,31 @@
-extends Node
+extends Node3D
 
-# Export variables for customization
-@export var initial_wave_size : int = 5
-@export var zombie_increase_per_wave : int = 2
-@export var wave_interval : float = 5.0  # Time between waves in seconds
-@export var zombie_scene : PackedScene  # The zombie scene to spawn
+# Export the Enemy scene to be spawned
+@export var enemy_scene: PackedScene
+# Define the min and max number of enemies to spawn
+@export var min_enemies: int = 3
+@export var max_enemies: int = 10
+# Position where enemies will spawn
+@export var spawn_area: Vector3 = Vector3(10, 0, 10)
 
-var current_wave : int = 1
-var zombies_to_spawn : int = 0
-var zombies_spawned : int = 0
-var wave_timer : float = 0.0
-var spawn_location : Vector2 = Vector2(100, 100)  # Spawn location for zombies (can be randomized)
-
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	# Start first wave
-	zombies_to_spawn = initial_wave_size
-	start_wave()
+	spawn_enemies()
 
-func _process(delta: float) -> void:
-	wave_timer -= delta
-	if wave_timer <= 0.0 and zombies_spawned >= zombies_to_spawn:
-		next_wave()
+# Function to spawn the random number of enemies
+func spawn_enemies():
+	# Randomly choose the number of enemies to spawn
+	var num_enemies = randi_range(2, 10)
+	
+	for i in range(num_enemies):
+		# Random position within the spawn area
+		var spawn_position = Vector3(
+			randf_range(-10, 10),
+			0,  # Assuming a 2D plane for spawn height, adjust as needed
+			randf_range(-10, 10)
+		)
 
-# Start a new wave
-func start_wave() -> void:
-	zombies_spawned = 0
-	for i in range(zombies_to_spawn):
-		spawn_zombie()
-
-	# Set the timer for the next wave
-	wave_timer = wave_interval
-
-# Spawn a single zombie at a given spawn location
-func spawn_zombie() -> void:
-	var zombie = zombie_scene.instantiate()
-	zombie.position = spawn_location  # Place zombie at the spawn location
-	add_child(zombie)
-	zombies_spawned += 1
-
-# Move to the next wave
-func next_wave() -> void:
-	current_wave += 1
-	zombies_to_spawn += zombie_increase_per_wave
-	start_wave()  # Start the new wave
+		# Spawn the enemy
+		var enemy = enemy_scene.instantiate()
+		enemy.transform.origin = spawn_position
+		add_child(enemy)  # Add enemy to the scene
