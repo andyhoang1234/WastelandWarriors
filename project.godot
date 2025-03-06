@@ -23,6 +23,10 @@ project/assembly_name="Wasteland Warriors"
 
 import/blender/enabled=false
 
+[dotnet]
+
+project/assembly_name="MultiplayerFPSTutorial"
+
 [input]
 
 up={
