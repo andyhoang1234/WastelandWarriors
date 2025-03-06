@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 # Export the Enemy scene to be spawned
 @export var enemy_scene: PackedScene
