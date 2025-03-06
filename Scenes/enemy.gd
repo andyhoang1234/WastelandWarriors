@@ -1,13 +1,8 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-<<<<<<< Updated upstream
-var SPEED = 10
-=======
-
 var SPEED = 1
 
->>>>>>> Stashed changes
 const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
