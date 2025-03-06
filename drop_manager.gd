@@ -22,7 +22,6 @@ func drop_item():
 	var instance = random_item.instantiate()
 	# Add the instance to the scene first
 	get_parent().add_child(instance)
-
 	# Now we can safely set the position
 	var random_x = randf_range(-drop_area.x / 2, drop_area.x / 2)
 	var random_z = randf_range(-drop_area.z / 2, drop_area.z / 2)
