@@ -9,9 +9,12 @@ signal health_changed(health_value)
 
 var health = 3
 
-const SPEED = 10.0
-const JUMP_VELOCITY = 11.0
+var SPEED = 5.0
+var JUMP_VELOCITY
 
+var max_stamina = 100 
+var stamina = 100
+var stamina_drain = 20.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -50,7 +53,14 @@ func _physics_process(delta):
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+		
+	if Input.is_action_pressed("player_run") and stamina > 0:
+		SPEED = 10.0
+		stamina -= stamina_drain * delta
+	else:
+		SPEED = 5.0
+		if stamina < max_stamina:
+			stamina += stamina_drain * delta 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
