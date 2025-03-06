@@ -7,7 +7,7 @@ signal health_changed(health_value)
 @onready var muzzle_flash = $Camera3D/Pistol/MuzzleFlash
 @onready var raycast = $Camera3D/RayCast3D
 
-var health = 3
+var health = 10
 
 var SPEED = 5.0
 var JUMP_VELOCITY

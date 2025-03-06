@@ -1,16 +1,14 @@
-
-[gd_scene load_steps=14 format=3 uid="uid://c8oqxmm2w2wvv"]
+[gd_scene load_steps=16 format=3 uid="uid://c8oqxmm2w2wvv"]
 
 [ext_resource type="Script" path="res://test_world.gd" id="1_6fns0"]
+[ext_resource type="Script" path="res://models/door.gd" id="1_x1sis"]
 [ext_resource type="PackedScene" uid="uid://c1j7an8woikyd" path="res://environment.tscn" id="2_fr3vy"]
 [ext_resource type="Texture2D" uid="uid://8ka2ui7sq36p" path="res://addons/kenney_particle_pack/circle_05.png" id="3_hbot1"]
 [ext_resource type="PackedScene" uid="uid://5k1o5ctvtah6" path="res://Scenes/enemy.tscn" id="3_nule3"]
+[ext_resource type="PackedScene" uid="uid://dtqn74o2v5qm2" path="res://models/Door.tscn" id="4_pwsvb"]
 [ext_resource type="Script" path="res://drop_manager.gd" id="5_kayyv"]
 [ext_resource type="PackedScene" uid="uid://bgicoiv2vry36" path="res://item.2.tscn" id="6_wvsd6"]
 [ext_resource type="PackedScene" uid="uid://k3tg7a4limit" path="res://item.tscn" id="7_6piyp"]
-[ext_resource type="Script" path="res://models/door.gd" id="1_x1sis"]
-[ext_resource type="PackedScene" uid="uid://dtqn74o2v5qm2" path="res://models/Door.tscn" id="4_pwsvb"]
-
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -88,7 +86,6 @@ layout_mode = 2
 text = "Quit"
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
