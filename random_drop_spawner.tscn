@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://rf0aqxgmx50n"]
+
+[ext_resource type="Script" path="res://random_drop_spawner.gd" id="1_4y15h"]
+
+[node name="RandomDropSpawner" type="Node3D"]
+script = ExtResource("1_4y15h")
+
+[node name="Area3D" type="Area3D" parent="."]
