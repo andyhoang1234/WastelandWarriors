@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxgacn40ai3ak"]
+
+[ext_resource type="ArrayMesh" uid="uid://bcay2mkj6li14" path="res://models/SMG12.obj" id="1_h1600"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkb46"]
+
+[node name="Llewlac" type="Node3D"]
+
+[node name="Smg12" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1528, 0, -4.07939)
+mesh = ExtResource("1_h1600")
+surface_material_override/0 = SubResource("StandardMaterial3D_vkb46")
