@@ -7,6 +7,9 @@ signal health_changed(health_value)
 @onready var muzzle_flash = $Camera3D/Pistol/MuzzleFlash
 @onready var raycast = $Camera3D/RayCast3D
 
+var bulletScene = preload("res://Bullet.tscn")
+var bulletSpawn
+
 var health = 10
 
 var SPEED = 5.0
@@ -22,7 +25,13 @@ var gravity = 20.0
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
+func shoot ():
+	var bullet = bulletScene.instantiate()
+	get_node("Smg12/bulletSpawn").add_child(bullet)
+	bullet.global_transform = bulletSpawn.global_transform
+
 func _ready():
+	bulletSpawn = get_node("Smg12/bulletSpawn")
 	if not is_multiplayer_authority(): return
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -36,12 +45,9 @@ func _unhandled_input(event):
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 	
-	if Input.is_action_just_pressed("shoot") \
-			and anim_player.current_animation != "shoot":
-		play_shoot_effects.rpc()
-		if raycast.is_colliding():
-			var hit_player = raycast.get_collider()
-			hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
+	if Input.is_action_just_pressed("player_shoot"):
+		shoot()
+		
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return

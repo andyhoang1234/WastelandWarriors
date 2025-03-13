@@ -1,8 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxgacn40ai3ak"]
+[gd_scene load_steps=7 format=3 uid="uid://dxgacn40ai3ak"]
 
 [ext_resource type="ArrayMesh" uid="uid://bcay2mkj6li14" path="res://models/SMG12.obj" id="1_h1600"]
+[ext_resource type="Texture2D" uid="uid://1shi3y4pmmih" path="res://Textures/Diffuse.png" id="2_3x1yw"]
+[ext_resource type="Texture2D" uid="uid://bdk2iccg6os3o" path="res://Textures/Glossy.png" id="3_5v7ic"]
+[ext_resource type="Texture2D" uid="uid://dib4oknh0f11n" path="res://Textures/Normal.png" id="4_rasc6"]
+[ext_resource type="Texture2D" uid="uid://vfd3aakymnrd" path="res://Textures/Roughness.png" id="5_274xx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkb46"]
+albedo_texture = ExtResource("2_3x1yw")
+metallic = 1.0
+metallic_texture = ExtResource("3_5v7ic")
+metallic_texture_channel = 4
+roughness_texture = ExtResource("5_274xx")
+emission_enabled = true
+emission_energy_multiplier = 16.0
+emission_texture = ExtResource("2_3x1yw")
+normal_enabled = true
+normal_texture = ExtResource("4_rasc6")
 
 [node name="Llewlac" type="Node3D"]
 
@@ -10,3 +24,6 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1528, 0, -4.07939)
 mesh = ExtResource("1_h1600")
 surface_material_override/0 = SubResource("StandardMaterial3D_vkb46")
+
+[node name="bulletSpawn" type="Node3D" parent="Smg12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1528, 0, 4.07939)
