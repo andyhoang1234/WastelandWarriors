@@ -3,9 +3,7 @@ extends Node
 @onready var main_menu = $CanvasLayer/MainMenu
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry")
 @onready var hud = $CanvasLayer/HUD
-@onready var pause = $CanvasLayer/pause
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
-@export var toggle: bool = true
 
 
 @onready var Player = preload("res://player.tscn")
@@ -13,29 +11,14 @@ extends Node
 var tracked = false
 var player
 
-func _ready():
-	pause.hide()
 
 func _physics_process(_delta):
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
 
 func _unhandled_input(_event):
-	if Input.is_action_just_pressed("pause"):
-		if toggle:
-			toggle = false
-			pause.show()
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			print("test")
-			toggle = true
-			pause.hide()
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-#func _on_Respawn_Button_Pressed():
-	
-func _on_Menu_Button_pressed():
-	main_menu.show()
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 
 func _on_single_player_button_pressed():
 	main_menu.hide()

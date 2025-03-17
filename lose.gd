@@ -13,5 +13,6 @@ func _on_respawn_button_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_menu_button_pressed():
-	pass
+func _on_menu_button_pressed() -> void:
+	pass # Replace with function body.
+	get_tree().change_scene_to_file()
