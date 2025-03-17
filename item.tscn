@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://k3tg7a4limit"]
-
-[node name="Item" type="Node3D"]
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
