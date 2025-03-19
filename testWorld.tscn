@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://drop_manager.gd" id="5_kayyv"]
 [ext_resource type="PackedScene" uid="uid://bgicoiv2vry36" path="res://Insta Kill.tscn" id="6_wvsd6"]
 [ext_resource type="PackedScene" uid="uid://k3tg7a4limit" path="res://Max health.tscn" id="7_6piyp"]
-[ext_resource type="PackedScene" uid="uid://bukjhaekxq240" path="res://Waves/Wave 1.tscn" id="9_8vkaa"]
+[ext_resource type="PackedScene" uid="uid://bukjhaekxq240" path="res://Waves/Wave1.tscn" id="9_8vkaa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
