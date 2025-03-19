@@ -59,3 +59,4 @@ func update_health_bar(health_value):
 func _on_main_menu_pressed() -> void:
 	pass # Replace with function body.
 	main_menu.show()
+	PauseMenu.hide()
