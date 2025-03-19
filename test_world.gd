@@ -4,12 +4,13 @@ extends Node
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry")
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
-
+@onready var PauseMenu = $CanvasLayer/PauseMenu
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
 var tracked = false
 var player
+var toggle = true
 
 
 func _physics_process(_delta):
@@ -19,6 +20,15 @@ func _physics_process(_delta):
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
+	if Input.is_action_just_pressed("pause"):
+		if toggle:
+			toggle = false
+			PauseMenu.show()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			toggle = true
+			PauseMenu.hide()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_single_player_button_pressed():
 	main_menu.hide()
@@ -44,3 +54,9 @@ func remove_player(peer_id):
 
 func update_health_bar(health_value):
 	health_bar.value = health_value
+
+
+func _on_main_menu_pressed() -> void:
+	pass # Replace with function body.
+	main_menu.show()
+	PauseMenu.hide()

@@ -87,6 +87,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,6 +125,43 @@ max_value = 3.0
 value = 3.0
 show_percentage = false
 
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 423.0
+offset_top = 227.0
+offset_right = 729.0
+offset_bottom = 421.0
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu"]
+layout_mode = 0
+offset_left = 111.0
+offset_top = -25.0
+offset_right = 217.0
+offset_bottom = -2.0
+text = "Game Paused"
+
+[node name="Button" type="Button" parent="CanvasLayer/PauseMenu"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 41.0
+offset_right = 196.0
+offset_bottom = 72.0
+text = "remose"
+
+[node name="MainMenu" type="Button" parent="CanvasLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.385
+anchor_right = -0.326
+anchor_bottom = 0.168
+offset_left = 229.81
+offset_top = 114.0
+offset_right = 307.756
+offset_bottom = 112.408
+text = "Main Menu"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://player.tscn")
 spawn_path = NodePath("..")
@@ -145,3 +183,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04783, -4.76837e-07, -0.92
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/MainMenu" to="." method="_on_main_menu_pressed"]
