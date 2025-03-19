@@ -4,7 +4,7 @@ signal health_changed(health_value)
 
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
-@onready var muzzle_flash = $Camera3D/Pistol/MuzzleFlash
+@onready var muzzle_flash = $Camera3D/Smg12/MuzzleFlash
 @onready var raycast = $Camera3D/RayCast3D
 
 var bulletScene = preload("res://Bullet.tscn")
@@ -30,14 +30,18 @@ func _enter_tree():
 
 func shoot ():
 	var bullet = bulletScene.instantiate()
-	get_node("Smg12/bulletSpawn").add_child(bullet)
+	get_node("Camera3D/Llewlac/Smg12").add_child(bullet)
 	bullet.global_transform = bulletSpawn.global_transform
-	Camera3D/bulletSpawn
-	
+	bullet.scale = Vector3(0.1,0.1,0.1)
+	ammo -= 1
+
 func _ready():
-	bulletSpawn = get_node("Smg12/bulletSpawn")
+	bulletSpawn = get_node("Camera3D/Llewlac/Smg12/bulletSpawn")
 	if not is_multiplayer_authority(): return
-	
+	else:
+		print("Error: bulletSpawn is null!")
+
+
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
 
@@ -48,10 +52,7 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
-	
-	if Input.is_action_just_pressed("player_shoot"):
-		shoot()
-		
+
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -60,7 +61,9 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-		
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+
 	if Input.is_action_pressed("player_run") and stamina > 0:
 		SPEED = 10.0
 		stamina -= stamina_drain * delta
