@@ -142,13 +142,13 @@ offset_right = 217.0
 offset_bottom = -2.0
 text = "Game Paused"
 
-[node name="Button" type="Button" parent="CanvasLayer/PauseMenu"]
+[node name="Resume" type="Button" parent="CanvasLayer/PauseMenu"]
 layout_mode = 0
 offset_left = 129.0
 offset_top = 41.0
 offset_right = 196.0
 offset_bottom = 72.0
-text = "remose"
+text = "Resume"
 
 [node name="MainMenu" type="Button" parent="CanvasLayer/PauseMenu"]
 layout_mode = 1
@@ -183,4 +183,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04783, -4.76837e-07, -0.92
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/MainMenu" to="." method="_on_main_menu_pressed"]
