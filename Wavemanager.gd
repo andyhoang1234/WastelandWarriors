@@ -5,6 +5,6 @@ func _process(delta):
 	var tree = get_node("/root")
 
 	# Check if there are no enemies in the "enemy" group
-	if tree.get_nodes_in_group("enemy").empty():
+	if tree.get_nodes_in_group("Wave1").empty():
 		# All enemies have been defeated, so proceed to the next level
-		tree.change_scene("res://next_level.tscn")  # Make sure this path is correct
+		tree.change_scene("res://Wave2")  # Make sure this path is correct
