@@ -4,12 +4,13 @@ extends Node
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry")
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
-
+@onready var PauseMenu = $CanvasLayer/PauseMenu
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
 var tracked = false
 var player
+var toggle = true
 
 
 func _physics_process(_delta):
@@ -22,12 +23,12 @@ func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
 		if toggle:
 			toggle = false
-			pause.show()
+			PauseMenu.show()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
-		toggle = true
-	pause.hide()
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			toggle = true
+			PauseMenu.hide()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_single_player_button_pressed():
 	main_menu.hide()

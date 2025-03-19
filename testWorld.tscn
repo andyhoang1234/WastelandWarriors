@@ -136,19 +136,30 @@ offset_bottom = 421.0
 
 [node name="Label" type="Label" parent="CanvasLayer/PauseMenu"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 111.0
+offset_top = -25.0
+offset_right = 217.0
+offset_bottom = -2.0
 text = "Game Paused"
 
 [node name="Button" type="Button" parent="CanvasLayer/PauseMenu"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 129.0
+offset_top = 41.0
+offset_right = 196.0
+offset_bottom = 72.0
+text = "remose"
 
 [node name="MainMenu" type="Button" parent="CanvasLayer/PauseMenu"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.385
+anchor_right = -0.326
+anchor_bottom = 0.168
+offset_left = 229.81
+offset_top = 114.0
+offset_right = 307.756
+offset_bottom = 112.408
 text = "Main Menu"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
