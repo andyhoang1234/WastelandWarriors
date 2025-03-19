@@ -29,8 +29,10 @@ func _unhandled_input(_event):
 		else:
 			toggle = true
 			PauseMenu.hide()
+			hud.show()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+#main menu buttons 
 func _on_single_player_button_pressed():
 	main_menu.hide()
 	hud.show()
@@ -56,9 +58,12 @@ func remove_player(peer_id):
 func update_health_bar(health_value):
 	health_bar.value = health_value
 
+#pause menu buttons 
 func _on_resume_pressed() -> void:
 	pass # Replace with function body.
 	PauseMenu.hide()
+	hud.show()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_main_menu_pressed() -> void:
 	pass # Replace with function body.
