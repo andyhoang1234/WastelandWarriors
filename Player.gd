@@ -15,6 +15,9 @@ var health = 10
 var SPEED = 5.0
 var JUMP_VELOCITY
 
+var ammo : int = 5
+var player_health = 100
+
 var max_stamina = 100 
 var stamina = 100
 var stamina_drain = 20.0
@@ -29,7 +32,8 @@ func shoot ():
 	var bullet = bulletScene.instantiate()
 	get_node("Smg12/bulletSpawn").add_child(bullet)
 	bullet.global_transform = bulletSpawn.global_transform
-
+	Camera3D/bulletSpawn
+	
 func _ready():
 	bulletSpawn = get_node("Smg12/bulletSpawn")
 	if not is_multiplayer_authority(): return
