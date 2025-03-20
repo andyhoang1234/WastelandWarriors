@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://5k1o5ctvtah6"]
 
 [ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_phvpf"]
-[ext_resource type="Texture2D" uid="uid://b3m5uleh75nqq" path="res://Textures/Screenshot from 2025-03-21 10-20-19.png" id="2_6ljxv"]
+[ext_resource type="Texture2D" uid="uid://eydx03r5ycpu" path="res://Textures/LJ.jpeg" id="2_e7jxt"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxtym"]
-albedo_texture = ExtResource("2_6ljxv")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h261r"]
+albedo_texture = ExtResource("2_e7jxt")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_an04p"]
 
@@ -17,7 +17,7 @@ script = ExtResource("1_phvpf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_uxtym")
+material_override = SubResource("StandardMaterial3D_h261r")
 mesh = SubResource("CapsuleMesh_an04p")
 surface_material_override/0 = SubResource("StandardMaterial3D_ufukn")
 
