@@ -27,3 +27,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.8333
 
 [node name="Enemy8" parent="." instance=ExtResource("1_0j3tm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.09357, 1, 0)
+
+[node name="Enemy9" parent="." instance=ExtResource("1_0j3tm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.40239, 1, 0)
