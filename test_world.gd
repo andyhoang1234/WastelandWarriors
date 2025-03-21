@@ -18,8 +18,6 @@ func _physics_process(_delta):
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
 
 func _unhandled_input(_event):
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
 	if Input.is_action_just_pressed("pause"):
 		if toggle:
 			toggle = false
@@ -60,12 +58,16 @@ func update_health_bar(health_value):
 
 #pause menu buttons 
 func _on_resume_pressed() -> void:
-	pass # Replace with function body.
 	PauseMenu.hide()
 	hud.show()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_main_menu_pressed() -> void:
-	pass # Replace with function body.
+	print("go to main menu")
 	main_menu.show()
 	PauseMenu.hide()
+	hud.hide()
+	# remove player...
+	# Hide the rest of the scene
+	
+	
