@@ -21,11 +21,13 @@ func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
 		if toggle:
 			toggle = false
+			get_tree().paused = true
 			PauseMenu.show()
 			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			toggle = true
+			get_tree().paused = false
 			PauseMenu.hide()
 			hud.show()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -58,11 +60,13 @@ func update_health_bar(health_value):
 
 #pause menu buttons 
 func _on_resume_pressed() -> void:
+	get_tree().paused = false
 	PauseMenu.hide()
 	hud.show()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_main_menu_pressed() -> void:
+	get_tree().paused = false
 	print("go to main menu")
 	main_menu.show()
 	PauseMenu.hide()
