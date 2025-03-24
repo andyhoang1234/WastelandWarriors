@@ -26,4 +26,4 @@ mesh = ExtResource("1_h1600")
 surface_material_override/0 = SubResource("StandardMaterial3D_vkb46")
 
 [node name="bulletSpawn" type="Node3D" parent="Smg12"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1528, 0, 4.07939)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.164125, -1.52924, -2.82727)
