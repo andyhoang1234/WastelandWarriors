@@ -37,9 +37,16 @@ func _physics_process(_delta):
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		#print("I collided with ", collision.get_collider().name)
+<<<<<<< Updated upstream
 		if collision.get_collider().is_in_group("Bullet"):
 	# Handle collision with a bullet
 			reduce_health(100)
+=======
+		if "player" in collision.get_collider().name:
+			collision.get_collider().reduce_health(10)
+			queue_free()
+
+>>>>>>> Stashed changes
 
 func reduce_health(amount):
 	enemy_health -= amount

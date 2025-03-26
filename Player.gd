@@ -102,6 +102,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+
 @rpc("call_local")
 func play_shoot_effects():
 	anim_player.stop()
@@ -122,3 +123,12 @@ func _on_animation_player_animation_finished(anim_name):
 		anim_player.play("idle")
 		
 		# Test comment
+
+
+
+func reduce_health():
+	player_health -= 10
+	if player_health < 0:
+		get_tree().change_scene_to_file("res://Menus/lose.tscn")
+			# The player dies. 
+			# Go back to the main menu. This can be changed to any scene in the future.
