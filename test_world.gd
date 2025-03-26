@@ -69,3 +69,6 @@ func _on_main_menu_pressed() -> void:
 	pass # Replace with function body.
 	main_menu.show()
 	PauseMenu.hide()
+
+var bulletScene = preload("res://Bullet.tscn")
+var bulletSpawn

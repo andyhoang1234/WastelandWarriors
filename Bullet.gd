@@ -2,6 +2,7 @@ extends Area3D
 
 var speed : float = 800.0
 var damage : int = 1
+var direction : Vector3 = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
