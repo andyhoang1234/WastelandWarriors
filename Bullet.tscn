@@ -10,14 +10,14 @@ data = PackedVector3Array(-0.7848, 0, 0.3344, -0.6972, 0.1559, 0.4739, -0.7092, 
 script = ExtResource("1_xsiof")
 
 [node name="Bullet" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152085, 0, -0.0344956)
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, -0.152085, 0, -0.0344956)
 mesh = ExtResource("1_ll70t")
 
 [node name="Timer" type="Timer" parent="Bullet"]
 autostart = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.152085, 0, -0.0344956)
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, -0.152085, 0, -0.0344956)
 shape = SubResource("ConcavePolygonShape3D_dd1mk")
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

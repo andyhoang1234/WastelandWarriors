@@ -11,6 +11,8 @@ extends Node
 var tracked = false
 var player
 var toggle = true
+var bulletScene = preload("res://Bullet.tscn")
+var bulletSpawn
 
 
 func _physics_process(_delta):
