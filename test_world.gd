@@ -39,6 +39,7 @@ func _on_single_player_button_pressed():
 	#multiplayer.multiplayer_peer = enet_peer
 	add_player(multiplayer.get_unique_id())
 
+
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
@@ -66,11 +67,12 @@ func _on_resume_pressed() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_main_menu_pressed() -> void:
-	get_tree().paused = false
+	get_tree().paused = true
 	print("go to main menu")
 	main_menu.show()
 	PauseMenu.hide()
 	hud.hide()
+
 	# remove player...
 	# Hide the rest of the scene
 	
