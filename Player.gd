@@ -29,12 +29,22 @@ func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
 func shoot ():
+	print ("shoot")
 	var bullet = bulletScene.instantiate()
+<<<<<<< Updated upstream
 	get_node("/root/testWorld").add_child(bullet)
 	bullet.global_transform = bulletSpawn.global_transform
 	bullet.scale = Vector3(0.1, 0.1, 0.1)
 	ammo -= 1
 
+=======
+	get_node("/root/LevelOne").add_child(bullet)
+	bullet.global_transform = bulletSpawn.global_transform
+	bullet.scale = Vector3(0.1,0.1,0.1)
+
+	ammo -= 1
+	
+>>>>>>> Stashed changes
 func _ready():
 	bulletSpawn = get_node("Camera3D/Llewlac/Smg12/bulletSpawn")
 	if not is_multiplayer_authority(): return
@@ -42,6 +52,7 @@ func _ready():
 		print("Error: bulletSpawn is null!")
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	bulletSpawn = get_node("Camera3D/bulletSpawn")
 	camera.current = true
 
 func _unhandled_input(event):
@@ -51,7 +62,10 @@ func _unhandled_input(event):
 		rotate_y(-event.relative.x * .005)
 		camera.rotate_x(-event.relative.y * .005)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -59,10 +73,17 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+<<<<<<< Updated upstream
 
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
 
+=======
+	if Input.is_action_just_pressed("shoot"):
+		print("shoot1")
+		shoot()
+		
+>>>>>>> Stashed changes
 	if Input.is_action_pressed("player_run") and stamina > 0:
 		SPEED = 10.0
 		stamina -= stamina_drain * delta
