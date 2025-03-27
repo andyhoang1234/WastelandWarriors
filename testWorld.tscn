@@ -55,39 +55,50 @@ process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 423.0
-offset_top = 227.0
-offset_right = -423.0
-offset_bottom = -227.0
+offset_left = 1.0
+offset_right = 1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/MainMenu"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu/Control"]
 process_mode = 3
 layout_mode = 2
+offset_left = 410.0
+offset_top = 194.0
+offset_right = 716.0
+offset_bottom = 388.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/Control/MarginContainer"]
 process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
 process_mode = 3
+modulate = Color(0, 0, 1, 1)
 layout_mode = 2
 text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SinglePlayer" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="SinglePlayer" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Single Player"
 
-[node name="Quit" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Quit"
@@ -192,7 +203,7 @@ drop_items = Array[PackedScene]([ExtResource("6_wvsd6"), ExtResource("7_6piyp")]
 [node name="Wave1" parent="." instance=ExtResource("9_8vkaa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04783, -4.76837e-07, -0.923508)
 
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
