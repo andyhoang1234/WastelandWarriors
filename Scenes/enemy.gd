@@ -21,6 +21,7 @@ func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
 
 func _physics_process(_delta):
+
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
 	
@@ -36,9 +37,10 @@ func _physics_process(_delta):
 	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		#print("I collided with ", collision.get_collider().name)
+		print("I collided with ", collision.get_collider().name)
 		if collision.get_collider().is_in_group("Bullet"):
 	# Handle collision with a bullet
+			queue_free()
 			reduce_health(100)
 
 func reduce_health(amount):
@@ -48,3 +50,4 @@ func reduce_health(amount):
 			# The player dies. 
 			# Go back to the main menu. This can be changed to any scene in the future.
 			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+			queue_free()
