@@ -29,7 +29,6 @@ func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
 func shoot ():
-	print ("shoot")
 	var bullet = bulletScene.instantiate()
 	get_node("/root/testWorld").add_child(bullet)
 	bullet.global_transform = bulletSpawn.global_transform
@@ -72,7 +71,6 @@ func _physics_process(delta):
 		shoot()
 
 	if Input.is_action_just_pressed("shoot"):
-		print("shoot1")
 		shoot()
 		
 	if Input.is_action_pressed("player_run") and stamina > 0:
