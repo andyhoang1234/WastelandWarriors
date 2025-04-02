@@ -1,7 +1,8 @@
 extends Area3D
 
-var speed : float = 800.0
+var speed : float = 80
 var damage : int = 1
+var direction : Vector3 = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +17,8 @@ func _process (delta):
 func _on_Bullet_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
-		destroy()
+		queue_free()
 
-func destroy() -> void:
-	pass # Replace with function body.
+
+func _on_body_entered(body: Node3D) -> void:
+		queue_free()

@@ -1,9 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://xcjrjq5cbn7y"]
+[gd_scene load_steps=14 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
+[ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
 [ext_resource type="PackedScene" uid="uid://dxgacn40ai3ak" path="res://Scenes/SMG12.tscn" id="2_yfxua"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xk8km"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
+albedo_texture = ExtResource("2_bhhdd")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mext7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7yr3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_67y6s"]
 
@@ -48,8 +54,10 @@ collision_layer = 2
 script = ExtResource("1_2v3wm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_xk8km")
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_x7q5x")
+mesh = SubResource("CapsuleMesh_mext7")
+surface_material_override/0 = SubResource("StandardMaterial3D_t7yr3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
