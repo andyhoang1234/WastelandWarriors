@@ -29,7 +29,11 @@ import/blender/enabled=false
 
 [global_group]
 
+<<<<<<< HEAD
 interactable=""
+=======
+Bullet=""
+>>>>>>> b4e0357db3866f3e45d4e7300d6c8b9483770cf2
 
 [input]
 
