@@ -14,20 +14,32 @@ var toggle = true
 var bulletScene = preload("res://Bullet.tscn")
 var bulletSpawn
 
+func _ready() -> void:
+	Global.PauseMenu = $CanvasLayer/PauseMenu
 
 func _physics_process(_delta):
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
 
+func _input(_event):
+	if Input.is_action_just_pressed("pause"):
+		if get_tree().paused == false:
+			get_tree().paused = true
+			Global.PauseMenu.show()
+			hud.hide()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
 		if toggle:
+			print("pause")
 			toggle = false
 			get_tree().paused = true
 			PauseMenu.show()
 			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
+		elif !toggle:
+			print("unpause")
 			toggle = true
 			get_tree().paused = false
 			PauseMenu.hide()
