@@ -127,7 +127,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 
-func reduce_health():
+func reduce_health(amount):
 	player_health -= 10
 	if player_health < 0:
 		get_tree().change_scene_to_file("res://Menus/lose.tscn")
