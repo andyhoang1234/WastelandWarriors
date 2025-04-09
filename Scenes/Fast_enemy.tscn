@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8q80jo1w5m6"]
+
+[ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_5u4ai"]
+[ext_resource type="Texture2D" uid="uid://eys4bnc4lr52" path="res://Textures/Usain-Bolt-2008.webp" id="2_ar5wb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cw78"]
+albedo_texture = ExtResource("2_ar5wb")
+heightmap_scale = 16.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_an04p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufukn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bkvtw"]
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
+script = ExtResource("1_5u4ai")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_0cw78")
+mesh = SubResource("CapsuleMesh_an04p")
+surface_material_override/0 = SubResource("StandardMaterial3D_ufukn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_bkvtw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

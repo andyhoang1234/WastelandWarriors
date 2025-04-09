@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://pksvokwlbybw"]
+
+[ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_m6w44"]
+[ext_resource type="Texture2D" uid="uid://b4ejkouk2u3i8" path="res://Textures/images.jpeg" id="2_adnvc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7vow"]
+albedo_texture = ExtResource("2_adnvc")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_an04p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufukn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bkvtw"]
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
+script = ExtResource("1_m6w44")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_n7vow")
+mesh = SubResource("CapsuleMesh_an04p")
+surface_material_override/0 = SubResource("StandardMaterial3D_ufukn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_bkvtw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
