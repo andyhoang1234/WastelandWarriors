@@ -27,6 +27,11 @@ project/assembly_name="Wasteland Warriors"
 
 import/blender/enabled=false
 
+[global_group]
+
+interactable=""
+Bullet=""
+
 [input]
 
 up={
