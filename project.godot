@@ -27,6 +27,7 @@ project/assembly_name="Wasteland Warriors"
 
 import/blender/enabled=false
 
+<<<<<<< HEAD
 [global_group]
 
 <<<<<<< HEAD
@@ -35,6 +36,8 @@ interactable=""
 Bullet=""
 >>>>>>> b4e0357db3866f3e45d4e7300d6c8b9483770cf2
 
+=======
+>>>>>>> 86b56baa8ed0c353c51f687e9cf9e6755f3cd5f3
 [input]
 
 up={
