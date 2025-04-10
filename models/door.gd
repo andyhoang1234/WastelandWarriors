@@ -1,16 +1,22 @@
 extends Node3D
 
+
+var interactable = true
 @export var toggle: bool = false
 @export var open_position: Vector3 = Vector3(0, 0, -2) # Adjust this based on your scene
 @export var closed_position: Vector3 = Vector3(0, 0, 0) # Default position
 @onready var door: Node3D = $Door
-@onready var ray: RayCast3D = $RayCast3D
+
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("door") and ray.is_colliding():
-		toggle = !toggle
-		move_door(toggle)
-
+	pass
+	
+func interact():
+	if interactable == true:
+		interactable = false
+		toggle = !toggle 
+		if toggle == false:  
+			
 func move_door(state: bool):
 	var target_position = open_position if state else closed_position
 	var tween = create_tween()
