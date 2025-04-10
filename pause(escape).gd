@@ -7,5 +7,5 @@ func _input(_event):
 		if get_tree().paused:
 			get_tree().paused = false
 			Global.PauseMenu.hide()
-			hud.show()
+
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
