@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
 var SPEED = 0
-var enemy_health = 100
+var enemy_health = 200
 const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -21,6 +21,7 @@ func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
 
 func _physics_process(_delta):
+
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
 	
@@ -36,13 +37,11 @@ func _physics_process(_delta):
 	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		#print("I collided with ", collision.get_collider().name)
+		print("I collided with ", collision.get_collider().name)
 		if collision.get_collider().is_in_group("Bullet"):
 	# Handle collision with a bullet
-			reduce_health(100)
-		if "player" in collision.get_collider().name:
-			collision.get_collider().reduce_health(10)
 			queue_free()
+			reduce_health(100)
 
 func reduce_health(amount):
 	enemy_health -= amount
@@ -51,3 +50,4 @@ func reduce_health(amount):
 			# The player dies. 
 			# Go back to the main menu. This can be changed to any scene in the future.
 			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+			queue_free()
