@@ -10,11 +10,7 @@ var interactable = true
 
 func _physics_process(delta):
 	pass
-	
-func interact():
-	if interactable == true:
-		interactable = false
-		toggle = !toggle 
+
 			
 func move_door(state: bool):
 	var target_position = open_position if state else closed_position

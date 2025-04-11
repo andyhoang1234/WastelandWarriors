@@ -5,6 +5,7 @@ extends Node
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var PauseMenu = $CanvasLayer/PauseMenu
+@onready var OptionsMenu = $CanvasLayer/OptionsMenu
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
@@ -14,20 +15,32 @@ var toggle = true
 var bulletScene = preload("res://Bullet.tscn")
 var bulletSpawn
 
+func _ready() -> void:
+	Global.PauseMenu = $CanvasLayer/PauseMenu
 
 func _physics_process(_delta):
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
 
+func _input(_event):
+	if Input.is_action_just_pressed("pause"):
+		if get_tree().paused == false:
+			get_tree().paused = true
+			Global.PauseMenu.show()
+			hud.hide()
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
 		if toggle:
+			print("pause")
 			toggle = false
 			get_tree().paused = true
 			PauseMenu.show()
 			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
+		elif !toggle:
+			print("unpause")
 			toggle = true
 			get_tree().paused = false
 			PauseMenu.hide()
@@ -59,7 +72,7 @@ func remove_player(peer_id):
 		player.queue_free()
 
 func update_health_bar(health_value):
-	health_bar.value = health_value
+	$HealthBar.value = health_value
 
 #pause menu buttons 
 func _on_resume_pressed() -> void:
@@ -68,14 +81,18 @@ func _on_resume_pressed() -> void:
 	hud.show()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+func _on_options_pressed() -> void:
+	OptionsMenu.show()
+	PauseMenu.hide()
+	hud.hide()
+
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = true
-	print("go to main menu")
 	main_menu.show()
 	PauseMenu.hide()
 	hud.hide()
 
-	# remove player...
-	# Hide the rest of the scene
-	
-	
+#Options Menu Buttons
+func _on_back_button_pressed() -> void:
+	OptionsMenu.hide()
+	PauseMenu.show()

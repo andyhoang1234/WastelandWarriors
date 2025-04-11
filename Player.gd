@@ -10,7 +10,7 @@ signal health_changed(health_value)
 var bulletScene = preload("res://Bullet.tscn")
 var bulletSpawn 		
 
-var health = 10
+var health = 100
 
 var SPEED = 5.0
 var JUMP_VELOCITY
@@ -128,8 +128,9 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func reduce_health(amount):
-	player_health -= 10
+	player_health -= 1
+	health_changed.emit(health)
 	if player_health < 0:
-		get_tree().change_scene_to_file("res://Menus/lose.tscn")
+		get_tree().change_scene_to_file("res://lose.tscn")
 			# The player dies. 
 			# Go back to the main menu. This can be changed to any scene in the future.

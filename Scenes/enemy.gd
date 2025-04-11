@@ -33,8 +33,8 @@ func _physics_process(_delta):
 	
 	velocity = new_velocity
 	
-# This function is called when the enemy takes damage
-func take_damage(amount):
+
+func reduce_health(amount):
 	enemy_health -= amount
 	if enemy_health <= 0:
 		_on_enemy_death()

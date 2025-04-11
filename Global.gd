@@ -1,5 +1,7 @@
 extends Node
 
+var PauseMenu
+
 # if status is true, increases the size of the window and scales on-screen elements to window size
 # allows for better viewing on retina (or similar resolution) displays
 func high_resolution_display_mode(status):
