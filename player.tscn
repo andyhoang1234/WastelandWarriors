@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
 [ext_resource type="PackedScene" uid="uid://dxgacn40ai3ak" path="res://Scenes/SMG12.tscn" id="2_yfxua"]
-[ext_resource type="Script" path="res://hand.gd" id="3_tuw68"]
+
+[ext_resource type="Script" path="res://interact.gd" id="4_5qpxp"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
 albedo_texture = ExtResource("2_bhhdd")
@@ -70,6 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51306, 0)
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -5)
 collision_mask = 2
+script = ExtResource("4_5qpxp")
 
 [node name="bulletSpawn" type="Node3D" parent="Camera3D"]
 
