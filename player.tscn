@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
 [ext_resource type="PackedScene" uid="uid://dxgacn40ai3ak" path="res://Scenes/SMG12.tscn" id="2_yfxua"]
+
 [ext_resource type="Script" path="res://interact.gd" id="4_5qpxp"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
 albedo_texture = ExtResource("2_bhhdd")
@@ -60,15 +62,12 @@ material_override = SubResource("StandardMaterial3D_x7q5x")
 mesh = SubResource("CapsuleMesh_mext7")
 surface_material_override/0 = SubResource("StandardMaterial3D_t7yr3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Player_Collide" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_67y6s")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51306, 0)
-
-[node name="Llewlac" parent="Camera3D" instance=ExtResource("2_yfxua")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.762073, 0.100847, -0.0490863)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -5)
@@ -76,6 +75,15 @@ collision_mask = 2
 script = ExtResource("4_5qpxp")
 
 [node name="bulletSpawn" type="Node3D" parent="Camera3D"]
+
+[node name="Hand" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.278, 0, -0.59)
+script = ExtResource("3_tuw68")
+default_position = Vector3(0.278, 0, -0.59)
+ads_position = Vector3(-0.006, 0, -0.2)
+
+[node name="Llewlac" parent="Camera3D/Hand" instance=ExtResource("2_yfxua")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.484, 0.101, 0.6)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
