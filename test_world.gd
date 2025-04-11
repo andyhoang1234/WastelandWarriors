@@ -72,7 +72,7 @@ func remove_player(peer_id):
 		player.queue_free()
 
 func update_health_bar(health_value):
-	health_bar.value = health_value
+	$HealthBar.value = health_value
 
 #pause menu buttons 
 func _on_resume_pressed() -> void:
