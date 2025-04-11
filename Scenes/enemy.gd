@@ -33,23 +33,13 @@ func _physics_process(_delta):
 	
 	velocity = new_velocity
 	
-	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		#print(collision.collider.get_collider().name)
-		if collision.get_collider().name == "StaticBody3D":
-			print(collision.get_collider().name)
-		if collision.get_collider().is_in_group("Bullet"):
-	# Handle collision with a bullet
-			reduce_health(100)
-		if "1" in collision.get_collider().name:
-			
-			collision.get_collider().reduce_health(100)
 
 func reduce_health(amount):
 	enemy_health -= amount
-	print(enemy_health)
-	if enemy_health < 0:
-			# The player dies. 
-			# Go back to the main menu. This can be changed to any scene in the future.
-			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+	if enemy_health <= 0:
+		_on_enemy_death()
+
+# This function is called when the enemy's health reaches 0
+func _on_enemy_death():
+	print(name + " has been defeated!")
+	queue_free()  # Destroy the enemy
