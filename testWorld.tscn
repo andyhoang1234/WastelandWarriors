@@ -100,6 +100,10 @@ process_mode = 3
 layout_mode = 2
 text = "Single Player"
 
+[node name="Options" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
 [node name="Quit" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
@@ -147,6 +151,62 @@ max_value = 3.0
 value = 3.0
 show_percentage = false
 
+[node name="OptionsMenu" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/OptionsMenu"]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 646.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/OptionsMenu/PanelContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/OptionsMenu"]
+process_mode = 3
+layout_mode = 2
+offset_left = 410.0
+offset_top = 194.0
+offset_right = 716.0
+offset_bottom = 388.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/OptionsMenu/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+process_mode = 3
+modulate = Color(0, 0, 1, 1)
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioButton" type="Button" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Audio"
+
+[node name="VideoButton" type="Button" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Video"
+
+[node name="ControlsButton" type="Button" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
 visible = false
@@ -182,6 +242,10 @@ process_mode = 3
 layout_mode = 2
 text = "Resume"
 
+[node name="Options" type="Button" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
 [node name="MainMenu" type="Button" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
@@ -211,5 +275,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04783, -4.76837e-07, -0.92
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]

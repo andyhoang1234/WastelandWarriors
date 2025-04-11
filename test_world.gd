@@ -5,6 +5,7 @@ extends Node
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var PauseMenu = $CanvasLayer/PauseMenu
+@onready var OptionsMenu = $CanvasLayer/OptionsMenu
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
@@ -80,14 +81,18 @@ func _on_resume_pressed() -> void:
 	hud.show()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+func _on_options_pressed() -> void:
+	OptionsMenu.show()
+	PauseMenu.hide()
+	hud.hide()
+
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = true
-	print("go to main menu")
 	main_menu.show()
 	PauseMenu.hide()
 	hud.hide()
 
-	# remove player...
-	# Hide the rest of the scene
-	
-	
+#Options Menu Buttons
+func _on_back_button_pressed() -> void:
+	OptionsMenu.hide()
+	PauseMenu.show()
