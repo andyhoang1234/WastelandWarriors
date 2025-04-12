@@ -52,7 +52,6 @@ process_mode = 2
 
 [node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
 process_mode = 2
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -111,6 +110,7 @@ text = "Quit"
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 process_mode = 2
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
