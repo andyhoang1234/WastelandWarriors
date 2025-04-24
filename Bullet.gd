@@ -4,7 +4,7 @@ var speed : float = 80
 var damage : int = 1
 var direction : Vector3 = Vector3.ZERO
 var bDrop : float = 0
-var dropSpeed :float = 0.1
+var dropSpeed :float = 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
