@@ -54,6 +54,8 @@ func _on_single_player_button_pressed():
 	#multiplayer.multiplayer_peer = enet_peer
 	add_player(multiplayer.get_unique_id())
 
+func _on_main_menu_options_pressed() -> void:
+	OptionsMenu.show()
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
@@ -81,11 +83,6 @@ func _on_resume_pressed() -> void:
 	hud.show()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _on_options_pressed() -> void:
-	OptionsMenu.show()
-	PauseMenu.hide()
-	hud.hide()
-
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = true
 	main_menu.show()
@@ -95,4 +92,6 @@ func _on_main_menu_pressed() -> void:
 #Options Menu Buttons
 func _on_back_button_pressed() -> void:
 	OptionsMenu.hide()
-	PauseMenu.show()
+
+func _on_controls_button_pressed() -> void:
+	pass # Replace with function body.

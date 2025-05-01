@@ -52,6 +52,7 @@ process_mode = 2
 
 [node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
 process_mode = 2
+show_behind_parent = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -99,7 +100,7 @@ process_mode = 3
 layout_mode = 2
 text = "Single Player"
 
-[node name="Options" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
+[node name="MainMenuOptions" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
@@ -138,14 +139,19 @@ value = 3.0
 show_percentage = false
 
 [node name="OptionsMenu" type="Control" parent="CanvasLayer"]
+process_mode = 2
 visible = false
+top_level = true
+z_index = 5
 layout_mode = 3
 anchors_preset = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/OptionsMenu"]
 layout_mode = 0
-offset_right = 1153.0
-offset_bottom = 646.0
+offset_left = 322.0
+offset_top = 157.0
+offset_right = 795.0
+offset_bottom = 503.0
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/OptionsMenu/PanelContainer"]
 modulate = Color(0, 0, 0, 1)
@@ -196,6 +202,7 @@ text = "Back"
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
 visible = false
+show_behind_parent = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 423.0
@@ -228,10 +235,6 @@ process_mode = 3
 layout_mode = 2
 text = "Resume"
 
-[node name="Options" type="Button" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Options"
-
 [node name="MainMenu" type="Button" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
@@ -260,8 +263,9 @@ drop_items = Array[PackedScene]([ExtResource("6_wvsd6"), ExtResource("7_6piyp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04783, -4.76837e-07, -0.923508)
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/MainMenuOptions" to="." method="_on_main_menu_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
