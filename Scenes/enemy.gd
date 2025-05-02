@@ -8,14 +8,8 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var some_condition = true
-
 func _ready():
-	if some_condition:  # Indented correctly now
-		do_something()  # This line is indented and belongs to _ready()
-
-func do_something():
-	print("Something happened!")
+	pass
 
 func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
@@ -34,8 +28,14 @@ func _physics_process(_delta):
 	velocity = new_velocity
 	
 
-func reduce_health(amount):
-	enemy_health -= amount
+	move_and_slide()
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().is("bullet"):
+			queue_free()
+
+func take_damage(damage):
+	enemy_health -= damage
 	if enemy_health <= 0:
 		_on_enemy_death()
 
