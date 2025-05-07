@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 2
-var enemy_health = 1
+var SPEED = 3.5
+var enemy_health = 20
 const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -31,7 +31,7 @@ func _physics_process(_delta):
 # Function to handle taking damage
 func take_damage(damage_amount: int):
 	enemy_health -= damage_amount
-	if enemy_health == 0:
+	if enemy_health <= 0:
 		queue_free()
 
 # This function is called when the enemy's health reaches 0
