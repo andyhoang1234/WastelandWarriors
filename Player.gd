@@ -8,7 +8,7 @@ signal health_changed(health_value)
 @onready var raycast = $Camera3D/RayCast3D
 
 var bulletScene = preload("res://Bullet.tscn")
-var bulletSpawn
+@onready var bulletSpawn = $Camera3D/Hand/Llewlac/Smg12/bulletSpawn
 
 var health = 100
 
@@ -33,6 +33,7 @@ func shoot ():
 	if ammo >= 0:
 		var bullet = bulletScene.instantiate()
 		get_node("/root/testWorld").add_child(bullet)
+		
 		bullet.global_transform = bulletSpawn.global_transform
 		bullet.scale = Vector3(0.1, 0.1, 0.1)
 		ammo -= 1 
@@ -44,13 +45,8 @@ func reload():
 
 
 func _ready():
-	bulletSpawn = get_node("Camera3D/Llewlac/Smg12/bulletSpawn")
-	if not is_multiplayer_authority(): return
-	else:
-		print("Error: bulletSpawn is null!")
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	bulletSpawn = get_node("Camera3D/bulletSpawn")
 	camera.current = true
 
 func _unhandled_input(event):

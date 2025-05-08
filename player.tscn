@@ -72,8 +72,6 @@ target_position = Vector3(0, 0, -5)
 collision_mask = 2
 script = ExtResource("4_5qpxp")
 
-[node name="bulletSpawn" type="Node3D" parent="Camera3D"]
-
 [node name="Hand" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.02, -0.5)
 script = ExtResource("4_bog6o")
