@@ -6,6 +6,7 @@ extends Node
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var PauseMenu = $CanvasLayer/PauseMenu
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
+@onready var ControlsMenu = $CanvasLayer/ControlsMenu
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
@@ -93,4 +94,8 @@ func _on_back_button_pressed() -> void:
 	OptionsMenu.hide()
 
 func _on_controls_button_pressed() -> void:
-	pass # Replace with function body.
+	ControlsMenu.show()
+
+#Controls Menu button
+func _on_back_options_button_pressed() -> void:
+	ControlsMenu.hide()
