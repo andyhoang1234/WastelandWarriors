@@ -1,7 +1,7 @@
 extends Area3D
 
 var speed: float = 300
-var damage: int = 12  # Ensure the damage is exposed
+var damage: int = 1200  # Ensure the damage is exposed
 var bDrop: float = 0
 
 # Called when the node enters the scene tree for the first time.
