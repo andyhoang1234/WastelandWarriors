@@ -15,6 +15,11 @@ var health = 100
 var canShoot := true
 var timeSinceLastShot := 0.0
 
+var original_position
+var recoil_offset = Vector3(0, 0, 0.2) # Adjust based on direction of the gun
+var recoil_speed = 10.0
+var isRecoiling = false
+@onready var weapon = $Camera3D/Hand/Llewlac/Smg12
 
 var SPEED = 5.0
 var JUMP_VELOCITY
@@ -52,6 +57,7 @@ func _ready():
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
+	original_position = weapon.position  # Assuming the gun is a child node named "Gun"
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
@@ -78,10 +84,19 @@ func _physics_process(delta):
 		shoot()
 		canShoot = false
 		timeSinceLastShot = 0.0
+		isRecoiling = true
+		weapon.position = original_position + recoil_offset
 	elif not canShoot:
 		timeSinceLastShot += delta
 		if timeSinceLastShot >= fireRate:
 			canShoot = true
+			
+		# Recoil return
+	if isRecoiling:
+		weapon.position = weapon.position.lerp(original_position, recoil_speed * delta)
+		if weapon.position.distance_to(original_position) < 0.001:
+			weapon.position = original_position
+			isRecoiling = false
 	
 	if Input.is_action_just_pressed("reload"):
 		reload()
