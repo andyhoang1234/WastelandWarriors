@@ -13,8 +13,6 @@ albedo_texture = ExtResource("2_e7jxt")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bkvtw"]
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
-collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_phvpf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

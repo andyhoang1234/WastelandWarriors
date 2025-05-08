@@ -13,7 +13,6 @@ var tracked = false
 var player
 var toggle = true
 var bulletScene = preload("res://Bullet.tscn")
-var bulletSpawn
 
 func _ready() -> void:
 	Global.PauseMenu = $CanvasLayer/PauseMenu
