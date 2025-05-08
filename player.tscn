@@ -66,6 +66,7 @@ shape = SubResource("CapsuleShape3D_67y6s")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51306, 0)
+fov = 90.0
 near = 0.001
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
@@ -76,7 +77,6 @@ script = ExtResource("4_5qpxp")
 [node name="Hand" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283076, -0.02, -0.5)
 script = ExtResource("4_bog6o")
-default_position = Vector3(0.42, -0.02, -0.5)
 
 [node name="Llewlac" parent="Camera3D/Hand" instance=ExtResource("2_yfxua")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.476924, 0.101, 0.417)

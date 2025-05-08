@@ -9,8 +9,12 @@ signal health_changed(health_value)
 
 var bulletScene = preload("res://Bullet.tscn")
 @onready var bulletSpawn = $Camera3D/Hand/Llewlac/Smg12/bulletSpawn
+@export var fireRate: float = 0.1  # Seconds between shots
 
 var health = 100
+var canShoot := true
+var timeSinceLastShot := 0.0
+
 
 var SPEED = 5.0
 var JUMP_VELOCITY
@@ -53,9 +57,15 @@ func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * .005)
-		camera.rotate_x(-event.relative.y * .005)
-		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+		if Global.aiming == true:
+			rotate_y(-event.relative.x * .0005)
+			camera.rotate_x(-event.relative.y * .0005)
+			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+			
+		else:
+			rotate_y(-event.relative.x * .005)
+			camera.rotate_x(-event.relative.y * .005)
+			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
@@ -64,8 +74,14 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot") and canShoot and ammo > 0:
 		shoot()
+		canShoot = false
+		timeSinceLastShot = 0.0
+	elif not canShoot:
+		timeSinceLastShot += delta
+		if timeSinceLastShot >= fireRate:
+			canShoot = true
 	
 	if Input.is_action_just_pressed("reload"):
 		reload()
