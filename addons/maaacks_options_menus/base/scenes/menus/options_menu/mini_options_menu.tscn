@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://vh1ucj2rfbby"]
+[gd_scene load_steps=7 format=3 uid="uid://vh1ucj2rfbby"]
 
 [ext_resource type="Script" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/mini_options_menu.gd" id="1_32vm2"]
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="2_kpc65"]
 [ext_resource type="Script" path="res://addons/maaacks_options_menus/base/scripts/capture_focus.gd" id="3_7qt1o"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="4_b20fb"]
+[ext_resource type="PackedScene" uid="uid://d7te75il06t7" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/option_control.tscn" id="5_700cu"]
+[ext_resource type="PackedScene" uid="uid://b6bl3n5mp3m1e" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/list_option_control.tscn" id="6_7kxuy"]
 
 [node name="MiniOptionsMenu" type="VBoxContainer"]
 custom_minimum_size = Vector2(400, 260)
@@ -46,6 +48,12 @@ option_name = "Fullscreen"
 option_section = 3
 key = "FullscreenEnabled"
 section = "VideoSettings"
+
+[node name="OptionControl" parent="." instance=ExtResource("5_700cu")]
+layout_mode = 2
+
+[node name="OptionControl2" parent="OptionControl" instance=ExtResource("6_7kxuy")]
+layout_mode = 2
 
 [connection signal="setting_changed" from="MuteControl" to="." method="_on_mute_control_setting_changed"]
 [connection signal="setting_changed" from="FullscreenControl" to="." method="_on_fullscreen_control_setting_changed"]
