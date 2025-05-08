@@ -95,12 +95,6 @@ door={
 ]
 }
 
-[physics]
-
-common/physics_ticks_per_second=120
-common/max_physics_steps_per_frame=100
-common/physics_interpolation=true
-
 [internationalization]
 
 locale/translations=PackedStringArray("res://addons/maaacks_options_menus/base/translations/menus_translations.en.translation", "res://addons/maaacks_options_menus/base/translations/menus_translations.fr.translation")
@@ -108,6 +102,12 @@ locale/translations=PackedStringArray("res://addons/maaacks_options_menus/base/t
 [maaacks_options_menus]
 
 disable_plugin_dialogues=true
+
+[physics]
+
+common/physics_ticks_per_second=120
+common/max_physics_steps_per_frame=100
+common/physics_interpolation=true
 
 [rendering]
 
