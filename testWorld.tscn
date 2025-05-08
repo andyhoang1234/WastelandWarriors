@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://drop_manager.gd" id="5_kayyv"]
 [ext_resource type="PackedScene" uid="uid://bgicoiv2vry36" path="res://Insta Kill.tscn" id="6_wvsd6"]
 [ext_resource type="PackedScene" uid="uid://k3tg7a4limit" path="res://Max health.tscn" id="7_6piyp"]
-[ext_resource type="PackedScene" uid="uid://bukjhaekxq240" path="res://Waves/Wave1.tscn" id="9_8vkaa"]
+[ext_resource type="Script" path="res://Wavemanager.gd" id="8_x6usk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u5pdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -264,8 +264,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.653, -1.038, 47.674)
 script = ExtResource("5_kayyv")
 drop_items = Array[PackedScene]([ExtResource("6_wvsd6"), ExtResource("7_6piyp")])
 
-[node name="Wave1" parent="." instance=ExtResource("9_8vkaa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.04783, -4.76837e-07, -0.923508)
+[node name="WaveManager" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.7738, 0, -6.52538)
+script = ExtResource("8_x6usk")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
