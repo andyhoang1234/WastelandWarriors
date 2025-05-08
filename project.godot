@@ -90,6 +90,12 @@ door={
 ]
 }
 
+[physics]
+
+common/physics_ticks_per_second=120
+common/max_physics_steps_per_frame=100
+common/physics_interpolation=true
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
