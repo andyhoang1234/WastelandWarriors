@@ -396,6 +396,8 @@ spawn_path = NodePath("..")
 navigation_mesh = SubResource("NavigationMesh_rmptm")
 
 [node name="Door" parent="NavigationRegion3D" instance=ExtResource("4_pwsvb")]
+toggle = false
+open_position = Vector3(0, 0, -2)
 
 [node name="DropManager" type="Node3D" parent="."]
 script = ExtResource("5_kayyv")
