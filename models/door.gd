@@ -15,6 +15,7 @@ signal interacted
 
 func _physics_process(delta):
 	pass
+	
 func _ready():
 	# Connect the interacted signal to self to handle interaction
 	connect("interacted", _on_interacted)

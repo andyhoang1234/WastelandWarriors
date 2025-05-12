@@ -50,6 +50,7 @@ shadow_enabled = true
 shadow_reverse_cull_face = true
 shadow_transmittance_bias = 4.926
 shadow_blur = 10.0
+directional_shadow_max_distance = 2513.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6knbf")
