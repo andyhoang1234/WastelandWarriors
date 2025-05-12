@@ -61,7 +61,8 @@ process_mode = 2
 [node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
 process_mode = 2
 show_behind_parent = true
-anchors_preset = 15
+anchors_preset = -1
+anchor_left = -0.00868056
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
@@ -286,6 +287,8 @@ text = "Keys
 
 
 W,A,S,D = Movement
+
+E = Interact
 
 R = Reload
 
