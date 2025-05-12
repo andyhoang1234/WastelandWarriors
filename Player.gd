@@ -68,10 +68,7 @@ func reload():
 	ammo = maxAmmo
 	print("Relaoded")
 
-
-
 func _ready():
-	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
 	original_position = weapon.position
@@ -187,6 +184,10 @@ func _on_animation_player_animation_finished(anim_name):
 		
 		# Test comment
 
+func restore_health_to_max():
+	player_health = 100
+	health_changed.emit(player_health)
+	print("Player health restored to max!")
 
 
 func reduce_health(amount):
