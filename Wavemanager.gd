@@ -33,7 +33,6 @@ func _physics_process(delta: float) -> void:
 	# If no enemies and we haven't spawned the next wave yet
 	if not enemies_exist:
 		spawn_wave()
-	print(current_wave)
 
 func spawn_wave():
 	if current_wave > wave_scenes.size():

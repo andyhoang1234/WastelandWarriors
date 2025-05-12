@@ -9,14 +9,14 @@ var interactable = true
 @export var closed_position: Vector3 = Vector3(0, 0, 0) # Default position
 @onready var door: Node3D = $Door
 
-@onready var camera = get_node("/root/testWorld/1/Player/Camera3D")
+@onready var camera = get_node("..")
 
 func _input(event):  
 	if event.is_action_pressed("interact"):
 		interact()
 
 func interact_cast() -> void:
-	print("interact cast")
+	
 	var space_state = camera.get_world_3d().direct_space_state
 	var screen_center = get_viewport().size / 2
 	var origin = camera.project_ray_origin(screen_center)
@@ -29,32 +29,18 @@ func interact_cast() -> void:
 	var result = space_state.intersect_ray(query)
 	current_cast_result = result.get("collider")
 
-	if current_cast_result != interact_cast_result:
-		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
-			interact_cast_result.emit_signal("unfocused")
-
-		interact_cast_result = current_cast_result
-
-		if interact_cast_result and interact_cast_result.has_user_signal("focused"):
-			interact_cast_result.emit_signal("focused")
-
 func interact() -> void:
 	if interact_cast_result:
-		print("cast result")
 		if interact_cast_result.has_user_signal("interacted"):
-			print("interact")
-			interact_cast_result.emit_signal("interacted")
+			if Input.is_action_just_pressed("interact"):
+				print("interact")
+				interact_cast_result.emit_signal("interacted")
 
 func _ready() -> void:
 	pass
 	
 func _physics_process(delta):
-	pass
+	interact_cast()
 
 func _process(delta: float) -> void:
 	pass
-			
-func move_door(state: bool):
-	var target_position = open_position if state else closed_position
-	var tween = create_tween()
-	tween.tween_property(door, "position", target_position, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
