@@ -3,10 +3,10 @@ extends Node
 @onready var main_menu = $CanvasLayer/MainMenu
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry")
 @onready var hud = $CanvasLayer/HUD
-@onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var PauseMenu = $CanvasLayer/PauseMenu
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
+@onready var health_bar = $CanvasLayer/HUD/HealthBar
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
@@ -74,7 +74,11 @@ func remove_player(peer_id):
 		player.queue_free()
 
 func update_health_bar(health_value):
-	$HealthBar.value = health_value
+	if health_bar:
+		health_bar.value = health_value
+	else:
+		print("Health bar not found!")
+
 
 #pause menu buttons 
 func _on_resume_pressed() -> void:

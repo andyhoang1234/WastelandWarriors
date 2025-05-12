@@ -1,11 +1,12 @@
 extends Area3D
 
-signal max_health_powerup_collected
+@export var is_one_time_use := true
 
-@export var health_increase_amount : int = 20
+func _ready():
+	body_entered.connect(_on_body_entered)
 
-func _on_area_entered(area: Area3D) -> void:
-	if area.is_in_group("player"):
-		area.increase_max_health(health_increase_amount)
-		emit_signal("max_health_powerup_collected")
-		queue_free()
+func _on_body_entered(body: Node):
+	if body.has_method("restore_health_to_max"):
+		body.restore_health_to_max()
+		if is_one_time_use:
+			queue_free()

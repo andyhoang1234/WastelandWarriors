@@ -1,12 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvhwbpjrckmhl"]
+[gd_scene load_steps=15 format=3 uid="uid://dvhwbpjrckmhl"]
 
 [ext_resource type="Script" path="res://test_world.gd" id="1_6fns0"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="2_nsrdy"]
 [ext_resource type="Script" path="res://pause(escape).gd" id="3_lpbyp"]
 [ext_resource type="PackedScene" uid="uid://dtqn74o2v5qm2" path="res://models/Door.tscn" id="4_pwsvb"]
-[ext_resource type="Script" path="res://drop_manager.gd" id="5_kayyv"]
-[ext_resource type="PackedScene" uid="uid://bgicoiv2vry36" path="res://Insta Kill.tscn" id="6_wvsd6"]
-[ext_resource type="PackedScene" uid="uid://k3tg7a4limit" path="res://Max health.tscn" id="7_6piyp"]
+[ext_resource type="PackedScene" uid="uid://ck7osq42amgeu" path="res://maxhealth.tscn" id="7_yggai"]
 [ext_resource type="PackedScene" uid="uid://du5hsx4v2omsr" path="res://Scenes/School.tscn" id="8_hooqx"]
 [ext_resource type="Script" path="res://Wavemanager.gd" id="8_x6usk"]
 
@@ -440,6 +438,9 @@ script = ExtResource("8_x6usk")
 
 [node name="School" parent="." instance=ExtResource("8_hooqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.653, -1.038, 47.674)
+
+[node name="maxhealth" parent="." instance=ExtResource("7_yggai")]
+transform = Transform3D(-0.862637, 0, -0.505823, 0, 1, 0, 0.505823, 0, -0.862637, 3.55725, -0.0192742, 0.719803)
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/MainMenuOptions" to="." method="_on_main_menu_options_pressed"]
