@@ -72,6 +72,7 @@ near = 0.001
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -5)
 collision_mask = 2
+collide_with_areas = true
 script = ExtResource("4_5qpxp")
 
 [node name="Hand" type="Node3D" parent="Camera3D"]
