@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eys4bnc4lr52"
-path.s3tc="res://.godot/imported/Usain-Bolt-2008.webp-96ccf578cdf2dab9d01260f651ea9e45.s3tc.ctex"
+uid="uid://cb61ygxqgtxbh"
+path.s3tc="res://.godot/imported/Aymee2.jpeg-18f7e9ca1b364dca8809c28d0a913d13.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Usain-Bolt-2008.webp"
-dest_files=["res://.godot/imported/Usain-Bolt-2008.webp-96ccf578cdf2dab9d01260f651ea9e45.s3tc.ctex"]
+source_file="res://Textures/Aymee2.jpeg"
+dest_files=["res://.godot/imported/Aymee2.jpeg-18f7e9ca1b364dca8809c28d0a913d13.s3tc.ctex"]
 
 [params]
 

@@ -10,7 +10,8 @@ var wave_scenes = [
 	preload("res://Waves/Wave7.tscn"),
 	preload("res://Waves/Wave8.tscn"),
 	preload("res://Waves/Wave9.tscn"),
-	preload("res://Waves/Wave10.tscn")
+	preload("res://Waves/Wave10.tscn"),
+	preload("res://Waves/Wave11.tscn")
 ]
 
 var current_wave = 1
@@ -43,3 +44,5 @@ func spawn_wave():
 	add_child(wave_instance)
 
 	current_wave += 1
+
+	
