@@ -90,8 +90,7 @@ process_mode = 2
 [node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
 process_mode = 2
 show_behind_parent = true
-anchors_preset = -1
-anchor_left = -0.00868056
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
@@ -266,7 +265,7 @@ modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="title" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
 process_mode = 3
 layout_mode = 2
 offset_left = 469.0
@@ -278,12 +277,12 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/title"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/MarginContainer"]
 process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/ControlsMenu/title/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/ControlsMenu/MarginContainer/VBoxContainer"]
 process_mode = 3
 modulate = Color(0, 0, 1, 1)
 layout_mode = 2
@@ -291,7 +290,7 @@ text = "Controls"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="keys" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
 process_mode = 3
 layout_mode = 2
 offset_left = 5.0
@@ -303,12 +302,12 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/keys"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/MarginContainer3"]
 process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/ControlsMenu/keys/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/ControlsMenu/MarginContainer3/VBoxContainer"]
 process_mode = 3
 modulate = Color(0, 0, 1, 1)
 layout_mode = 2
@@ -317,17 +316,13 @@ text = "Keys
 
 W,A,S,D = Movement
 
-E = Interact
-
 R = Reload
 
-shift = Sprint
-
-Esc = Pause Menu"
+shift = Sprint"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="mouse" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
 process_mode = 3
 layout_mode = 2
 offset_left = 591.0
@@ -339,12 +334,12 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/mouse"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/MarginContainer4"]
 process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/ControlsMenu/mouse/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/ControlsMenu/MarginContainer4/VBoxContainer"]
 process_mode = 3
 modulate = Color(0, 0, 1, 1)
 layout_mode = 2
@@ -357,7 +352,7 @@ Right Mouse Button = Scope In "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="button" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/ControlsMenu"]
 process_mode = 3
 layout_mode = 2
 offset_left = 447.0
@@ -369,12 +364,12 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/button"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ControlsMenu/MarginContainer2"]
 process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="BackOptionsButton" type="Button" parent="CanvasLayer/ControlsMenu/button/VBoxContainer"]
+[node name="BackOptionsButton" type="Button" parent="CanvasLayer/ControlsMenu/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Back to Options"
 
@@ -452,6 +447,6 @@ transform = Transform3D(-0.862637, 0, -0.505823, 0, 1, 0, 0.505823, 0, -0.862637
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ControlsMenu/button/VBoxContainer/BackOptionsButton" to="." method="_on_back_options_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ControlsMenu/MarginContainer2/VBoxContainer/BackOptionsButton" to="." method="_on_back_options_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
