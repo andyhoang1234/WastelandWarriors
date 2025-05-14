@@ -1,5 +1,8 @@
 extends RayCast3D
 
+# Declare signals
+signal door_interacted
+
 var interact_cast_result
 var current_cast_result
 var interact_distance := 10.0  # Set a default interaction distance
@@ -12,11 +15,11 @@ var interactable = true
 @onready var camera = get_node("..")
 
 func _input(event):  
-	if event.is_action_pressed("interact"):
+	if Input.is_action_just_pressed("interact"):
 		interact()
 
+# Perform raycast to detect interactable objects
 func interact_cast() -> void:
-	
 	var space_state = camera.get_world_3d().direct_space_state
 	var screen_center = get_viewport().size / 2
 	var origin = camera.project_ray_origin(screen_center)
@@ -27,18 +30,20 @@ func interact_cast() -> void:
 	query.set_exclude([self])
 
 	var result = space_state.intersect_ray(query)
-	current_cast_result = result.get("collider")
+	if result:
+		current_cast_result = result.get("collider")
+	else:
+		current_cast_result = null
 
+# Interact with detected object (e.g., door)
 func interact() -> void:
-	if interact_cast_result:
-		if interact_cast_result.has_user_signal("interacted"):
-			if Input.is_action_just_pressed("interact"):
-				print("interact")
-				interact_cast_result.emit_signal("interacted")
+	print(current_cast_result)
+	if current_cast_result:
+		# Emit the door_interacted signal when we interact with the door
+		if current_cast_result == door:
+			emit_signal("door_interacted")
 
-func _ready() -> void:
-	pass
-	
+# Regular physics process
 func _physics_process(delta):
 	interact_cast()
 
