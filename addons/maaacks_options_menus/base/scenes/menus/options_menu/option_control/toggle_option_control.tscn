@@ -4,5 +4,7 @@
 
 [node name="OptionControl" instance=ExtResource("1_8rnmo")]
 
-[node name="CheckButton" type="CheckButton" parent="." index="1"]
+[node name="FullScreen" type="CheckButton" parent="." index="1"]
 layout_mode = 2
+
+[connection signal="toggled" from="FullScreen" to="." method="_on_full_screen_toggled"]

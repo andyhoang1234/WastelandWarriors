@@ -28,6 +28,12 @@ func _on_interacted():
 			move_door(true)
 
 # --- Move the door to the open or closed position ---
+	
+func interact():
+	if interactable == true:
+		interactable = false
+		toggle = !toggle 
+			
 func move_door(state: bool):
 	var target_position = open_position if state else closed_position
 	var tween = create_tween()
