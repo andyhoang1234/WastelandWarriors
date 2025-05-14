@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 3.5
+var SPEED = 5
 var enemy_health = 20
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.

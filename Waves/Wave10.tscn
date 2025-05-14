@@ -1,16 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0xkqfmeqt1se"]
+[gd_scene load_steps=3 format=3 uid="uid://c0xkqfmeqt1se"]
 
 [ext_resource type="PackedScene" uid="uid://5k1o5ctvtah6" path="res://Scenes/enemy.tscn" id="1_g4qaw"]
-[ext_resource type="Texture2D" uid="uid://b4ejkouk2u3i8" path="res://Textures/images.jpeg" id="2_0613e"]
+[ext_resource type="PackedScene" uid="uid://pksvokwlbybw" path="res://Scenes/Brute.tscn" id="2_glkl5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t1lng"]
-albedo_texture = ExtResource("2_0613e")
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_dux1i"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0wfc"]
-
-[node name="Wave5" type="Node3D"]
+[node name="Wave10" type="Node3D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_g4qaw")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 1, 0)
@@ -45,8 +38,5 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.8618
 [node name="Enemy11" parent="." instance=ExtResource("1_g4qaw")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.862, 1, -2)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
-material_override = SubResource("StandardMaterial3D_t1lng")
-mesh = SubResource("CapsuleMesh_dux1i")
-surface_material_override/0 = SubResource("StandardMaterial3D_r0wfc")
+[node name="Enemy12" parent="." instance=ExtResource("2_glkl5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -2)

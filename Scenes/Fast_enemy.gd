@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 2
+var SPEED = 9
 var enemy_health = 1
 const JUMP_VELOCITY = 4.5
 
