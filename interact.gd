@@ -10,7 +10,6 @@ var interactable = true
 @export var toggle: bool = false
 @export var open_position: Vector3 = Vector3(0, 0, -2) # Adjust this based on your scene
 @export var closed_position: Vector3 = Vector3(0, 0, 0) # Default position
-@onready var door: Node3D = $Door
 
 @onready var camera = get_node("..")
 
@@ -40,8 +39,9 @@ func interact() -> void:
 	print(current_cast_result)
 	if current_cast_result:
 		# Emit the door_interacted signal when we interact with the door
-		if current_cast_result == door:
-			emit_signal("door_interacted")
+		if current_cast_result.get_parent().has_method("move_door"):
+			print("interacted")
+			current_cast_result.get_parent().move_door()
 
 # Regular physics process
 func _physics_process(delta):
