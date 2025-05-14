@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://5k1o5ctvtah6" path="res://Scenes/enemy.tscn" id="1_bliaj"]
 
-[node name="Wave5" type="Node3D"]
+[node name="Wave6" type="Node3D"]
 
 [node name="Enemy" parent="." instance=ExtResource("1_bliaj")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
