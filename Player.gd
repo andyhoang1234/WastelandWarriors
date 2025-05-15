@@ -8,7 +8,7 @@ signal health_changed(health_value)
 @onready var raycast = $Camera3D/RayCast3D
 
 var bulletScene = preload("res://Bullet.tscn")
-var bulletSpawn 		
+var bulletSpawn
 
 var health = 100
 
