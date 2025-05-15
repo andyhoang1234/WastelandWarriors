@@ -139,7 +139,6 @@ func _get_property_list():
 		{ "name": "default_value", "type": property_type}
 	]
 
-
 func _on_full_screen_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
