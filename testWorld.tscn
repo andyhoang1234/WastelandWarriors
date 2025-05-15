@@ -178,7 +178,6 @@ show_percentage = false
 
 [node name="OptionsMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
-visible = false
 top_level = true
 z_index = 5
 layout_mode = 3
