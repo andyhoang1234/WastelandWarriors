@@ -15,4 +15,10 @@ mesh = ExtResource("1_ll70t")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_di1tn")
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+lifetime = 4.42
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 2.1
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
