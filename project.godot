@@ -20,6 +20,11 @@ config/icon="res://CHS.svg"
 Global="*res://Global.gd"
 AppConfig="*res://addons/maaacks_options_menus/base/scenes/autoloads/app_config.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
+
 [dotnet]
 
 project/assembly_name="Wasteland Warriors"
