@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvhwbpjrckmhl"]
+[gd_scene load_steps=16 format=3 uid="uid://dvhwbpjrckmhl"]
 
 [ext_resource type="Script" path="res://test_world.gd" id="1_6fns0"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="2_nsrdy"]
+[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="2_w55fa"]
 [ext_resource type="Script" path="res://pause(escape).gd" id="3_lpbyp"]
 [ext_resource type="PackedScene" uid="uid://dtqn74o2v5qm2" path="res://models/Door.tscn" id="4_pwsvb"]
 [ext_resource type="PackedScene" uid="uid://ck7osq42amgeu" path="res://maxhealth.tscn" id="7_yggai"]
@@ -220,13 +221,11 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MuteControl" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_nsrdy")]
-unique_name_in_owner = true
+[node name="Volume" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_w55fa")]
 layout_mode = 2
-option_name = "Mute"
-option_section = 2
-key = "Mute"
-section = "AudioSettings"
+alignment = 1
+option_name = "Volume"
+key = "Volume"
 
 [node name="FullscreenControl" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_nsrdy")]
 unique_name_in_owner = true
