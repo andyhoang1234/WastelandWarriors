@@ -112,6 +112,8 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		
+
 
 	if Input.is_action_pressed("shoot") and canShoot and ammo > 0:
 		shoot()
@@ -168,6 +170,15 @@ func _physics_process(delta):
 		anim_player.play("idle")
 
 	move_and_slide()
+	
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		print(health)
+		
+		if collider and collider.name.begins_with("Enemy"):
+			reduce_health(1)  # Adjust the amount as needed
 
 
 @rpc("call_local")
@@ -183,13 +194,6 @@ func handle_input():
 	else:
 		is_sprinting = false
 
-@rpc("any_peer")
-func receive_damage():
-	health -= 1
-	if health <= 0:
-		health = 3
-		position = Vector3.ZERO
-	health_changed.emit(health)
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "shoot":
@@ -204,9 +208,7 @@ func restore_health_to_max():
 
 
 func reduce_health(amount):
-	player_health -= 1
+	health -= amount
 	health_changed.emit(health)
-	if player_health < 0:
+	if health <= 0:
 		get_tree().change_scene_to_file("res://lose.tscn")
-			# The player dies. 
-			# Go back to the main menu. This can be changed to any scene in the future.

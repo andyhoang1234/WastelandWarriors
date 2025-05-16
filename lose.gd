@@ -14,4 +14,4 @@ func _on_respawn_button_pressed() -> void:
 
 
 func _on_menu_button_pressed() -> void:
-	show.MainMenu()
+	pass
