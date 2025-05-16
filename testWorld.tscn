@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvhwbpjrckmhl"]
+[gd_scene load_steps=16 format=3 uid="uid://dvhwbpjrckmhl"]
 
 [ext_resource type="Script" path="res://test_world.gd" id="1_6fns0"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="2_nsrdy"]
+[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="2_w55fa"]
 [ext_resource type="Script" path="res://pause(escape).gd" id="3_lpbyp"]
 [ext_resource type="PackedScene" uid="uid://dtqn74o2v5qm2" path="res://models/Door.tscn" id="4_pwsvb"]
 [ext_resource type="PackedScene" uid="uid://ck7osq42amgeu" path="res://maxhealth.tscn" id="7_yggai"]
@@ -178,6 +179,7 @@ show_percentage = false
 
 [node name="OptionsMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
+visible = false
 top_level = true
 z_index = 5
 layout_mode = 3
@@ -220,13 +222,11 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MuteControl" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_nsrdy")]
-unique_name_in_owner = true
+[node name="Volume" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_w55fa")]
 layout_mode = 2
-option_name = "Mute"
-option_section = 2
-key = "Mute"
-section = "AudioSettings"
+alignment = 1
+option_name = "Volume"
+key = "Volume"
 
 [node name="FullscreenControl" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_nsrdy")]
 unique_name_in_owner = true
@@ -410,6 +410,60 @@ text = "Resume"
 
 [node name="MainMenu" type="Button" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Lose" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -577.5
+offset_top = -325.5
+offset_right = 577.5
+offset_bottom = 325.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Lose"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Lose/PanelContainer"]
+modulate = Color(0.490196, 0, 0, 1)
+layout_mode = 2
+color = Color(0.320451, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Lose/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Lose/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "Ha you Died"
+horizontal_alignment = 1
+
+[node name="RespawnButton" type="Button" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Respawn"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Main Menu"
 
