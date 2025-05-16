@@ -37,9 +37,12 @@ var ammo : int = 5
 var maxAmmo : int = 28
 var player_health = 100
 
-var max_stamina = 100 
-var stamina = 100
-var stamina_drain = 20.0
+@export var max_stamina: float = 100.0
+@export var stamina_recovery_rate: float = 10.0 # per second
+@export var stamina_drain_rate: float = 20.0    # per second (sprinting, etc.)
+
+var current_stamina: float = max_stamina
+var is_sprinting: bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -89,6 +92,7 @@ func _unhandled_input(event):
 			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
 func _physics_process(delta):
+	handle_input()
 	
 	if is_shaking:
 		shake_time += delta
@@ -119,7 +123,6 @@ func _physics_process(delta):
 		timeSinceLastShot += delta
 		if timeSinceLastShot >= fireRate:
 			canShoot = true
-			
 		# Recoil return
 	if isRecoiling:
 	# Recoil weapon animation
@@ -134,14 +137,18 @@ func _physics_process(delta):
 		reload()
 
 
-		
-	if Input.is_action_pressed("player_run") and stamina > 0:
-		SPEED = 10.0
-		stamina -= stamina_drain * delta
+
+	if is_sprinting and current_stamina > 0:
+		current_stamina -= stamina_drain_rate * delta
+		if current_stamina < 0:
+			current_stamina = 0
+			is_sprinting = false # force stop sprinting
 	else:
-		SPEED = 5.0
-		if stamina < max_stamina:
-			stamina += stamina_drain * delta 
+		current_stamina += stamina_recovery_rate * delta
+		if current_stamina > max_stamina:
+			current_stamina = max_stamina
+		
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "up", "down")
@@ -169,6 +176,12 @@ func play_shoot_effects():
 	anim_player.play("shoot")
 	muzzle_flash.restart()
 	muzzle_flash.emitting = true
+	
+func handle_input():
+	if Input.is_action_pressed("sprint") and current_stamina > 0:
+		is_sprinting = true
+	else:
+		is_sprinting = false
 
 @rpc("any_peer")
 func receive_damage():
