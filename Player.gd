@@ -168,8 +168,6 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		print(health)
-		
 		if collider and collider.name.begins_with("Enemy"):
 			reduce_health(1)  # Adjust the amount as needed
 
