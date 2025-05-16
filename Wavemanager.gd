@@ -15,6 +15,7 @@ var wave_scenes = [
 ]
 
 var current_wave = 1
+var spawn_area_size = Vector3(25, 0, 30) # Define the size of the spawn area
 
 func _ready() -> void:
 	spawn_wave()
@@ -43,6 +44,14 @@ func spawn_wave():
 	var wave_instance = wave_scene.instantiate()
 	add_child(wave_instance)
 
-	current_wave += 1
+	# Spawn enemies at random positions
+	for enemy in wave_instance.get_children():
+		if enemy.is_in_group("enemy"): # Assuming enemies are in the "enemy" group
+			var random_position = Vector3(
+				randf_range(-spawn_area_size.x / 2, spawn_area_size.x / 2),
+				0, # Assuming y is ground level
+				randf_range(-spawn_area_size.z / 2, spawn_area_size.z / 2)
+			)
+			enemy.position = random_position
 
-	
+	current_wave += 1
