@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 11
-var enemy_health = 20
+var SPEED = 7
+var enemy_health = 100
 
 @export var powerup_scene = preload("res://maxhealth.tscn")
 
@@ -11,7 +11,8 @@ var enemy_health = 20
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	pass
+	enemy_health += Global.HMult
+	print(enemy_health)
 
 func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
