@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvhwbpjrckmhl"]
+[gd_scene load_steps=15 format=3 uid="uid://dvhwbpjrckmhl"]
 
 [ext_resource type="Script" path="res://test_world.gd" id="1_6fns0"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="2_nsrdy"]
-[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="2_w55fa"]
 [ext_resource type="Script" path="res://pause(escape).gd" id="3_lpbyp"]
 [ext_resource type="PackedScene" uid="uid://dtqn74o2v5qm2" path="res://models/Door.tscn" id="4_pwsvb"]
 [ext_resource type="PackedScene" uid="uid://ck7osq42amgeu" path="res://maxhealth.tscn" id="7_yggai"]
@@ -222,11 +221,13 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Volume" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_w55fa")]
+[node name="MuteControl" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_nsrdy")]
+unique_name_in_owner = true
 layout_mode = 2
-alignment = 1
-option_name = "Volume"
-key = "Volume"
+option_name = "Mute"
+option_section = 2
+key = "Mute"
+section = "AudioSettings"
 
 [node name="FullscreenControl" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("2_nsrdy")]
 unique_name_in_owner = true
@@ -413,60 +414,6 @@ process_mode = 3
 layout_mode = 2
 text = "Main Menu"
 
-[node name="Lose" type="Control" parent="CanvasLayer"]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -577.5
-offset_top = -325.5
-offset_right = 577.5
-offset_bottom = 325.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Lose"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Lose/PanelContainer"]
-modulate = Color(0.490196, 0, 0, 1)
-layout_mode = 2
-color = Color(0.320451, 0, 0, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Lose/PanelContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Lose/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
-modulate = Color(1, 0, 0, 1)
-layout_mode = 2
-text = "Ha you Died"
-horizontal_alignment = 1
-
-[node name="RespawnButton" type="Button" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Respawn"
-
-[node name="MenuButton" type="Button" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Main Menu"
-
 [node name="pause(escape)" type="Node" parent="."]
 process_mode = 2
 script = ExtResource("3_lpbyp")
@@ -477,6 +424,8 @@ spawn_path = NodePath("..")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_rmptm")
+
+[node name="Door" parent="NavigationRegion3D" instance=ExtResource("4_pwsvb")]
 
 [node name="DropManager" type="Node3D" parent="."]
 script = SubResource("GDScript_8l3n1")
@@ -492,54 +441,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.653, -1.038, 47.674)
 
 [node name="maxhealth" parent="." instance=ExtResource("7_yggai")]
 transform = Transform3D(-0.862637, 0, -0.505823, 0, 1, 0, 0.505823, 0, -0.862637, 3.55725, -0.0192742, 0.719803)
-
-[node name="Door3" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-3.90398e-07, 0, -2.02776, 0, 3.63845, 0, 2.02776, 0, -5.18343e-07, -92.0793, -0.289973, -30.9649)
-
-[node name="Door2" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-1.42399, 0, 1.50881e-07, 0, 1.90747, 0, -1.05956e-07, 0, -1.42399, -101.574, -0.0997338, 11.0469)
-
-[node name="Door" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, -1.42399, 0, 1.38111, 0, 1, 0, -6.22447e-08, -92.5816, -0.0418854, 15.0713)
-
-[node name="Door5" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.61234, 0, 1.46909, 0, -1, 0, -7.04775e-08, -11.4156, -0.384731, 22.7727)
-
-[node name="Door4" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.61278, 0, 1.38111, 0, -1, 0, -7.04969e-08, -11.4455, -0.185908, -31.3612)
-
-[node name="Door6" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.68535, 0, 1.38111, 0, -1, 0, -7.36689e-08, 72.6526, -0.161466, 22.6263)
-
-[node name="Door7" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.5609, 0, 1.38111, 0, -1, 0, -6.82292e-08, 73.2817, -0.00982571, -37.8269)
-
-[node name="Door8" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.38111, 0, -1, 0, -6.22447e-08, 126.186, -0.158052, 23.8065)
-
-[node name="Door9" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.38111, 0, -1, 0, -6.22447e-08, 126.629, 0.0109738, -34.5354)
-
-[node name="Door10" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.38111, 0, -1, 0, -6.22447e-08, 206.692, -0.0756356, 23.8429)
-
-[node name="Door11" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.61496, 0, 1.38111, 0, -1, 0, -7.05921e-08, 207.805, -0.23891, -35.1974)
-
-[node name="Door12" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.61355, 0, -1, 0, -6.22447e-08, 207.754, 0.892909, -20.8198)
-
-[node name="Door13" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.38111, 0, -1, 0, -6.22447e-08, 224.323, -0.136451, -21.6953)
-
-[node name="Door14" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-1, 0, -1.24489e-07, 0, 1.38111, 0, 8.74228e-08, 0, -1.42399, 254.401, -0.26302, -24.5904)
-
-[node name="Door15" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.38111, 0, -1, 0, -6.22447e-08, 245.412, -0.15205, -21.7659)
-
-[node name="Door16" parent="." instance=ExtResource("4_pwsvb")]
-transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.38111, 0, -1, 0, -6.22447e-08, 290.56, -0.146962, -4.25662)
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/MainMenuOptions" to="." method="_on_main_menu_options_pressed"]
