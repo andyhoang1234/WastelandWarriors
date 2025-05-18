@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-signal health_changed(health_value)
+signal health_changed(health)
 
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
@@ -35,7 +35,6 @@ var JUMP_VELOCITY
 
 var ammo : int = 5
 var maxAmmo : int = 28
-var player_health = 100
 
 var max_stamina = 100 
 var stamina = 100
@@ -66,7 +65,6 @@ func shoot():
 
 func reload():
 	ammo = maxAmmo
-	print("Relaoded")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -90,8 +88,6 @@ func _unhandled_input(event):
 			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
 func _physics_process(delta):
-	
-	print(Global.instakill)
 	
 	if is_shaking:
 		shake_time += delta
@@ -190,9 +186,8 @@ func _on_animation_player_animation_finished(anim_name):
 		# Test comment
 
 func restore_health_to_max():
-	player_health = 100
-	health_changed.emit(player_health)
-	print("Player health restored to max!")
+	health = 100
+	health_changed.emit(health)
 	
 func insta_kill():
 	Global.instakill = 100
@@ -211,6 +206,6 @@ func _on_insta_kill_timeout():
 
 func reduce_health(amount):
 	health -= amount
-	health_changed.emit(health)
+	world.update_health_bar(health)
 	if health <= 0:
 		get_tree().change_scene_to_file("res://lose.tscn")

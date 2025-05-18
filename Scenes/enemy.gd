@@ -12,7 +12,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	enemy_health += Global.HMult
-	print(enemy_health)
 
 func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
