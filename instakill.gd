@@ -11,10 +11,9 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node):
-	if body.has_method("restore_health_to_max"):
-		body.restore_health_to_max()
-		if is_one_time_use:
-			queue_free()
+	if body.has_method("insta_kill"):
+		body.insta_kill()
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	float_timer += delta * float_speed

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://chsn67w3te622"]
+
+[ext_resource type="Script" path="res://instakill.gd" id="1_5lxuw"]
+[ext_resource type="ArrayMesh" uid="uid://8nk24d45px5j" path="res://models/Tren.obj" id="2_lb2dq"]
+[ext_resource type="Material" uid="uid://kws5ipeymo1v" path="res://Textures/Gold.tres" id="3_q0v0l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_43unv"]
+
+[node name="instakill" type="Area3D"]
+collision_layer = 2
+script = ExtResource("1_5lxuw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_43unv")
+
+[node name="Tren" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = ExtResource("2_lb2dq")
+surface_material_override/0 = ExtResource("3_q0v0l")

@@ -73,6 +73,7 @@ func _ready():
 	camera.current = true
 	original_position = weapon.position
 	camera_original_transform = camera.transform
+	Global.instakill = 1
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
@@ -89,6 +90,8 @@ func _unhandled_input(event):
 			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
 func _physics_process(delta):
+	
+	print(Global.instakill)
 	
 	if is_shaking:
 		shake_time += delta
@@ -190,6 +193,20 @@ func restore_health_to_max():
 	player_health = 100
 	health_changed.emit(player_health)
 	print("Player health restored to max!")
+	
+func insta_kill():
+	Global.instakill = 100
+	
+	var timer = Timer.new()
+	timer.wait_time = 20
+	timer.one_shot = true
+	timer.connect("timeout", Callable(self, "_on_insta_kill_timeout"))
+	add_child(timer)
+	timer.start()
+	
+func _on_insta_kill_timeout():
+	Global.instakill = 1
+
 
 
 func reduce_health(amount):

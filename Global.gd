@@ -3,6 +3,7 @@ extends Node
 var PauseMenu
 var aiming
 var HMult:float
+var instakill
 
 # if status is true, increases the size of the window and scales on-screen elements to window size
 # allows for better viewing on retina (or similar resolution) displays
