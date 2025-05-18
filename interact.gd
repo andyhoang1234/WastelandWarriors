@@ -36,11 +36,9 @@ func interact_cast() -> void:
 
 # Interact with detected object (e.g., door)
 func interact() -> void:
-	print(current_cast_result)
 	if current_cast_result:
 		# Emit the door_interacted signal when we interact with the door
 		if current_cast_result.get_parent().has_method("move_door"):
-			print("interacted")
 			current_cast_result.get_parent().move_door()
 
 # Regular physics process

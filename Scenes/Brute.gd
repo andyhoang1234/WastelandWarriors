@@ -11,7 +11,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	enemy_health += Global.HMult
-	print(enemy_health)
 
 func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
@@ -45,5 +44,4 @@ func take_damage(damage_amount: int):
 
 # This function is called when the enemy's health reaches 0
 func _on_enemy_death():
-	print(name + " has been defeated!")
 	queue_free()  # Destroy the enemy
