@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
+
 var SPEED = 3
 var enemy_health = 1
 
@@ -48,7 +49,7 @@ func _on_enemy_death():
 	# Print the message to the console
 	print("Total Dorrah: ", Global.dorrah)
 
-	# Drop a powerup if a random chance is met
+
 	if randi() % 100 < 100:
 		var powerup = powerup_scene.instantiate()
 		var world = get_tree().get_root().get_node("testWorld")

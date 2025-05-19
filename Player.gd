@@ -169,7 +169,10 @@ func _physics_process(delta):
 		
 		if collider and collider.name.begins_with("Enemy"):
 			reduce_health(1)  # Adjust the amount as needed
-
+		if collider and collider.name.begins_with("Fast"):
+			reduce_health(5)  # Adjust the amount as needed
+		if collider and collider.name.begins_with("Brute"):
+			reduce_health(10)  # Adjust the amount as needed
 
 @rpc("call_local")
 func play_shoot_effects():
@@ -201,8 +204,6 @@ func insta_kill():
 	
 func _on_insta_kill_timeout():
 	Global.instakill = 1
-
-
 
 func reduce_health(amount):
 	health -= amount

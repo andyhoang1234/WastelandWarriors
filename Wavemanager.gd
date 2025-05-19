@@ -15,7 +15,7 @@ var wave_scenes = [
 ]
 
 var current_wave = 1
-var spawn_area_size = Vector3(25, 0, 30) # Define the size of the spawn area
+var spawn_area_size = Vector3(25, 0, 25) # Define the size of the spawn area
 
 func _ready() -> void:
 	spawn_wave()
