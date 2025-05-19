@@ -1,17 +1,17 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 11
-var enemy_health = 20
+var SPEED = 3
+var enemy_health = 100
 
-@export var powerup_scene = preload("res://maxhealth.tscn")
+@export var powerup_scene = preload("res://Scenes/randomDrop.tscn")
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	pass
+	enemy_health += Global.HMult
 
 func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
@@ -38,13 +38,11 @@ func take_damage(damage_amount: int):
 
 # This function is called when the enemy's health reaches 0
 func _on_enemy_death():
-	print("Tashi has been defeated and is a d-wangchuck@gmail.com")
 
-	# 50% chance to drop the powerup
-	if randi() % 100 < 5:
+	if randi() % 100 < 100:
 		var powerup = powerup_scene.instantiate()
 		var world = get_tree().get_root().get_node("testWorld")
 		world.add_child(powerup)
-		powerup.global_transform.origin = global_transform.origin + Vector3(0, 1, 0)
+		powerup.global_transform.origin = global_transform.origin + Vector3(0, -0.2, 0)
 
 	queue_free()  # Destroy the enemy

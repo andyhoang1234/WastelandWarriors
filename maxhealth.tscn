@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck7osq42amgeu"]
+[gd_scene load_steps=5 format=3 uid="uid://ck7osq42amgeu"]
 
 [ext_resource type="Script" path="res://max_health.gd" id="1_qcbjr"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_iw8x2"]
+[ext_resource type="Material" uid="uid://kws5ipeymo1v" path="res://Textures/Gold.tres" id="3_bciby"]
+[ext_resource type="ArrayMesh" uid="uid://b2l78fgbtt7ua" path="res://models/Vape.obj" id="4_15v2x"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_43unv"]
 
@@ -10,8 +10,10 @@
 collision_layer = 2
 script = ExtResource("1_qcbjr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_iw8x2")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_43unv")
+
+[node name="Vape" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = ExtResource("4_15v2x")
+surface_material_override/0 = ExtResource("3_bciby")

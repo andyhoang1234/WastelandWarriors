@@ -55,3 +55,4 @@ func spawn_wave():
 			enemy.position = random_position
 
 	current_wave += 1
+	Global.HMult += 2

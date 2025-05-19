@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-signal health_changed(health_value)
+signal health_changed(health)
 
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
@@ -36,7 +36,6 @@ var JUMP_VELOCITY
 
 var ammo : int = 5
 var maxAmmo : int = 28
-var player_health = 100
 
 var max_stamina = 100 
 var stamina = 100
@@ -67,13 +66,13 @@ func shoot():
 
 func reload():
 	ammo = maxAmmo
-	print("Relaoded")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
 	original_position = weapon.position
 	camera_original_transform = camera.transform
+	Global.instakill = 1
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
@@ -169,8 +168,6 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		print(health)
-		
 		if collider and collider.name.begins_with("Enemy"):
 			reduce_health(1)  # Adjust the amount as needed
 
@@ -190,13 +187,26 @@ func _on_animation_player_animation_finished(anim_name):
 		# Test comment
 
 func restore_health_to_max():
-	player_health = 100
-	health_changed.emit(player_health)
-	print("Player health restored to max!")
+	health = 100
+	health_changed.emit(health)
+	
+func insta_kill():
+	Global.instakill = 100
+	
+	var timer = Timer.new()
+	timer.wait_time = 20
+	timer.one_shot = true
+	timer.connect("timeout", Callable(self, "_on_insta_kill_timeout"))
+	add_child(timer)
+	timer.start()
+	
+func _on_insta_kill_timeout():
+	Global.instakill = 1
+
 
 
 func reduce_health(amount):
 	health -= amount
-	health_changed.emit(health)
+	world.update_health_bar(health)
 	if health <= 0:
 		Lose.show()
