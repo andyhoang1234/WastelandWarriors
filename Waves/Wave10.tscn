@@ -38,5 +38,5 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.8618
 [node name="Enemy11" parent="." instance=ExtResource("1_g4qaw")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.862, 1, -2)
 
-[node name="Enemy12" parent="." instance=ExtResource("2_glkl5")]
+[node name="Brute" parent="." instance=ExtResource("2_glkl5")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -2)

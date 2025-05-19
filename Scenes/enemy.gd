@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 3
-var enemy_health = 100
+var SPEED = 5.5
+var enemy_health = 1
 
 @export var powerup_scene = preload("res://Scenes/randomDrop.tscn")
 
@@ -39,7 +39,7 @@ func take_damage(damage_amount: int):
 # This function is called when the enemy's health reaches 0
 func _on_enemy_death():
 
-	if randi() % 100 < 100:
+	if randi() % 100 < 50:
 		var powerup = powerup_scene.instantiate()
 		var world = get_tree().get_root().get_node("testWorld")
 		world.add_child(powerup)
