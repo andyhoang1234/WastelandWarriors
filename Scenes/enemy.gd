@@ -1,11 +1,13 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 5.5
+
+var SPEED = 3
 var enemy_health = 1
 
 @export var powerup_scene = preload("res://Scenes/randomDrop.tscn")
-
+@export var min_dorrah_reward: int = 10  # Minimum Dorrah reward
+@export var max_dorrah_reward: int = 100  # Maximum Dorrah reward
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -30,16 +32,25 @@ func _physics_process(_delta):
 	
 	move_and_slide()
 
+# Take damage and reduce health
 func take_damage(damage_amount: int):
 	enemy_health -= damage_amount
 	if enemy_health <= 0:
 		_on_enemy_death()
 
-
 # This function is called when the enemy's health reaches 0
 func _on_enemy_death():
+	# Generate a random Dorrah reward between min_dorrah_reward and max_dorrah_reward
+	var dorrah_reward = randi_range(min_dorrah_reward, max_dorrah_reward)
 
-	if randi() % 100 < 50:
+	# Add the random Dorrah reward to the global currency
+	Global.add_dorrah(dorrah_reward)
+
+	# Print the message to the console
+	print("Total Dorrah: ", Global.dorrah)
+
+
+	if randi() % 100 < 100:
 		var powerup = powerup_scene.instantiate()
 		var world = get_tree().get_root().get_node("testWorld")
 		world.add_child(powerup)
