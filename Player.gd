@@ -51,7 +51,7 @@ func shoot():
 		var bullet = bulletScene.instantiate()
 		world.add_child(bullet)
 		bullet.global_transform = bulletSpawn.global_transform
-		bullet.scale = Vector3(0.1, 0.1, 0.1)
+		bullet.scale = Vector3(0.01, 0.01, 0.01)
 		ammo -= 1
 
 		# Recoil

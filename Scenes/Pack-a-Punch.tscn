@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://3p31jme7ieuh"]
+
+[ext_resource type="ArrayMesh" uid="uid://dmnhv0a58ivr4" path="res://models/Pack.obj" id="1_l0wtc"]
+[ext_resource type="Texture2D" uid="uid://dxirbn0bn0s5n" path="res://Textures/PackEmit.png" id="2_yoh57"]
+[ext_resource type="Texture2D" uid="uid://dkoumhcgf4yo8" path="res://Textures/PackRoughness.png" id="3_73tsp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyidt"]
+albedo_color = Color(0.244776, 0.244776, 0.244776, 1)
+roughness_texture = ExtResource("3_73tsp")
+roughness_texture_channel = 4
+emission_enabled = true
+emission_energy_multiplier = 0.97
+emission_texture = ExtResource("2_yoh57")
+
+[node name="Pack-a-punch" type="Node3D"]
+
+[node name="Pack" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_l0wtc")
+surface_material_override/0 = SubResource("StandardMaterial3D_iyidt")
