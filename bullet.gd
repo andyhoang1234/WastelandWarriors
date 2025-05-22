@@ -1,6 +1,6 @@
 extends Area3D
 
-var speed: float = 300
+var speed: float = 150
 var damage: int = 20 * Global.instakill  # Ensure the damage is exposed
 var bDrop: float = 0
 

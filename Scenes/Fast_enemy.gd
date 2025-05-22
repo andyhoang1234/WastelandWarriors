@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 9
+var SPEED = 8
 var enemy_health = 80
 
 @export var powerup_scene = preload("res://maxhealth.tscn")
