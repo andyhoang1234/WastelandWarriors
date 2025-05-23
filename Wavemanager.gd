@@ -11,7 +11,17 @@ var wave_scenes = [
 	preload("res://Waves/Wave8.tscn"),
 	preload("res://Waves/Wave9.tscn"),
 	preload("res://Waves/Wave10.tscn"),
-	preload("res://Waves/Wave11.tscn")
+	preload("res://Waves/Wave11.tscn"),
+	preload("res://Waves/Wave12.tscn"),
+	preload("res://Waves/Wave13.tscn"),
+	preload("res://Waves/Wave14.tscn"),
+	preload("res://Waves/Wave15.tscn"),
+	preload("res://Waves/Wave16.tscn"),
+	preload("res://Waves/Wave17.tscn"),
+	preload("res://Waves/Wave18.tscn"),
+	preload("res://Waves/Wave19.tscn"),
+	preload("res://Waves/Wave20.tscn"),
+	preload("res://Waves/Wave21.tscn")
 ]
 
 var current_wave = 1
@@ -37,9 +47,10 @@ func _physics_process(delta: float) -> void:
 		spawn_wave()
 
 func spawn_wave():
+	# Clamp current_wave to the last wave if it exceeds the total number of waves
 	if current_wave > wave_scenes.size():
-		return # No more waves
-
+		current_wave = wave_scenes.size()  # Always spawn the last wave
+	
 	var wave_scene = wave_scenes[current_wave - 1]
 	var wave_instance = wave_scene.instantiate()
 	add_child(wave_instance)
@@ -54,5 +65,9 @@ func spawn_wave():
 			)
 			enemy.position = random_position
 
-	current_wave += 1
+	# Only increase wave if not the last one
+	if current_wave < wave_scenes.size():
+		current_wave += 1
+
 	Global.HMult += 2
+	Global.DEnemyMult += 2
