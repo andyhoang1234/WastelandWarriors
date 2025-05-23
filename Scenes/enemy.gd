@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
 
-var SPEED = 3
+var SPEED = 6
 var enemy_health = 1
 
 @export var powerup_scene = preload("res://Scenes/randomDrop.tscn")
@@ -50,7 +50,7 @@ func _on_enemy_death():
 	print("Total Dorrah: ", Global.dorrah)
 
 
-	if randi() % 100 < 100:
+	if randi() % 100 < 5:
 		var powerup = powerup_scene.instantiate()
 		var world = get_tree().get_root().get_node("testWorld")
 		world.add_child(powerup)

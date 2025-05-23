@@ -13,6 +13,9 @@ var bulletScene = preload("res://Bullet.tscn")
 
 @onready var world = get_node("/root/testWorld")
 
+var hit_cooldown := 0.5  # cooldown time in seconds between hits
+var time_since_last_hit := 0.0
+
 var health = 100
 var canShoot := true
 var timeSinceLastShot := 0.0
@@ -162,17 +165,21 @@ func _physics_process(delta):
 		anim_player.play("idle")
 
 	move_and_slide()
-	
+	time_since_last_hit += delta
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		
-		if collider and collider.name.begins_with("Enemy"):
-			reduce_health(1)  # Adjust the amount as needed
-		if collider and collider.name.begins_with("Fast"):
-			reduce_health(5)  # Adjust the amount as needed
-		if collider and collider.name.begins_with("Brute"):
-			reduce_health(10)  # Adjust the amount as needed
+	
+		if collider and time_since_last_hit >= hit_cooldown:
+			if collider.name.begins_with("Enemy"):
+				reduce_health(5)
+				time_since_last_hit = 0.0
+		elif collider.name.begins_with("Fast"):
+			reduce_health(5)
+			time_since_last_hit = 0.0
+		elif collider.name.begins_with("Brute"):
+			reduce_health(10)
+			time_since_last_hit = 0.0
 
 @rpc("call_local")
 func play_shoot_effects():
