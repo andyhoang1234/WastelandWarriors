@@ -23,3 +23,6 @@ func _ready():
 func add_dorrah(amount: int):
 	dorrah += amount
 	print("Dorrah Total: ", dorrah)  
+
+func subtract_money(acmount: int):
+	dorrah -= acmount

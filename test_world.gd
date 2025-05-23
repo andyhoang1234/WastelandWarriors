@@ -106,4 +106,4 @@ func _on_respawn_button_pressed() -> void:
 func _on_menu_button_pressed() -> void:
 	main_menu.show()
 	Lose.hide()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	hud.hide()
