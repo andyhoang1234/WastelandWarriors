@@ -3,7 +3,10 @@ extends Node
 var bullet_damage_multiplier: int = 1
 var PauseMenu
 var aiming
-var HMult: float
+
+var HMult:float
+var DEnemyMult:int
+
 var instakill
 var health
 var dorrah: int = 0
@@ -18,6 +21,7 @@ func high_resolution_display_mode(status):
 func _ready():
 	high_resolution_display_mode(true)
 	HMult == 0
+	DEnemyMult ==0
 
 func add_dorrah(amount: int):
 	dorrah += amount
