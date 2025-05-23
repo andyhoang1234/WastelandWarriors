@@ -46,8 +46,6 @@ func _on_enemy_death():
 	# Add the random Dorrah reward to the global currency
 	Global.add_dorrah(dorrah_reward)
 
-	# Print the message to the console
-	print("Total Dorrah: ", Global.dorrah)
 
 
 	if randi() % 100 < 100:

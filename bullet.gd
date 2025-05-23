@@ -1,7 +1,7 @@
 extends Area3D
 
 var speed: float = 150
-var damage: int = 20 * Global.instakill  # Ensure the damage is exposed
+var damage: int = 20 * Global.instakill * Global.bullet_damage_multiplier # Ensure the damage is exposed
 var bDrop: float = 0
 
 # Called when the node enters the scene tree for the first time.
