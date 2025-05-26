@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvhwbpjrckmhl"]
+[gd_scene load_steps=17 format=3 uid="uid://dvhwbpjrckmhl"]
 
 [ext_resource type="Script" path="res://test_world.gd" id="1_6fns0"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="2_nsrdy"]
+[ext_resource type="Script" path="res://label.gd" id="2_rk6p2"]
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="2_w55fa"]
 [ext_resource type="Script" path="res://pause(escape).gd" id="3_lpbyp"]
 [ext_resource type="PackedScene" uid="uid://dtqn74o2v5qm2" path="res://models/Door.tscn" id="4_pwsvb"]
@@ -91,9 +92,10 @@ process_mode = 2
 [node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
 process_mode = 2
 show_behind_parent = true
-anchors_preset = 15
+anchors_preset = -1
+anchor_left = -0.00607639
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.996914
 offset_left = 1.0
 offset_right = 1.0
 offset_bottom = 2.0
@@ -157,6 +159,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 618.0
+offset_right = 225.0
+offset_bottom = 641.0
+script = ExtResource("2_rk6p2")
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD"]
 process_mode = 3
@@ -412,6 +422,7 @@ layout_mode = 2
 text = "Main Menu"
 
 [node name="Lose" type="Control" parent="CanvasLayer"]
+process_mode = 2
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -431,10 +442,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -3.0
+offset_left = -4.0
+offset_top = -6.0
+offset_right = 4.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -458,10 +469,12 @@ text = "Ha you Died"
 horizontal_alignment = 1
 
 [node name="RespawnButton" type="Button" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Respawn"
 
 [node name="MenuButton" type="Button" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 1
 layout_mode = 2
 text = "Main Menu"
 
@@ -547,3 +560,4 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0.366295, -1.32749, 
 [connection signal="pressed" from="CanvasLayer/ControlsMenu/MarginContainer2/VBoxContainer/BackOptionsButton" to="." method="_on_back_options_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]

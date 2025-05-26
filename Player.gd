@@ -6,6 +6,7 @@ signal health_changed(health)
 @onready var anim_player = $AnimationPlayer
 @onready var muzzle_flash = $Camera3D/Smg12/MuzzleFlash
 @onready var raycast = $Camera3D/RayCast3D
+@onready var Lose = get_parent().get_node("CanvasLayer/Lose")
 
 var bulletScene = preload("res://Bullet.tscn")
 @onready var bulletSpawn = $Camera3D/Hand/Llewlac/Smg12/bulletSpawn
@@ -218,4 +219,5 @@ func reduce_health(amount):
 	health -= amount
 	world.update_health_bar(health)
 	if health <= 0:
-		get_tree().change_scene_to_file("res://lose.tscn")
+		Lose.show()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
