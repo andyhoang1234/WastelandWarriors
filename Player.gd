@@ -13,7 +13,7 @@ var bulletScene = preload("res://Bullet.tscn")
 
 @onready var world = get_node("/root/testWorld")
 
-var hit_cooldown := 0.5  # cooldown time in seconds between hits
+var hit_cooldown := 0.3  # cooldown time in seconds between hits
 var time_since_last_hit := 0.0
 
 var health = 100
@@ -174,13 +174,13 @@ func _physics_process(delta):
 	
 		if collider and time_since_last_hit >= hit_cooldown:
 			if collider.name.begins_with("Enemy"):
-				reduce_health(5)
+				reduce_health(7)
 				time_since_last_hit = 0.0
 		elif collider.name.begins_with("Fast"):
-			reduce_health(5)
+			reduce_health(7)
 			time_since_last_hit = 0.0
 		elif collider.name.begins_with("Brute"):
-			reduce_health(10)
+			reduce_health(15)
 			time_since_last_hit = 0.0
 
 @rpc("call_local")
