@@ -50,22 +50,6 @@ var gravity = 20.0
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
-func shoot():
-	if ammo > 0:
-		var bullet = bulletScene.instantiate()
-		world.add_child(bullet)
-		bullet.global_transform = bulletSpawn.global_transform
-		bullet.scale = Vector3(0.01, 0.01, 0.01)
-		ammo -= 1
-
-		# Recoil
-		isRecoiling = true
-		weapon.position = original_position + recoil_offset
-
-		# Start smooth shake
-		camera_shake_timer = camera_shake_duration
-		shake_time = 0.0
-		is_shaking = true
 
 func reload():
 	ammo = maxAmmo
@@ -117,7 +101,20 @@ func _physics_process(delta):
 
 
 	if Input.is_action_pressed("shoot") and canShoot and ammo > 0:
-		shoot()
+		var bullet = bulletScene.instantiate()
+		world.add_child(bullet)
+		bullet.global_transform = bulletSpawn.global_transform
+		bullet.scale = Vector3(0.01, 0.01, 0.01)
+		ammo -= 1
+
+		# Recoil
+		isRecoiling = true
+		weapon.position = original_position + recoil_offset
+
+		# Start smooth shake
+		camera_shake_timer = camera_shake_duration
+		shake_time = 0.0
+		is_shaking = true
 		canShoot = false
 		timeSinceLastShot = 0.0
 		isRecoiling = true
