@@ -6,7 +6,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 
 
 @onready var main_menu = $CanvasLayer/MainMenu
-@onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry")
+@onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/AddressEntry")
 @onready var hud = $CanvasLayer/HUD
 @onready var PauseMenu = $CanvasLayer/PauseMenu
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
