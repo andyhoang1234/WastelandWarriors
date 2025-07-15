@@ -576,3 +576,4 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0.366295, -1.32749, 
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
