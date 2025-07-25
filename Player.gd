@@ -217,4 +217,3 @@ func reduce_health(amount):
 	world.update_health_bar(health)
 	if health <= 0:
 		Lose.show()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
