@@ -36,6 +36,12 @@ func _input(_event):
 			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+func update_dorrah_label(new_value: int):
+	var label = $CanvasLayer/DorrahLabel  # Adjust path to your label
+	if label:
+		label.update_label(new_value)
+		print("Updating dorrah label to", new_value)
+
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
 		if toggle:

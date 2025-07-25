@@ -17,6 +17,8 @@ var bulletScene = preload("res://Bullet.tscn")
 var hit_cooldown := 0.3  # cooldown time in seconds between hits
 var time_since_last_hit := 0.0
 
+var dorrah: int = 0
+
 var health = 100
 var canShoot := true
 var timeSinceLastShot := 0.0
@@ -48,18 +50,30 @@ var stamina_drain = 20.0
 var gravity = 20.0
 
 func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
+	set_multiplayer_authority(str(name).to_int())  # Make sure peer ID is int
 
 
 func reload():
 	ammo = maxAmmo
 
 func _ready():
+	add_to_group("players")
+	if not is_multiplayer_authority():
+		rpc_id(1, "request_current_dorrah")  # Ask server for current value, assuming server peer 1
+	# Your existing _ready content
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
 	original_position = weapon.position
 	camera_original_transform = camera.transform
 	Global.instakill = 1
+	
+	if is_multiplayer_authority():
+		var peer_id = get_multiplayer_authority()
+		if not Global.dorrah_per_player.has(peer_id):
+			Global.set_dorrah(peer_id, 0)
+	else:
+		# Ask server to sync current dorrah on join
+		rpc_id(1, "request_add_dorrah", 0)  # Assuming peer 1 is server
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
@@ -74,6 +88,30 @@ func _unhandled_input(event):
 			rotate_y(-event.relative.x * .005)
 			camera.rotate_x(-event.relative.y * .005)
 			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+
+@rpc("any_peer", "call_remote")
+func request_add_dorrah(amount: int):
+	if not is_multiplayer_authority():
+		return
+	var peer_id = get_multiplayer_authority()
+	Global.add_dorrah(peer_id, amount)
+	rpc_id(peer_id, "sync_dorrah", Global.get_dorrah(peer_id))
+
+@rpc("authority", "call_remote")
+func request_current_dorrah():
+	var peer_id = get_multiplayer_authority()
+	print("Server received dorrah request from peer", peer_id)
+	var current = Global.get_dorrah(peer_id)
+	rpc_id(peer_id, "sync_dorrah", current)
+
+@rpc("authority", "call_local")
+func sync_dorrah(new_value: int):
+	dorrah = new_value
+	print("Client updated dorrah to:", new_value)
+	world.update_dorrah_label(new_value)
+
+func earn_dorrah(amount: int):
+	rpc("request_add_dorrah", amount)
 
 func _physics_process(delta):
 	
