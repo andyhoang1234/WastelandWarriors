@@ -77,7 +77,7 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	
-	print(Global.dorrah)
+	#print(Global.dorrah)
 	
 	if is_shaking:
 		shake_time += delta
