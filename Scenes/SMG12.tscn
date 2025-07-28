@@ -1,14 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxgacn40ai3ak"]
 
 [ext_resource type="ArrayMesh" uid="uid://bcay2mkj6li14" path="res://models/SMG12.obj" id="1_h1600"]
+[ext_resource type="Script" path="res://Scenes/SMG12.gd" id="1_i0fkt"]
 [ext_resource type="Texture2D" uid="uid://1shi3y4pmmih" path="res://Textures/Diffuse.png" id="2_3x1yw"]
 [ext_resource type="Texture2D" uid="uid://bdk2iccg6os3o" path="res://Textures/Glossy.png" id="3_5v7ic"]
 [ext_resource type="Texture2D" uid="uid://dib4oknh0f11n" path="res://Textures/Normal.png" id="4_rasc6"]
 [ext_resource type="Texture2D" uid="uid://vfd3aakymnrd" path="res://Textures/Roughness.png" id="5_274xx"]
-
-[sub_resource type="GDScript" id="GDScript_rt7gy"]
-script/source = "extends Node3D
-"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkb46"]
 albedo_texture = ExtResource("2_3x1yw")
@@ -23,7 +20,7 @@ normal_enabled = true
 normal_texture = ExtResource("4_rasc6")
 
 [node name="Llewlac" type="Node3D"]
-script = SubResource("GDScript_rt7gy")
+script = ExtResource("1_i0fkt")
 
 [node name="Smg12" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.34977, 0.170636, -3.97754)
@@ -32,3 +29,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vkb46")
 
 [node name="bulletSpawn" type="Node3D" parent="Smg12"]
 transform = Transform3D(14.41, 0, 0, 0, -6.29879e-07, 14.41, 0, -14.41, -6.29881e-07, 0, -1.5227, -2.53278)
+
+[node name="ads" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62755, 0, 0)

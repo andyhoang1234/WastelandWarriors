@@ -3,7 +3,7 @@ extends Node3D
 const ADS_LERP = 15.0
 
 @onready var default_position = get_parent().position + Vector3(0.2, -1.55, -0.2)
-@onready var ads_position = get_parent().position + Vector3(0, -1.513, 0)
+@onready var ads_position = get_node('Llewlac/ads').position
 @onready var adsfov = 40.0
 @onready var norfov = 90.0
 
