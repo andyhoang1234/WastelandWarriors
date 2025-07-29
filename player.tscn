@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://xcjrjq5cbn7y"]
+[gd_scene load_steps=17 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
 [ext_resource type="PackedScene" uid="uid://dxgacn40ai3ak" path="res://Scenes/SMG12.tscn" id="2_yfxua"]
 [ext_resource type="Script" path="res://interact.gd" id="4_5qpxp"]
 [ext_resource type="Script" path="res://hand.gd" id="4_bog6o"]
+[ext_resource type="PackedScene" uid="uid://bphdutvg0p6g1" path="res://Scripts/Weapons/XM4.tscn" id="6_umhhw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
 albedo_texture = ExtResource("2_bhhdd")
@@ -76,11 +77,12 @@ collide_with_areas = true
 script = ExtResource("4_5qpxp")
 
 [node name="Hand" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283076, -0.02, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283076, -0.02, -0.274105)
 script = ExtResource("4_bog6o")
+weapon_scenes = Array[PackedScene]([ExtResource("2_yfxua"), ExtResource("6_umhhw")])
 
-[node name="Llewlac" parent="Camera3D/Hand" instance=ExtResource("2_yfxua")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.476924, 0.101, 0.417)
+[node name="Eye" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283, 0, 0.345612)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

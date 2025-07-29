@@ -38,17 +38,7 @@ func _ready():
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
-	
-	if event is InputEventMouseMotion:
-		if Global.aiming == true:
-			rotate_y(-event.relative.x * .0005)
-			camera.rotate_x(-event.relative.y * .0005)
-			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
-			
-		else:
-			rotate_y(-event.relative.x * .005)
-			camera.rotate_x(-event.relative.y * .005)
-			camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
+
 
 func _physics_process(delta):
 
