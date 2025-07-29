@@ -1,3 +1,4 @@
+@ -0,0 +1,84 @@
 extends Node
 
 var bulletScene = preload("res://Bullet.tscn")
