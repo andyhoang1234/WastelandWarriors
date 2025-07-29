@@ -2,7 +2,6 @@ extends Node
 
 var bullet_damage_multiplier: int = 1
 var PauseMenu
-var aiming
 
 var HMult:float
 var DEnemyMult:int

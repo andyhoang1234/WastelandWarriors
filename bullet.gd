@@ -1,6 +1,6 @@
 extends Area3D
 
-var speed: float = 150
+var speed: float = 100
 var damage: int = 20 * Global.instakill * Global.bullet_damage_multiplier # Ensure the damage is exposed
 var bDrop: float = 0
 
@@ -10,7 +10,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	bDrop = bDrop + 0.1
+	bDrop = bDrop + 0.01
 	global_transform.origin += transform.basis.y.normalized() * speed * delta
 	global_transform.origin.y -= bDrop * delta
 
