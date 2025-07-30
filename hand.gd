@@ -16,8 +16,14 @@ var aiming
 @onready var parentcam = get_parent()
 @onready var default_position = position
 
+@export var lag_speed: float
+var lagged_rotation := Vector3.ZERO
+
 
 func _ready():
+	
+	lagged_rotation = global_rotation
+	
 	for packed_scene in weapon_scenes:
 		if packed_scene:
 			var weapon = packed_scene.instantiate()
@@ -34,16 +40,29 @@ func _ready():
 
 
 func _process(delta):
-	print(parentcam)
+	
+	var target_rotation = get_parent().global_rotation
+
+	# Interpolate toward the parent's global rotation
+	lagged_rotation.x = lerp_angle(lagged_rotation.x, target_rotation.x, delta * lag_speed)
+	lagged_rotation.y = lerp_angle(lagged_rotation.y, target_rotation.y, delta * lag_speed)
+
+	# Apply the lagged rotation (overwrite inherited transform)
+	global_rotation = lagged_rotation
+	
+	parentcam.rotation.z = 0
+	
+	if aiming == true:
+		lag_speed = 100.0
+	else: 
+		lag_speed = 200.0
+	
 	if current_weapon == null:
 		return
 
 	var camera = get_parent()
 
 	aiming = Input.is_action_pressed("fire2")
-	
-	if aiming == true:
-		get_parent()
 		
 	
 	var target_fov = adsfov if aiming else norfov
