@@ -6,6 +6,8 @@ var PauseMenu
 var HMult:float
 var DEnemyMult:int
 
+var door_price: int = 15000 # Starting price of doors
+
 var dorrah_per_player := {}
 
 var instakill
