@@ -13,6 +13,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var Lose = $CanvasLayer/Lose
+@onready var TabMenu = $CanvasLayer/TabMenu
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
@@ -23,6 +24,7 @@ var bulletScene = preload("res://Bullet.tscn")
 
 func _ready() -> void:
 	Global.PauseMenu = $CanvasLayer/PauseMenu
+	Global.Lose = $CanvasLayer/Lose
 
 func _physics_process(_delta):
 	if tracked:
@@ -56,6 +58,10 @@ func _unhandled_input(_event):
 			PauseMenu.hide()
 			hud.show()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if Input.is_action_pressed("tab"):
+		TabMenu.show()
+	else:
+		TabMenu.hide()
 
 #main menu buttons 
 func _on_single_player_button_pressed():
@@ -113,12 +119,10 @@ func _on_back_options_button_pressed() -> void:
 func _on_respawn_button_pressed() -> void:
 	pass # Replace with function body.
 
-
-func _on_menu_button_pressed() -> void:
+func _on_menu_lose_button_pressed() -> void:
 	main_menu.show()
 	Lose.hide()
 	hud.hide()
-	
 
 
 func _on_host_button_pressed():
