@@ -1,12 +1,18 @@
 extends Node
 
+
+const PORT = 9999
+var enet_peer = ENetMultiplayerPeer.new()
+
+
 @onready var main_menu = $CanvasLayer/MainMenu
-@onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry")
+@onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/AddressEntry")
 @onready var hud = $CanvasLayer/HUD
 @onready var PauseMenu = $CanvasLayer/PauseMenu
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
+@onready var Lose = $CanvasLayer/Lose
 
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
@@ -30,17 +36,21 @@ func _input(_event):
 			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+func update_dorrah_label(new_value: int):
+	var label = $CanvasLayer/DorrahLabel  # Adjust path to your label
+	if label:
+		label.update_label(new_value)
+		print("Updating dorrah label to", new_value)
+
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
 		if toggle:
-			print("pause")
 			toggle = false
 			get_tree().paused = true
 			PauseMenu.show()
 			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		elif !toggle:
-			print("unpause")
 			toggle = true
 			get_tree().paused = false
 			PauseMenu.hide()
@@ -65,20 +75,15 @@ func add_player(peer_id):
 	player.name = str(peer_id)
 	add_child(player)
 	tracked = true
-	if player.is_multiplayer_authority():
-		player.health_changed.connect(update_health_bar)
+	player.health_changed.connect(update_health_bar)
 
 func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()
 
-func update_health_bar(health_value):
-	if health_bar:
-		health_bar.value = health_value
-	else:
-		print("Health bar not found!")
-
+func update_health_bar(health):
+	health_bar.value = health
 
 #pause menu buttons 
 func _on_resume_pressed() -> void:
@@ -103,3 +108,50 @@ func _on_controls_button_pressed() -> void:
 #Controls Menu button
 func _on_back_options_button_pressed() -> void:
 	ControlsMenu.hide()
+
+#Lose sceen
+func _on_respawn_button_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_menu_button_pressed() -> void:
+	main_menu.show()
+	Lose.hide()
+	hud.hide()
+	
+
+
+func _on_host_button_pressed():
+	main_menu.hide()
+	hud.show()
+	
+	enet_peer.create_server(PORT)
+	multiplayer.multiplayer_peer = enet_peer
+	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
+	
+	add_player(multiplayer.get_unique_id())
+	
+	#upnp_setup()
+func _on_join_button_pressed():
+	main_menu.hide()
+	hud.show()
+	
+	enet_peer.create_client(address_entry.text, PORT)
+	multiplayer.multiplayer_peer = enet_peer
+
+func _on_multiplayer_spawner_spawned(node):
+	if node.is_multiplayer_authority():
+		node.health_changed.connect(update_health_bar)
+func upnp_setup():
+	var upnp = UPNP.new()
+	
+	var discover_result = upnp.discover()
+	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Discover Failed! Error %s" % discover_result)
+
+	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), "UPNP Invalid Gateway!")
+
+	var map_result = upnp.add_port_mapping(PORT)
+	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Error %s" % map_result)
+	
+	print("Success! Join Address: %s" % upnp.query_external_address())

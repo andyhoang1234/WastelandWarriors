@@ -1,50 +1,62 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-var SPEED = 11
-var enemy_health = 20
 
-@export var powerup_scene = preload("res://maxhealth.tscn")
+var SPEED = 6
+var enemy_health = 1
 
+@export var powerup_scene = preload("res://Scenes/randomDrop.tscn")
+@export var min_dorrah_reward: int = 10
+@export var max_dorrah_reward: int = 100
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	pass
+	set_multiplayer_authority(1)  # Make sure the server is the authority
+	enemy_health += Global.HMult
 
 func update_target_location(target_location):
 	nav_agent.set_target_position(target_location)
 
 func _physics_process(_delta):
+	if not is_multiplayer_authority(): return  # Only server moves enemy
+
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
 	
-	# Check if the enemy is already at the target location
 	if current_location.distance_to(next_location) > 0.1:
-		look_at(next_location)  # Enemy will turn to face player
+		look_at(next_location)
 
-	# Vector Maths
 	var new_velocity = (next_location - current_location).normalized() * SPEED
 	velocity = new_velocity
 	
 	move_and_slide()
 
-func take_damage(damage_amount: int):
+# Called by players to apply damage
+@rpc("any_peer", "call_remote")
+func take_damage(damage_amount: int, player_id: int):
+	if not is_multiplayer_authority(): return  # Only server modifies health
+
 	enemy_health -= damage_amount
 	if enemy_health <= 0:
-		_on_enemy_death()
+		_on_enemy_death(player_id)
+
+func _on_enemy_death(killer_peer_id: int):
+	var dorrah_reward = randi_range(min_dorrah_reward, max_dorrah_reward)
+	
+	# Add dorrah to the killer's total on the server
+	Global.add_dorrah(killer_peer_id, dorrah_reward)
+	rpc_id(killer_peer_id, "sync_dorrah", Global.get_dorrah(killer_peer_id))
+
+	
+	# Your existing code for powerup spawning, etc.
+	
+	rpc("networked_queue_free")  # Free the enemy on all clients
+	print("Awarding dorrah:", dorrah_reward, "to peer:", killer_peer_id)
+	rpc_id(killer_peer_id, "sync_dorrah", Global.get_dorrah(killer_peer_id))
 
 
-# This function is called when the enemy's health reaches 0
-func _on_enemy_death():
-	print("Tashi has been defeated and is a d-wangchuck@gmail.com")
 
-	# 50% chance to drop the powerup
-	if randi() % 100 < 5:
-		var powerup = powerup_scene.instantiate()
-		var world = get_tree().get_root().get_node("testWorld")
-		world.add_child(powerup)
-		powerup.global_transform.origin = global_transform.origin + Vector3(0, 1, 0)
-
-	queue_free()  # Destroy the enemy
+@rpc("call_local")
+func networked_queue_free():
+	queue_free()
