@@ -1,11 +1,11 @@
 extends Node
 
 # Gun Modifiers
-var maxAmmo : int = 28
-var recoil_speed = 7.0
+var maxAmmo : int = 40
+var recoil_speed = 5.0
 var bulletScene = preload("res://Bullet.tscn")
-var recoil_distance := 0.1 # Recoil amount along local Z-axis
-@export var fireRate: float = 0.1
+var recoil_distance := 0.2 # Recoil amount along local Z-axis
+@export var fireRate: float = 0.2
 
 # Internal State
 var active := false
