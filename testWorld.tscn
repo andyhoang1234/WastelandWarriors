@@ -467,6 +467,11 @@ layout_mode = 2
 text = "Player List"
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="CanvasLayer/TabMenu/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+horizontal_alignment = 1
+
 [node name="Lose" type="Control" parent="CanvasLayer"]
 process_mode = 2
 visible = false

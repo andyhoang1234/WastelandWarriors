@@ -15,6 +15,8 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var Lose = $CanvasLayer/Lose
 @onready var TabMenu = $CanvasLayer/TabMenu
 
+var IpAddress
+
 @onready var Player = preload("res://player.tscn")
 #@onready var Player = $Player
 var tracked = false
@@ -25,8 +27,13 @@ var bulletScene = preload("res://Bullet.tscn")
 func _ready() -> void:
 	Global.PauseMenu = $CanvasLayer/PauseMenu
 	Global.Lose = $CanvasLayer/Lose
+	
+	var upnp = UPNP.new()
+	upnp.discover(2000, 2, "InternetGatewayDevice")
+	IpAddress = upnp.query_external_address()
 
 func _physics_process(_delta):
+	print(IpAddress)
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
 
