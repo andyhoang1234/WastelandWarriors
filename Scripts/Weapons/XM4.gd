@@ -54,7 +54,6 @@ func _physics_process(delta):
 			
 		cam.rotation.y = lerp(cam.rotation.y, randf_range(recoil_rotation_side_min, recoil_rotation_side_max), 0.5)
 		
-
 		canShoot = false
 		timeSinceLastShot = 0.0
 		isRecoiling = true

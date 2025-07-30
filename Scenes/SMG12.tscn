@@ -32,4 +32,4 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vkb46")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.63, -1.40727)
 
 [node name="bulletSpawn" type="Node3D" parent="."]
-transform = Transform3D(14.41, 0, 0, 0, -0.502901, 14.4012, 0, -14.4012, -0.502901, -0.00210696, -0.649185, -4.40169)
+transform = Transform3D(14.41, 0, 0, 0, 0.251488, 14.4078, 0, -14.4078, 0.251488, -0.00210696, -0.649185, -4.40169)

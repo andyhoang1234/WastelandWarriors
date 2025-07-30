@@ -19,6 +19,12 @@ var aiming
 @export var lag_speed: float
 var lagged_rotation := Vector3.ZERO
 
+var sway_amount := 0.00005  # Controls how intense the sway is
+var sway_speed := 2.0  # Speed of sway movement
+var sway_timer := 0.0
+var sway_offset := Vector3.ZERO
+var target_position
+
 
 func _ready():
 	
@@ -53,9 +59,25 @@ func _process(delta):
 	parentcam.rotation.z = 0
 	
 	if aiming == true:
+		
+		target_position = ads_position
 		lag_speed = 100.0
+		
+		# Increase sway timer
+		sway_timer += delta * sway_speed
+
+		# Generate smooth random offsets using sin/cos for smooth sway
+		sway_offset.x = sin(sway_timer * 1.1) * sway_amount
+		sway_offset.y = cos(sway_timer * 1.3) * sway_amount
+
+		# Apply sway to camera rotation
+		parentcam.rotation.x += sway_offset.y
+		parentcam.rotation.y += sway_offset.x
+		
 	else: 
+		target_position = default_position
 		lag_speed = 200.0
+		sway_timer = 0.0
 	
 	if current_weapon == null:
 		return
@@ -67,8 +89,7 @@ func _process(delta):
 	
 	var target_fov = adsfov if aiming else norfov
 	camera.fov = lerp(camera.fov, target_fov, delta * ADS_LERP)
-
-	var target_position = ads_position if aiming else default_position
+	
 	current_weapon.transform.origin = current_weapon.transform.origin.lerp(target_position, delta * ADS_LERP)
 	
 

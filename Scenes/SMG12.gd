@@ -35,7 +35,6 @@ func set_active(value: bool) -> void:
 	active = value
 
 func _physics_process(delta):
-
 	if not active:
 		return
 
@@ -49,10 +48,11 @@ func _physics_process(delta):
 		# Apply recoil in local Z-axis
 		var recoil_offset = hand.basis.z.normalized() * recoil_distance
 		hand.transform.origin += recoil_offset
+		
 		if cam.rotation.x <= 1.52 and cam.rotation.x >= -1.52:
 			cam.rotation.x += recoil_rotation_up
 			
-		cam.rotation.y += randf_range(recoil_rotation_side_min, recoil_rotation_side_max)
+		cam.rotation.y = lerp(cam.rotation.y, randf_range(recoil_rotation_side_min, recoil_rotation_side_max), 0.5)
 
 		canShoot = false
 		timeSinceLastShot = 0.0

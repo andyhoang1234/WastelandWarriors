@@ -77,12 +77,12 @@ collide_with_areas = true
 script = ExtResource("4_5qpxp")
 
 [node name="Hand" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283076, -0.02, -0.274105)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283, 0, 0)
 script = ExtResource("4_bog6o")
 weapon_scenes = Array[PackedScene]([ExtResource("2_yfxua"), ExtResource("6_umhhw")])
 
 [node name="Eye" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283, 0, 0.345612)
+transform = Transform3D(0.975917, 0, 0.218143, 0, 1, 0, -0.218143, 0, 0.975917, -0.283, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
