@@ -29,11 +29,14 @@ var target_position
 func _ready():
 	
 	lagged_rotation = global_rotation
-	
+
 	for packed_scene in weapon_scenes:
 		if packed_scene:
 			var weapon = packed_scene.instantiate()
 			add_child(weapon)
+			weapon.visible = false  # Hide all weapons by default
+			if weapon.has_method("set_active"):
+				weapon.call("set_active", false)
 			weapons.append(weapon)
 		else:
 			push_error("Invalid PackedScene in weapon_scenes.")
@@ -42,7 +45,12 @@ func _ready():
 		push_error("No weapons were loaded.")
 		return
 
-	switch_weapon(0)
+	# Activate only the first weapon
+	current_weapon_index = 0
+	current_weapon = weapons[0]
+	current_weapon.visible = true
+	if current_weapon.has_method("set_active"):
+		current_weapon.call("set_active", true)
 
 
 func _process(delta):
@@ -54,7 +62,8 @@ func _process(delta):
 	lagged_rotation.y = lerp_angle(lagged_rotation.y, target_rotation.y, delta * lag_speed)
 
 	# Apply the lagged rotation (overwrite inherited transform)
-	global_rotation = lagged_rotation
+	if aiming == true:
+		global_rotation = lagged_rotation
 	
 	parentcam.rotation.z = 0
 	
