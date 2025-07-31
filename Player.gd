@@ -14,12 +14,11 @@ signal health_changed(health)
 var hit_cooldown := 0.3  # cooldown time in seconds between hits
 var time_since_last_hit := 0.0
 
-var dorrah: int = 0
+var dorrah: int = 15000
 
 var health = 100
 
-var SPEED = 5.0
-var JUMP_VELOCITY
+var SPEED = 5
 
 var max_stamina = 100 
 var stamina = 100

@@ -5,7 +5,9 @@ var maxAmmo : int = 40
 var recoil_speed = 5.0
 var bulletScene = preload("res://Bullet.tscn")
 var recoil_distance := 0.2 # Recoil amount along local Z-axis
-@export var fireRate: float = 0.2
+var recoil_rotation_up : float = 0.01
+var recoil_rotation_side = -0.01
+@export var fireRate: float = 0.1
 
 # Internal State
 var active := false
@@ -19,6 +21,7 @@ var isRecoiling = false
 @onready var weapon = $"." # The weapon node
 
 @onready var hand = get_parent()
+@onready var cam = hand.get_parent()
 
 func _ready():
 	original_transform = hand.transform
@@ -43,7 +46,12 @@ func _physics_process(delta):
 		# Apply recoil in local Z-axis
 		var recoil_offset = hand.basis.z.normalized() * recoil_distance
 		hand.transform.origin += recoil_offset
-
+		
+		if cam.rotation.x <= 1.52 and cam.rotation.x >= -1.52:
+			cam.rotation.x += recoil_rotation_up
+			
+		cam.rotation.y = lerp(cam.rotation.y, randf_range(-recoil_rotation_side, recoil_rotation_side), 0.5)
+		
 		canShoot = false
 		timeSinceLastShot = 0.0
 		isRecoiling = true
