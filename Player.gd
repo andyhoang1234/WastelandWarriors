@@ -20,9 +20,15 @@ var health = 100
 
 var SPEED = 5
 
-var max_stamina = 100 
-var stamina = 100
-var stamina_drain = 20.0
+@export var max_stamina: float = 100.0
+@export var stamina: float = 100.0
+@export var stamina_depletion_rate: float = 20.0
+@export var stamina_regen_rate: = 10.0
+@export var sprint_speed: float = 10.0
+@export var walk_speed: = 5.0
+
+var is_sprinting: bool = false
+var can_sprint: bool = true 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -77,15 +83,27 @@ func sync_dorrah(new_value: int):
 func earn_dorrah(amount: int):
 	rpc("request_add_dorrah", amount)
 
-func _physics_process(delta):
+func handle_movement(delta):
+	var input_dir = Vector3.ZERO
+	
+	if input.is_action_pressed("move_forward"):
+		input_dir.z -= 1 
+	if input.is_action_pressed("move_backward"):
+		input_dir.z += 1
+	if input.is_action_pressed("move_left"):
+		input_dir.x -= 1
+	if input.is_action_pressed("move_right"):
+		input_dir.x += 1
+	
+	input_dir = input_dir.normalized()
+	
+	is sprinting = input.is_action_pressed("sprint") and can_sprint and stamina > 0.0
 
-	if Input.is_action_pressed("player_run") and stamina > 0:
-		SPEED = 10.0
-		stamina -= stamina_drain * delta
-	else:
-		current_stamina += stamina_recovery_rate * delta
-		if current_stamina > max_stamina:
-			current_stamina = max_stamina
+
+func _physics_process(delta):
+	
+	handle_movement(delta)
+	handle_stamina(delta)
 		
 	
 	# Get the input direction and handle the movement/deceleration.
