@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bphdutvg0p6g1"]
+[gd_scene load_steps=12 format=3 uid="uid://bphdutvg0p6g1"]
 
 [ext_resource type="Script" path="res://Scripts/Weapons/XM4.gd" id="1_hyvs5"]
 [ext_resource type="ArrayMesh" uid="uid://cqiigpk2nas5o" path="res://models/XM4.obj" id="1_yl5vv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bkvr8bibbi0wm" path="res://Textures/AR-15_Guns_metal_Normal.png" id="5_mdpk6"]
 [ext_resource type="Texture2D" uid="uid://bklmfylx3e7ar" path="res://Textures/AR-15_Rubber_BaseColor.png" id="7_vfsne"]
 [ext_resource type="Texture2D" uid="uid://dxfbvhek2h40c" path="res://Textures/AR-15_Rubber_OcclusionRoughnessMetallic.png" id="8_envn5"]
+[ext_resource type="ArrayMesh" uid="uid://cvivre1wc8k3q" path="res://models/Sight.obj" id="9_fgrfr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sit1q"]
 albedo_texture = ExtResource("3_n6m0o")
@@ -32,13 +33,17 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("1_hyvs5")
 
 [node name="XM4" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.999962, 0, -0.00872654, 0.000330883, 0.999281, 0.0379155, 0.00872026, -0.0379169, 0.999243, -0.796407, 0.407618, -6.14342)
+transform = Transform3D(0.999962, 0, -0.00872654, 0.000330883, 0.999281, 0.0379155, 0.00872026, -0.0379169, 0.999243, -0.800476, 0.336202, -6.14342)
 mesh = ExtResource("1_yl5vv")
 surface_material_override/0 = SubResource("StandardMaterial3D_sit1q")
 surface_material_override/1 = SubResource("StandardMaterial3D_xdrh1")
 
 [node name="bulletSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0174524, 0.999848, 0, -0.999848, -0.0174524, 0.00448296, -0.203735, -3.75341)
+transform = Transform3D(1, 0, 0, 0, 0.0348995, 0.999391, 0, -0.999391, 0.0348995, 0.000414198, -0.275151, -3.75341)
 
 [node name="ads" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.622868, 0.994767)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00406876, 0.551452, 0.994767)
+
+[node name="Sight" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -0.000540846, -1.40767e-05, -0.000540846, 1, 4.71709e-06, 1.40746e-05, 4.72328e-06, -1, -0.000419338, -0.302541, -0.51345)
+mesh = ExtResource("9_fgrfr")

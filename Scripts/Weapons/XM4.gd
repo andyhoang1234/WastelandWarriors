@@ -4,7 +4,7 @@ extends Node
 var maxAmmo : int = 40
 var recoil_speed = 5.0
 var bulletScene = preload("res://Scripts/Bullets/45cal.tscn")
-var recoil_distance := 0.2 # Recoil amount along local Z-axis
+var recoil_distance := 0.1 # Recoil amount along local Z-axis
 var recoil_rotation_up : float = 0.01
 var recoil_rotation_side = -0.01
 @export var fireRate: float = 0.1

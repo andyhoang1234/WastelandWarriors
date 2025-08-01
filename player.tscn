@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://xcjrjq5cbn7y"]
+[gd_scene load_steps=19 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://interact.gd" id="4_5qpxp"]
 [ext_resource type="Script" path="res://hand.gd" id="4_bog6o"]
 [ext_resource type="PackedScene" uid="uid://bphdutvg0p6g1" path="res://Scripts/Weapons/XM4.tscn" id="6_umhhw"]
+[ext_resource type="PackedScene" uid="uid://us5low51ygaq" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
 [ext_resource type="PackedScene" uid="uid://dhypv5vekd2eq" path="res://mini_map.tscn" id="7_uqshk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
@@ -80,7 +81,7 @@ script = ExtResource("4_5qpxp")
 [node name="Hand" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283, 0, 0)
 script = ExtResource("4_bog6o")
-weapon_scenes = Array[PackedScene]([ExtResource("2_yfxua"), ExtResource("6_umhhw")])
+weapon_scenes = Array[PackedScene]([ExtResource("2_yfxua"), ExtResource("6_umhhw"), ExtResource("7_r55j8"), null])
 
 [node name="Eye" type="Node3D" parent="Camera3D"]
 transform = Transform3D(0.975917, 0, 0.218143, 0, 1, 0, -0.218143, 0, 0.975917, -0.283, 0, 0)

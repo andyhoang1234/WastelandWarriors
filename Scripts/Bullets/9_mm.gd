@@ -2,7 +2,7 @@ extends Area3D
 
 
 var speed: float = 100
-var damage: int = 1 * Global.instakill * Global.bullet_damage_multiplier # Ensure the damage is exposed
+var damage: int = 3 * Global.instakill * Global.bullet_damage_multiplier # Ensure the damage is exposed
 var bDrop: float = 0
 
 var shooter_peer_id: int  # This will be set by the player who fired the bullet
