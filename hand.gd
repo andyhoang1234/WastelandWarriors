@@ -122,6 +122,24 @@ func _unhandled_input(event):
 			parentcam.rotate_x(-event.relative.y * .005)
 			parentcam.rotation.x = clamp(parentcam.rotation.x, -PI/2, PI/2)
 
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_1:
+				if weapons.size() >= 1:
+					switch_weapon(0)
+			KEY_2:
+				if weapons.size() >= 2:
+					switch_weapon(1)
+			KEY_3:
+				if weapons.size() >= 3:
+					switch_weapon(2)
+			KEY_4:
+				if weapons.size() >= 4:
+					switch_weapon(3)
+			KEY_5:
+				if weapons.size() >= 5:
+					switch_weapon(4)
+
 
 func switch_weapon(index: int) -> void:
 	if index == current_weapon_index or index < 0 or index >= weapons.size():
