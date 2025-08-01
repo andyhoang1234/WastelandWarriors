@@ -3,7 +3,7 @@ extends Node
 # Gun Modifiers
 var maxAmmo : int = 28
 var recoil_speed = 7.0
-var bulletScene = preload("res://Bullet.tscn")
+var bulletScene = preload("res://Scripts/Bullets/9mm.tscn")
 var recoil_distance = 0.05 # Recoil amount along local Z-axis
 var recoil_rotation_up : float = 0.005
 var recoil_rotation_side = 0.01
