@@ -1,0 +1,53 @@
+[gd_scene load_steps=18 format=3 uid="uid://us5low51ygaq"]
+
+[ext_resource type="ArrayMesh" uid="uid://g8nyj70ly87m" path="res://models/1911.obj" id="1_4jd1s"]
+[ext_resource type="Script" path="res://Scripts/Weapons/1911.gd" id="1_t2mce"]
+[ext_resource type="Texture2D" uid="uid://dnkqjli1jid3p" path="res://Textures/1911/Reciever_BaseColor.png" id="2_g2odo"]
+[ext_resource type="Texture2D" uid="uid://ciayh2qfdufg3" path="res://Textures/1911/Reciever_Metallic.png" id="3_iyex4"]
+[ext_resource type="Texture2D" uid="uid://dsyjrm21nlrel" path="res://Textures/1911/Reciever_Normal.png" id="4_m05h7"]
+[ext_resource type="Texture2D" uid="uid://clnkbewgq1vi7" path="res://Textures/1911/Reciever_Roughness.png" id="5_tl2le"]
+[ext_resource type="Texture2D" uid="uid://stg7h1hj4l2c" path="res://Textures/1911/Grip_BaseColor.png" id="6_pm7kn"]
+[ext_resource type="Texture2D" uid="uid://d4jorgu782raq" path="res://Textures/1911/Grip_Metallic.png" id="7_7grbn"]
+[ext_resource type="Texture2D" uid="uid://cp2qiu5w5rhsl" path="res://Textures/1911/Grip_Normal.png" id="8_d55n5"]
+[ext_resource type="Texture2D" uid="uid://dtqx4bai4qdum" path="res://Textures/1911/Grip_Roughness.png" id="9_k1npy"]
+[ext_resource type="Texture2D" uid="uid://do3uj661lbsda" path="res://Textures/1911/Top_BaseColor.png" id="10_bvfdu"]
+[ext_resource type="Texture2D" uid="uid://cepx0qwj8biqy" path="res://Textures/1911/Top_Metallic.png" id="11_yvv1k"]
+[ext_resource type="Texture2D" uid="uid://s5ph6rp5qlti" path="res://Textures/1911/Top_Normal.png" id="12_rp5o8"]
+[ext_resource type="Texture2D" uid="uid://braq7fu2701qv" path="res://Textures/1911/Top_Roughness.png" id="13_2p56f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6af1"]
+albedo_texture = ExtResource("2_g2odo")
+metallic = 1.0
+metallic_texture = ExtResource("3_iyex4")
+roughness_texture = ExtResource("5_tl2le")
+normal_enabled = true
+normal_texture = ExtResource("4_m05h7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgt4e"]
+albedo_texture = ExtResource("6_pm7kn")
+metallic = 1.0
+metallic_texture = ExtResource("7_7grbn")
+roughness_texture = ExtResource("9_k1npy")
+normal_enabled = true
+normal_texture = ExtResource("8_d55n5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orjwg"]
+albedo_texture = ExtResource("10_bvfdu")
+metallic = 1.0
+metallic_texture = ExtResource("11_yvv1k")
+roughness_texture = ExtResource("13_2p56f")
+normal_enabled = true
+normal_texture = ExtResource("12_rp5o8")
+
+[node name="1911" type="Node3D"]
+script = ExtResource("1_t2mce")
+
+[node name="1911" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, -0.000190914, -0.154137, -0.537872)
+mesh = ExtResource("1_4jd1s")
+surface_material_override/0 = SubResource("StandardMaterial3D_w6af1")
+surface_material_override/1 = SubResource("StandardMaterial3D_qgt4e")
+surface_material_override/2 = SubResource("StandardMaterial3D_orjwg")
+
+[node name="bulletSpawn" type="Node3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, 0.1, 0, -0.1, -4.37114e-09, -0.00370377, -0.0221906, -0.79897)
