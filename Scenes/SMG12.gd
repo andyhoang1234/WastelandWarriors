@@ -3,15 +3,13 @@ extends Node
 # Gun Modifiers
 var maxAmmo : int = 28
 var recoil_speed = 7.0
-var bulletScene = preload("res://Bullet.tscn")
+var bulletScene = preload("res://Scripts/Bullets/9mm.tscn")
 var recoil_distance = 0.05 # Recoil amount along local Z-axis
 var recoil_rotation_up : float = 0.005
-var recoil_rotation_side = -0.005
+var recoil_rotation_side = 0.01
 @export var fireRate: float = 0.05
 
 # Internal State
-var recoil_rotation_side_min = recoil_rotation_side
-var recoil_rotation_side_max = recoil_rotation_side * -1
 var active := false
 var canShoot := true
 var timeSinceLastShot := 0.0
@@ -52,7 +50,7 @@ func _physics_process(delta):
 		if cam.rotation.x <= 1.52 and cam.rotation.x >= -1.52:
 			cam.rotation.x += recoil_rotation_up
 			
-		cam.rotation.y = lerp(cam.rotation.y, randf_range(recoil_rotation_side_min, recoil_rotation_side_max), 0.5)
+		cam.rotation.y = lerp(cam.rotation.y, randf_range(-recoil_rotation_side, recoil_rotation_side), 0.5)
 
 		canShoot = false
 		timeSinceLastShot = 0.0

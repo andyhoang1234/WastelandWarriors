@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cvivre1wc8k3q"
+path="res://.godot/imported/Sight.obj-da2e7bd317f04dff080ab316288e41da.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Sight.obj-da2e7bd317f04dff080ab316288e41da.mesh"]
+
+source_file="res://models/Sight.obj"
+dest_files=["res://.godot/imported/Sight.obj-da2e7bd317f04dff080ab316288e41da.mesh", "res://.godot/imported/Sight.obj-da2e7bd317f04dff080ab316288e41da.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

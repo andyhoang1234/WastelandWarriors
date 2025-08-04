@@ -16,4 +16,5 @@ func update_price_display():
 
 # --- Move the door to the open or closed position ---
 func move_door():
+	price_label.visible = false
 	queue_free()

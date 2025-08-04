@@ -18,8 +18,7 @@ var dorrah: int = 15000
 
 var health = 100
 
-var SPEED = 5.0
-var JUMP_VELOCITY
+var SPEED = 5
 
 var max_stamina = 100 
 var stamina = 100

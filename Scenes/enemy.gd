@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 
 var SPEED = 6
-var enemy_health = 1
+var enemy_health = 10
 
 @export var powerup_scene = preload("res://Scenes/randomDrop.tscn")
 @export var min_dorrah_reward: int = 10
