@@ -6,8 +6,8 @@ signal health_changed(health)
 @onready var anim_player = $AnimationPlayer
 @onready var raycast = $Camera3D/RayCast3D
 @onready var Lose = get_parent().get_node("CanvasLayer/Lose")
-
-
+@onready var TabMenu = $CanvasLayer/TabMenu
+@onready var hud = $CanvasLayer/HUD
 
 @onready var world = get_node("/root/testWorld")
 
@@ -52,6 +52,10 @@ func _ready():
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 
+	if Input.is_action_pressed("tab"):
+		TabMenu.show()
+	else:
+		TabMenu.hide()
 
 @rpc("any_peer", "call_remote")
 func request_add_dorrah(amount: int):

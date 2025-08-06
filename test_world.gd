@@ -7,13 +7,12 @@ var enet_peer = ENetMultiplayerPeer.new()
 
 @onready var main_menu = $CanvasLayer/MainMenu
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/AddressEntry")
-@onready var hud = $CanvasLayer/HUD
 @onready var PauseMenu = $CanvasLayer/PauseMenu
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var Lose = $CanvasLayer/Lose
-@onready var TabMenu = $CanvasLayer/TabMenu
+
 
 var IpAddress
 
@@ -42,7 +41,6 @@ func _input(_event):
 		if get_tree().paused == false:
 			get_tree().paused = true
 			Global.PauseMenu.show()
-			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func update_dorrah_label(new_value: int):
@@ -57,23 +55,17 @@ func _unhandled_input(_event):
 			toggle = false
 			get_tree().paused = true
 			PauseMenu.show()
-			hud.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		elif !toggle:
 			toggle = true
 			get_tree().paused = false
 			PauseMenu.hide()
-			hud.show()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	if Input.is_action_pressed("tab"):
-		TabMenu.show()
-	else:
-		TabMenu.hide()
+
 
 #main menu buttons 
 func _on_single_player_button_pressed():
 	main_menu.hide()
-	hud.show()
 	#multiplayer.multiplayer_peer = enet_peer
 	add_player(multiplayer.get_unique_id())
 
@@ -102,14 +94,12 @@ func update_health_bar(health):
 func _on_resume_pressed() -> void:
 	get_tree().paused = false
 	PauseMenu.hide()
-	hud.show()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_main_menu_pressed() -> void:
 	get_tree().paused = true
 	main_menu.show()
 	PauseMenu.hide()
-	hud.hide()
 
 #Options Menu Buttons
 func _on_back_button_pressed() -> void:
@@ -129,12 +119,10 @@ func _on_respawn_button_pressed() -> void:
 func _on_menu_lose_button_pressed() -> void:
 	main_menu.show()
 	Lose.hide()
-	hud.hide()
 
 
 func _on_host_button_pressed():
 	main_menu.hide()
-	hud.show()
 	
 	enet_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = enet_peer
@@ -146,7 +134,6 @@ func _on_host_button_pressed():
 	#upnp_setup()
 func _on_join_button_pressed():
 	main_menu.hide()
-	hud.show()
 	
 	enet_peer.create_client(address_entry.text, PORT)
 	multiplayer.multiplayer_peer = enet_peer
