@@ -8,6 +8,7 @@ signal health_changed(health)
 @onready var Lose = get_parent().get_node("CanvasLayer/Lose")
 @onready var TabMenu = $CanvasLayer/TabMenu
 @onready var hud = $CanvasLayer/HUD
+@onready var health_bar = $CanvasLayer/HUD/HealthBar
 
 @onready var world = get_node("/root/testWorld")
 
@@ -144,7 +145,13 @@ func _on_insta_kill_timeout():
 
 func reduce_health(amount):
 	health -= amount
-	world.update_health_bar(health)
+	update_health_bar(health)
 	if health <= 0:
-		Lose.show()
+		die()
+
+func die() -> void:
+	Lose.show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func update_health_bar(health):
+	health_bar.value = health

@@ -10,7 +10,6 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var PauseMenu = $CanvasLayer/PauseMenu
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
-@onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var Lose = $CanvasLayer/Lose
 
 
@@ -66,7 +65,7 @@ func _unhandled_input(_event):
 #main menu buttons 
 func _on_single_player_button_pressed():
 	main_menu.hide()
-	#multiplayer.multiplayer_peer = enet_peer
+	multiplayer.multiplayer_peer = enet_peer
 	add_player(multiplayer.get_unique_id())
 
 func _on_main_menu_options_pressed() -> void:
@@ -80,15 +79,13 @@ func add_player(peer_id):
 	player.name = str(peer_id)
 	add_child(player)
 	tracked = true
-	player.health_changed.connect(update_health_bar)
 
 func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()
 
-func update_health_bar(health):
-	health_bar.value = health
+
 
 #pause menu buttons 
 func _on_resume_pressed() -> void:
@@ -138,9 +135,6 @@ func _on_join_button_pressed():
 	enet_peer.create_client(address_entry.text, PORT)
 	multiplayer.multiplayer_peer = enet_peer
 
-func _on_multiplayer_spawner_spawned(node):
-	if node.is_multiplayer_authority():
-		node.health_changed.connect(update_health_bar)
 func upnp_setup():
 	var upnp = UPNP.new()
 	
