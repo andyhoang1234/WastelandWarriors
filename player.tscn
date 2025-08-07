@@ -184,6 +184,7 @@ horizontal_alignment = 1
 
 [node name="Lose" type="Control" parent="CanvasLayer"]
 process_mode = 2
+visible = false
 show_behind_parent = true
 layout_mode = 3
 anchors_preset = 0
