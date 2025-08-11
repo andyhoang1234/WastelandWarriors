@@ -62,8 +62,8 @@ func _process(delta):
 	lagged_rotation.y = lerp_angle(lagged_rotation.y, target_rotation.y, delta * lag_speed)
 
 	# Apply the lagged rotation (overwrite inherited transform)
-	if aiming == true:
-		global_rotation = lagged_rotation
+	#if aiming == true:
+		#global_rotation = lagged_rotation
 	
 	parentcam.rotation.z = 0
 	
