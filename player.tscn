@@ -182,7 +182,70 @@ process_mode = 3
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Lose" type="Control" parent="CanvasLayer"]
+[node name="MainMenuMultiplayer" type="PanelContainer" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+show_behind_parent = true
+anchors_preset = -1
+anchor_left = -0.00260417
+anchor_top = -0.00571605
+anchor_right = 1.00447
+anchor_bottom = 1.00154
+offset_left = -1.0
+offset_top = -0.296
+offset_right = -0.1521
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenuMultiplayer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/MainMenuMultiplayer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenuMultiplayer/Control"]
+process_mode = 3
+layout_mode = 2
+offset_left = 434.0
+offset_top = 161.0
+offset_right = 740.0
+offset_bottom = 490.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+modulate = Color(0, 0, 1, 1)
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RemuseMultiplayer" type="Button" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Remuse"
+
+[node name="MainMenuOptions" type="Button" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitMultiplayer" type="Button" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Quit"
+
+[node name="LOSE" type="Control" parent="CanvasLayer"]
 process_mode = 2
 visible = false
 show_behind_parent = true
@@ -193,7 +256,7 @@ offset_top = 227.0
 offset_right = 729.0
 offset_bottom = 421.0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Lose"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/LOSE"]
 process_mode = 3
 layout_mode = 2
 offset_left = -178.0
@@ -201,27 +264,32 @@ offset_top = -115.0
 offset_right = 512.0
 offset_bottom = 305.0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Lose/PanelContainer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/LOSE/PanelContainer"]
 layout_mode = 2
 color = Color(0.439216, 0, 0, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Lose/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LOSE/PanelContainer"]
 process_mode = 3
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Lose/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer"]
 process_mode = 3
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Ha you Died"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 horizontal_alignment = 1
 
+[node name="Timer" type="Timer" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2"]
+wait_time = 10.0
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer/RemuseMultiplayer" to="." method="_on_remuse_multiplayer_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer/QuitMultiplayer" to="." method="_on_quit_multiplayer_pressed"]

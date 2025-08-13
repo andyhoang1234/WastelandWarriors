@@ -86,7 +86,6 @@ func remove_player(peer_id):
 		player.queue_free()
 
 
-
 #pause menu buttons 
 func _on_resume_pressed() -> void:
 	get_tree().paused = false
