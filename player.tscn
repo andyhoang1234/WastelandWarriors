@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://xcjrjq5cbn7y"]
+[gd_scene load_steps=22 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://interact.gd" id="4_5qpxp"]
 [ext_resource type="Script" path="res://hand.gd" id="4_bog6o"]
 [ext_resource type="PackedScene" uid="uid://bphdutvg0p6g1" path="res://Scripts/Weapons/XM4.tscn" id="6_umhhw"]
+[ext_resource type="PackedScene" uid="uid://us5low51ygaq" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
+[ext_resource type="PackedScene" uid="uid://dhypv5vekd2eq" path="res://mini_map.tscn" id="7_uqshk"]
+[ext_resource type="Script" path="res://label.gd" id="9_2317f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
 albedo_texture = ExtResource("2_bhhdd")
@@ -52,6 +55,12 @@ properties/2/path = NodePath("Camera3D:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hc20e"]
+bg_color = Color(1, 0.117647, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqyt7"]
+bg_color = Color(0.00392157, 1, 0, 1)
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_2v3wm")
 
@@ -79,7 +88,7 @@ script = ExtResource("4_5qpxp")
 [node name="Hand" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.283, 0, 0)
 script = ExtResource("4_bog6o")
-weapon_scenes = Array[PackedScene]([ExtResource("2_yfxua"), ExtResource("6_umhhw")])
+weapon_scenes = Array[PackedScene]([ExtResource("2_yfxua"), ExtResource("6_umhhw"), ExtResource("7_r55j8"), null])
 
 [node name="Eye" type="Node3D" parent="Camera3D"]
 transform = Transform3D(0.975917, 0, 0.218143, 0, 1, 0, -0.218143, 0, 0.975917, -0.283, 0, 0)
@@ -93,5 +102,126 @@ playback_default_blend_time = 0.05
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hn37q")
+
+[node name="MiniMap" parent="." instance=ExtResource("7_uqshk")]
+target = NodePath("..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 618.0
+offset_right = 225.0
+offset_bottom = 641.0
+script = ExtResource("9_2317f")
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 624.0
+offset_right = -981.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hc20e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tqyt7")
+value = 100.0
+show_percentage = false
+
+[node name="TabMenu" type="Control" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+show_behind_parent = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 423.0
+offset_top = 227.0
+offset_right = 729.0
+offset_bottom = 421.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/TabMenu"]
+process_mode = 3
+layout_mode = 2
+offset_left = -178.0
+offset_top = -115.0
+offset_right = 512.0
+offset_bottom = 305.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabMenu/PanelContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabMenu/PanelContainer/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TabMenu/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Player List"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/TabMenu/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Lose" type="Control" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+show_behind_parent = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 423.0
+offset_top = 227.0
+offset_right = 729.0
+offset_bottom = 421.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Lose"]
+process_mode = 3
+layout_mode = 2
+offset_left = -178.0
+offset_top = -115.0
+offset_right = 512.0
+offset_bottom = 305.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Lose/PanelContainer"]
+layout_mode = 2
+color = Color(0.439216, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Lose/PanelContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Lose/PanelContainer/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Ha you Died"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Lose/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+horizontal_alignment = 1
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

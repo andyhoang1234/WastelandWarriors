@@ -6,8 +6,9 @@ signal health_changed(health)
 @onready var anim_player = $AnimationPlayer
 @onready var raycast = $Camera3D/RayCast3D
 @onready var Lose = get_parent().get_node("CanvasLayer/Lose")
-
-
+@onready var TabMenu = $CanvasLayer/TabMenu
+@onready var hud = $CanvasLayer/HUD
+@onready var health_bar = $CanvasLayer/HUD/HealthBar
 
 @onready var world = get_node("/root/testWorld")
 
@@ -61,6 +62,10 @@ func _ready():
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 
+	if Input.is_action_pressed("tab"):
+		TabMenu.show()
+	else:
+		TabMenu.hide()
 
 @rpc("any_peer", "call_remote")
 func request_add_dorrah(amount: int):
@@ -153,12 +158,19 @@ func insta_kill():
 	timer.connect("timeout", Callable(self, "_on_insta_kill_timeout"))
 	add_child(timer)
 	timer.start()
-	
+
 func _on_insta_kill_timeout():
 	Global.instakill = 1
 
 func reduce_health(amount):
 	health -= amount
-	world.update_health_bar(health)
+	update_health_bar(health)
 	if health <= 0:
-		Lose.show()
+		die()
+
+func die() -> void:
+	Lose.show()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func update_health_bar(health):
+	health_bar.value = health

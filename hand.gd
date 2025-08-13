@@ -62,8 +62,8 @@ func _process(delta):
 	lagged_rotation.y = lerp_angle(lagged_rotation.y, target_rotation.y, delta * lag_speed)
 
 	# Apply the lagged rotation (overwrite inherited transform)
-	if aiming == true:
-		global_rotation = lagged_rotation
+	#if aiming == true:
+		#global_rotation = lagged_rotation
 	
 	parentcam.rotation.z = 0
 	
@@ -121,6 +121,24 @@ func _unhandled_input(event):
 			get_parent().get_parent().rotate_y(-event.relative.x * .005)
 			parentcam.rotate_x(-event.relative.y * .005)
 			parentcam.rotation.x = clamp(parentcam.rotation.x, -PI/2, PI/2)
+
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_1:
+				if weapons.size() >= 1:
+					switch_weapon(0)
+			KEY_2:
+				if weapons.size() >= 2:
+					switch_weapon(1)
+			KEY_3:
+				if weapons.size() >= 3:
+					switch_weapon(2)
+			KEY_4:
+				if weapons.size() >= 4:
+					switch_weapon(3)
+			KEY_5:
+				if weapons.size() >= 5:
+					switch_weapon(4)
 
 
 func switch_weapon(index: int) -> void:
