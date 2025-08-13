@@ -1,7 +1,10 @@
 extends Node
 
+
 var bullet_damage_multiplier: int = 1
+var Lose
 var PauseMenu
+var TabMenu
 
 var HMult:float
 var DEnemyMult:int
