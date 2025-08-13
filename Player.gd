@@ -21,14 +21,16 @@ var health = 100
 var SPEED = 5
 
 @export var max_stamina: float = 100.0
-@export var stamina: float = 100.0
+@export var stamina: int
 @export var stamina_depletion_rate: float = 20.0
 @export var stamina_regen_rate: = 10.0
 @export var sprint_speed: float = 10.0
 @export var walk_speed: = 5.0
 
-var is_sprinting: bool = false
-var can_sprint: bool = true 
+var is_sprinting: bool 
+var can_sprint: bool 
+
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 20.0
@@ -38,6 +40,7 @@ func _enter_tree():
 
 
 func _ready():
+	stamina == max_stamina
 	add_to_group("players")
 	if not is_multiplayer_authority():
 		rpc_id(1, "request_current_dorrah")  # Ask server for current value, assuming server peer 1
@@ -83,27 +86,8 @@ func sync_dorrah(new_value: int):
 func earn_dorrah(amount: int):
 	rpc("request_add_dorrah", amount)
 
-func handle_movement(delta):
-	var input_dir = Vector3.ZERO
-	
-	if input.is_action_pressed("move_forward"):
-		input_dir.z -= 1 
-	if input.is_action_pressed("move_backward"):
-		input_dir.z += 1
-	if input.is_action_pressed("move_left"):
-		input_dir.x -= 1
-	if input.is_action_pressed("move_right"):
-		input_dir.x += 1
-	
-	input_dir = input_dir.normalized()
-	
-	is sprinting = input.is_action_pressed("sprint") and can_sprint and stamina > 0.0
-
 
 func _physics_process(delta):
-	
-	handle_movement(delta)
-	handle_stamina(delta)
 		
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -116,8 +100,23 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
 		
+	print(stamina)
+	
+	if Input.is_action_pressed("player_run"):
+		if stamina >= 0:
+			is_sprinting == true
+			SPEED = sprint_speed
+			stamina -=  stamina_depletion_rate * delta
+		else: 
+			is_sprinting == false
+			SPEED = 5
+	else:
+		is_sprinting == false
+		
+	if stamina <= max_stamina and is_sprinting == false:
+		stamina += stamina_regen_rate * delta
+	
 	if not is_multiplayer_authority(): return
 	
 	# Add the gravity.
