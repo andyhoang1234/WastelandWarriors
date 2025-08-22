@@ -48,6 +48,7 @@ func _on_enemy_death(killer_peer_id: int):
 	Global.add_dorrah(killer_peer_id, dorrah_reward)
 	rpc_id(killer_peer_id, "sync_dorrah", Global.get_dorrah(killer_peer_id))
 
+
 	
 	# Your existing code for powerup spawning, etc.
 	
