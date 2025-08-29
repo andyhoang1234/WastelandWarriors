@@ -182,69 +182,6 @@ process_mode = 3
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="MainMenuMultiplayer" type="PanelContainer" parent="CanvasLayer"]
-process_mode = 2
-visible = false
-show_behind_parent = true
-anchors_preset = -1
-anchor_left = -0.00260417
-anchor_top = -0.00571605
-anchor_right = 1.00447
-anchor_bottom = 1.00154
-offset_left = -1.0
-offset_top = -0.296
-offset_right = -0.1521
-offset_bottom = 6.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenuMultiplayer"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 2
-
-[node name="Control" type="Control" parent="CanvasLayer/MainMenuMultiplayer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenuMultiplayer/Control"]
-process_mode = 3
-layout_mode = 2
-offset_left = 434.0
-offset_top = 161.0
-offset_right = 740.0
-offset_bottom = 490.0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer"]
-process_mode = 3
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
-process_mode = 3
-modulate = Color(0, 0, 1, 1)
-layout_mode = 2
-text = "Main Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RemuseMultiplayer" type="Button" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-text = "Remuse"
-
-[node name="MainMenuOptions" type="Button" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Options"
-
-[node name="QuitMultiplayer" type="Button" parent="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-text = "Quit"
-
 [node name="LOSE" type="Control" parent="CanvasLayer"]
 process_mode = 2
 visible = false
@@ -290,6 +227,112 @@ horizontal_alignment = 1
 [node name="Timer" type="Timer" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2"]
 wait_time = 10.0
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 423.0
+offset_top = 289.0
+offset_right = 423.0
+offset_bottom = 289.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+process_mode = 3
+layout_mode = 2
+offset_left = 434.0
+offset_top = 161.0
+offset_right = 740.0
+offset_bottom = 490.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+modulate = Color(0, 0, 1, 1)
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SinglePlayer" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Single Player"
+
+[node name="MainMenuOptions" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="HostButton" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Address to Join Here"
+alignment = 1
+
+[node name="Quit" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Quit"
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+show_behind_parent = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 423.0
+offset_top = 227.0
+offset_right = 729.0
+offset_bottom = 421.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/PauseMenu"]
+process_mode = 3
+layout_mode = 2
+anchor_left = -1.392
+anchor_top = -1.182
+anchor_right = 2.363
+anchor_bottom = 2.163
+offset_left = 425.952
+offset_top = 229.308
+offset_right = -470.078
+offset_bottom = -220.622
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PauseMenu/PanelContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Resume"
+
+[node name="BacktoMenu" type="Button" parent="CanvasLayer/PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Main Menu"
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="pressed" from="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer/RemuseMultiplayer" to="." method="_on_remuse_multiplayer_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenuMultiplayer/Control/MarginContainer/VBoxContainer/QuitMultiplayer" to="." method="_on_quit_multiplayer_pressed"]
