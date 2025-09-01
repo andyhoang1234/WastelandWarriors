@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://xcjrjq5cbn7y"]
+[gd_scene load_steps=24 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://us5low51ygaq" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
 [ext_resource type="PackedScene" uid="uid://dhypv5vekd2eq" path="res://mini_map.tscn" id="7_uqshk"]
 [ext_resource type="Script" path="res://label.gd" id="9_2317f"]
+[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="10_du1vn"]
+[ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="11_7ivqw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
 albedo_texture = ExtResource("2_bhhdd")
@@ -227,7 +229,7 @@ horizontal_alignment = 1
 [node name="Timer" type="Timer" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2"]
 wait_time = 10.0
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="MultiplayerMainMenu" type="Control" parent="CanvasLayer"]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -236,24 +238,24 @@ offset_top = 289.0
 offset_right = 423.0
 offset_bottom = 289.0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MultiplayerMainMenu"]
 process_mode = 3
 layout_mode = 2
-offset_left = 434.0
-offset_top = 161.0
-offset_right = 740.0
-offset_bottom = 490.0
+offset_left = -49.0
+offset_top = -124.0
+offset_right = 337.0
+offset_bottom = 217.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer"]
 process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 process_mode = 3
 modulate = Color(0, 0, 1, 1)
 layout_mode = 2
@@ -261,32 +263,99 @@ text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SinglePlayer" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="SinglePlayer" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Single Player"
 
-[node name="MainMenuOptions" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="MainMenuOptions" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
-[node name="HostButton" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="HostButton" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Host"
 
-[node name="JoinButton" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="JoinButton" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join"
 
-[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Enter Address to Join Here"
 alignment = 1
 
-[node name="Quit" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Quit"
+
+[node name="OptionsMenu" type="Control" parent="CanvasLayer"]
+process_mode = 2
+visible = false
+top_level = true
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/OptionsMenu"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 157.0
+offset_right = 795.0
+offset_bottom = 503.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/OptionsMenu/PanelContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/OptionsMenu"]
+process_mode = 3
+layout_mode = 2
+offset_left = 410.0
+offset_top = 194.0
+offset_right = 716.0
+offset_bottom = 388.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/OptionsMenu/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+process_mode = 3
+modulate = Color(0, 0, 1, 1)
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Volume" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("10_du1vn")]
+layout_mode = 2
+alignment = 1
+option_name = "Volume"
+key = "Volume"
+
+[node name="FullscreenControl" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer" instance=ExtResource("11_7ivqw")]
+unique_name_in_owner = true
+layout_mode = 2
+option_name = "Fullscreen"
+option_section = 3
+key = "FullscreenEnabled"
+section = "VideoSettings"
+
+[node name="ControlsButton" type="Button" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
@@ -336,3 +405,4 @@ layout_mode = 2
 text = "Main Menu"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
