@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://xcjrjq5cbn7y"]
+[gd_scene load_steps=23 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://us5low51ygaq" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
 [ext_resource type="PackedScene" uid="uid://dhypv5vekd2eq" path="res://mini_map.tscn" id="7_uqshk"]
 [ext_resource type="Script" path="res://label.gd" id="9_2317f"]
+[ext_resource type="Texture2D" uid="uid://080ue7kg7wk0" path="res://Textures/Cross.png" id="10_1r62a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
 albedo_texture = ExtResource("2_bhhdd")
@@ -111,73 +112,67 @@ process_mode = 2
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
 process_mode = 2
+texture_filter = 1
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 mouse_filter = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/HUD"]
-layout_mode = 0
-offset_left = 185.0
-offset_top = 618.0
-offset_right = 225.0
-offset_bottom = 641.0
-script = ExtResource("9_2317f")
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD"]
 process_mode = 3
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 13.0
-offset_top = 624.0
-offset_right = -981.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_direction = 2
+layout_mode = 0
+offset_left = 14.62
+offset_top = 620.0
+offset_right = 257.62
+offset_bottom = 635.0
 theme_override_styles/background = SubResource("StyleBoxFlat_hc20e")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tqyt7")
 value = 100.0
 show_percentage = false
 
+[node name="Label" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 618.0
+offset_right = 309.0
+offset_bottom = 641.0
+script = ExtResource("9_2317f")
+
 [node name="TabMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
-visible = false
 show_behind_parent = true
+clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = 423.0
-offset_top = 227.0
-offset_right = 729.0
-offset_bottom = 421.0
+offset_right = 1152.0
+offset_bottom = 648.0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/TabMenu"]
-process_mode = 3
-layout_mode = 2
-offset_left = -178.0
-offset_top = -115.0
-offset_right = 512.0
-offset_bottom = 305.0
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/TabMenu"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabMenu/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/TabMenu/CenterContainer"]
 process_mode = 3
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabMenu/PanelContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabMenu/CenterContainer/PanelContainer"]
 process_mode = 3
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/TabMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabMenu/CenterContainer/PanelContainer/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TabMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Player List"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/TabMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="CanvasLayer/TabMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 horizontal_alignment = 1
@@ -223,5 +218,13 @@ horizontal_alignment = 1
 process_mode = 3
 layout_mode = 2
 horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("10_1r62a")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
