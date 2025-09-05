@@ -1,9 +1,7 @@
 extends Node
 
-
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
-
 
 @onready var main_menu = $CanvasLayer/MainMenu
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/AddressEntry")
@@ -12,11 +10,9 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
 @onready var Lose = $CanvasLayer/Lose
 
-
 var IpAddress
 
 @onready var Player = preload("res://player.tscn")
-#@onready var Player = $Player
 var tracked = false
 var player
 var toggle = true
@@ -31,7 +27,6 @@ func _ready() -> void:
 	IpAddress = upnp.query_external_address()
 
 func _physics_process(_delta):
-	print(IpAddress)
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
 
@@ -55,14 +50,24 @@ func _unhandled_input(_event):
 			get_tree().paused = true
 			PauseMenu.show()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		elif !toggle:
+		else:
 			toggle = true
 			get_tree().paused = false
 			PauseMenu.hide()
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+# Called when a new peer connects (server only)
+func _on_peer_connected(id: int) -> void:
+	print("Player connected with peer ID:", id)
+	Global.initialize_player(id)
+	add_player(id)
 
-#main menu buttons 
+# Called when a peer disconnects (server only)
+func _on_peer_disconnected(id: int) -> void:
+	print("Player disconnected with peer ID:", id)
+	remove_player(id)
+
+# Main menu buttons 
 func _on_single_player_button_pressed():
 	main_menu.hide()
 	multiplayer.multiplayer_peer = enet_peer
@@ -74,20 +79,22 @@ func _on_main_menu_options_pressed() -> void:
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
-func add_player(peer_id):
+func add_player(peer_id: int) -> void:
+	if get_node_or_null(str(peer_id)):
+		return # Player already exists
 	player = Player.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
 	tracked = true
+	print("Added player with peer ID:", peer_id)
 
-func remove_player(peer_id):
-	var player = get_node_or_null(str(peer_id))
-	if player:
-		player.queue_free()
+func remove_player(peer_id: int) -> void:
+	var player_node = get_node_or_null(str(peer_id))
+	if player_node:
+		player_node.queue_free()
+		print("Removed player with peer ID:", peer_id)
 
-
-
-#pause menu buttons 
+# Pause menu buttons 
 func _on_resume_pressed() -> void:
 	get_tree().paused = false
 	PauseMenu.hide()
@@ -98,18 +105,18 @@ func _on_main_menu_pressed() -> void:
 	main_menu.show()
 	PauseMenu.hide()
 
-#Options Menu Buttons
+# Options Menu Buttons
 func _on_back_button_pressed() -> void:
 	OptionsMenu.hide()
 
 func _on_controls_button_pressed() -> void:
 	ControlsMenu.show()
 
-#Controls Menu button
+# Controls Menu button
 func _on_back_options_button_pressed() -> void:
 	ControlsMenu.hide()
 
-#Lose sceen
+# Lose screen
 func _on_respawn_button_pressed() -> void:
 	pass # Replace with function body.
 
@@ -117,25 +124,43 @@ func _on_menu_lose_button_pressed() -> void:
 	main_menu.show()
 	Lose.hide()
 
-
-func _on_host_button_pressed():
+# Host button pressed - start server
+func _on_host_button_pressed() -> void:
 	main_menu.hide()
 	
-	enet_peer.create_server(PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(remove_player)
+	var err = enet_peer.create_server(PORT)
+	if err != OK:
+		push_error("Failed to create server on port %d" % PORT)
+		return
 	
+	multiplayer.multiplayer_peer = enet_peer
+	
+	# Connect signals for player join/leave
+	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	
+	# Add the server player (peer ID 1)
 	add_player(multiplayer.get_unique_id())
 	
-	#upnp_setup()
-func _on_join_button_pressed():
+	# Optional: UPnP port mapping
+	# upnp_setup()
+
+# Join button pressed - connect to server
+func _on_join_button_pressed() -> void:
 	main_menu.hide()
 	
-	enet_peer.create_client(address_entry.text, PORT)
+	var err = enet_peer.create_client(address_entry.text, PORT)
+	if err != OK:
+		push_error("Failed to connect to server at %s:%d" % [address_entry.text, PORT])
+		return
+	
 	multiplayer.multiplayer_peer = enet_peer
+	
+	# You can connect to signals here if needed, e.g.:
+	# multiplayer.peer_connected.connect(_on_peer_connected)
+	# multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
-func upnp_setup():
+func upnp_setup() -> void:
 	var upnp = UPNP.new()
 	
 	var discover_result = upnp.discover()
@@ -146,4 +171,4 @@ func upnp_setup():
 	var map_result = upnp.add_port_mapping(PORT)
 	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Error %s" % map_result)
 	
-	print("Success! Join Address: %s" % upnp.query_external_address())
+	#print("Success! Join Address: %s" % upnp.query_external_address())
