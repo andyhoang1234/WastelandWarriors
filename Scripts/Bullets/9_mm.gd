@@ -7,6 +7,10 @@ var bDrop: float = 0
 
 var shooter_peer_id: int  # This will be set by the player who fired the bullet
 
+func _ready():
+	await get_tree().create_timer(2.0).timeout
+	queue_free()
+
 func _process(delta: float) -> void:
 	bDrop = bDrop + 0.01
 	global_transform.origin += transform.basis.y.normalized() * speed * delta
