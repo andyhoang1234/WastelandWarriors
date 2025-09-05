@@ -11,6 +11,7 @@ var current_weapon: Node3D
 @onready var ads_position = get_parent().get_node("Eye").position
 var adsfov := 40.0
 var norfov := 90.0
+@onready var crosshair = $"../../CenterContainer"
 
 var aiming
 @onready var parentcam = get_parent()
@@ -69,6 +70,9 @@ func _process(delta):
 	
 	if aiming == true:
 		
+		crosshair.hide()
+		
+		
 		target_position = ads_position
 		lag_speed = 100.0
 		
@@ -87,6 +91,8 @@ func _process(delta):
 		target_position = default_position
 		lag_speed = 200.0
 		sway_timer = 0.0
+		
+		crosshair.show()
 	
 	if current_weapon == null:
 		return
