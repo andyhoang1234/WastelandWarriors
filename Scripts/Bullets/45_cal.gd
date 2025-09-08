@@ -2,6 +2,7 @@ extends Area3D
 
 
 var speed: float = 100
+var headshot_damage: int = 15 * Global.instakill * Global.bullet_damage_multiplier #
 var damage: int = 10 * Global.instakill * Global.bullet_damage_multiplier # Ensure the damage is exposed
 var bDrop: float = 0
 
@@ -20,5 +21,8 @@ func _process(delta: float) -> void:
 	
 func _on_body_entered(body: Node3D):
 	if body.has_method("take_damage"):
+		body.take_damage(damage, shooter_peer_id)  # Now we pass both args
+		queue_free()
+	if body.has_method("take_damage_headshot"):
 		body.take_damage(damage, shooter_peer_id)  # Now we pass both args
 		queue_free()
