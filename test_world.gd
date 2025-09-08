@@ -88,6 +88,7 @@ func add_player(peer_id: int) -> void:
 	tracked = true
 	print("Added player with peer ID:", peer_id)
 
+
 func remove_player(peer_id: int) -> void:
 	var player_node = get_node_or_null(str(peer_id))
 	if player_node:
@@ -95,6 +96,7 @@ func remove_player(peer_id: int) -> void:
 		print("Removed player with peer ID:", peer_id)
 
 # Pause menu buttons 
+
 func _on_resume_pressed() -> void:
 	get_tree().paused = false
 	PauseMenu.hide()
