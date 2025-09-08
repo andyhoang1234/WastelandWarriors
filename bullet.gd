@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 	bDrop = bDrop + 0.01
 	global_transform.origin += transform.basis.y.normalized() * speed * delta
 	global_transform.origin.y -= bDrop * delta
+	
 
 func _on_body_entered(body: Node3D):
 	if body.has_method("take_damage"):
