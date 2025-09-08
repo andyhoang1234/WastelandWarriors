@@ -142,3 +142,7 @@ func _on_remuse_multiplayer_pressed() -> void:
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
+
+#LOSE
+func _on_timer_timeout() -> void:
+	pass # Replace with function body.
