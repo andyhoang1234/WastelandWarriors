@@ -12,6 +12,7 @@ point_size = 0.1
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ufukn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bkvtw"]
+height = 2.35642
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_phvpf")
@@ -27,6 +28,11 @@ wait_time = 2.0
 autostart = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.726214, 0, 0, 0, 1, 0, -0.093267, -0.00950396)
+shape = SubResource("CapsuleShape3D_bkvtw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 0.430004, 0, 0, 0, 1, 0, 0.868137, 0)
 shape = SubResource("CapsuleShape3D_bkvtw")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

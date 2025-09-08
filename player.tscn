@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://interact.gd" id="4_5qpxp"]
 [ext_resource type="Script" path="res://hand.gd" id="4_bog6o"]
 [ext_resource type="PackedScene" uid="uid://bphdutvg0p6g1" path="res://Scripts/Weapons/XM4.tscn" id="6_umhhw"]
-[ext_resource type="PackedScene" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
+[ext_resource type="PackedScene" uid="uid://us5low51ygaq" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
 [ext_resource type="PackedScene" uid="uid://dhypv5vekd2eq" path="res://mini_map.tscn" id="7_uqshk"]
 [ext_resource type="Script" path="res://label.gd" id="9_2317f"]
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="10_du1vn"]
