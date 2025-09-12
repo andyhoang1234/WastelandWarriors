@@ -42,6 +42,13 @@ func take_damage(damage_amount: int, player_id: int) -> void:
 	enemy_health -= damage_amount
 	if enemy_health <= 0:
 		_on_enemy_death(player_id)
+func take_damage_headshot(damage_amount: int, player_id: int):
+	if not is_multiplayer_authority(): return  # Only server modifies health
+
+	enemy_health -= damage_amount
+	if enemy_health <= 0:
+		_on_enemy_death(player_id)
+
 
 func _on_enemy_death(killer_peer_id: int) -> void:
 	var dorrah_reward = randi_range(min_dorrah_reward, max_dorrah_reward)
