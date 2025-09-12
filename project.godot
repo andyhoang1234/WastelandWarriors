@@ -22,8 +22,8 @@ AppConfig="*res://addons/maaacks_options_menus/base/scenes/autoloads/app_config.
 
 [display]
 
-window/stretch/mode="canvas_items"
-window/stretch/aspect="ignore"
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [dotnet]
 
