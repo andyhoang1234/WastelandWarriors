@@ -22,11 +22,16 @@ var health = 100
 var SPEED = 5
 
 @export var max_stamina: float = 100.0
-@export var stamina: int
+@export var stamina: float = 100.0
 @export var stamina_depletion_rate: float = 20.0
-@export var stamina_regen_rate: = 10.0
-@export var sprint_speed: float = 10.0
-@export var walk_speed: = 5.0
+@export var sprint_speed: float = 20.0
+@export var stamina_regen_rate: float = 10.0
+@export var walk_speed: float = 5.0
+
+var time_since_stopped_sprinting: float = 0.0
+var stamina_regen_delay: float = 2.0  # seconds
+
+
 
 var is_sprinting: bool 
 var can_sprint: bool 
@@ -41,7 +46,7 @@ func _enter_tree():
 
 
 func _ready():
-	stamina == max_stamina
+	stamina = max_stamina
 	add_to_group("players")
 	if not is_multiplayer_authority():
 		rpc_id(1, "request_current_dorrah")  # Ask server for current value, assuming server peer 1
@@ -108,19 +113,27 @@ func _physics_process(delta):
 		
 	print(stamina)
 	
-	if Input.is_action_pressed("player_run"):
-		if stamina >= 0:
-			is_sprinting == true
-			SPEED = sprint_speed
-			stamina -=  stamina_depletion_rate * delta
-		else: 
-			is_sprinting == false
-			SPEED = 5
+	if Input.is_action_pressed("player_run") and stamina > 0:
+		is_sprinting = true
+		SPEED = sprint_speed
+		stamina -= stamina_depletion_rate * delta
+		time_since_stopped_sprinting = 0.0  # reset delay timer
 	else:
-		is_sprinting == false
-		
-	if stamina <= max_stamina and is_sprinting == false:
+		if is_sprinting:
+			# just stopped sprinting
+			time_since_stopped_sprinting = 0.0
+			is_sprinting = false
+			SPEED = walk_speed
+
+# Increment timer if not sprinting
+	if not is_sprinting:
+		time_since_stopped_sprinting += delta
+
+# Stamina regeneration after delay
+	if not is_sprinting and time_since_stopped_sprinting >= stamina_regen_delay and stamina < max_stamina:
 		stamina += stamina_regen_rate * delta
+
+
 	
 	if not is_multiplayer_authority(): return
 	
