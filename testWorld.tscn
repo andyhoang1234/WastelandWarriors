@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvhwbpjrckmhl"]
+[gd_scene load_steps=15 format=3 uid="uid://dvhwbpjrckmhl"]
 
 [ext_resource type="Script" path="res://test_world.gd" id="1_6fns0"]
+[ext_resource type="Texture2D" uid="uid://cagu6f1kwno5r" path="res://Textures/menus/201019066-illustration-of-the-city-at-sunset-with-a-river-in-the-foreground.jpg" id="2_l5rwr"]
 [ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="2_nsrdy"]
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="2_w55fa"]
 [ext_resource type="Script" path="res://pause(escape).gd" id="3_lpbyp"]
@@ -120,6 +121,12 @@ layout_mode = 2
 
 [node name="Control" type="Control" parent="CanvasLayer/MainMenu"]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainMenu/Control"]
+layout_mode = 2
+offset_right = 1159.0
+offset_bottom = 648.0
+texture = ExtResource("2_l5rwr")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu/Control"]
 process_mode = 3
