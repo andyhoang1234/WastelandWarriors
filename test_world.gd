@@ -84,6 +84,7 @@ func add_player(peer_id: int) -> void:
 		return # Player already exists
 	player = Player.instantiate()
 	player.name = str(peer_id)
+	player.shooter_peer_id = peer_id
 	add_child(player)
 	tracked = true
 	print("Added player with peer ID:", peer_id)
