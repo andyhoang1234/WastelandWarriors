@@ -11,7 +11,6 @@ func _ready():
 
 
 func update_price_display():
-	print("Updating label for door: ", self.name)
 	price_label.text = str(Global.door_price)
 
 # --- Move the door to the open or closed position ---

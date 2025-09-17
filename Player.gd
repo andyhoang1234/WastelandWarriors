@@ -90,7 +90,6 @@ func request_current_dorrah() -> void:
 func sync_dorrah(peer_id: int, new_value: int) -> void:
 	if peer_id == get_multiplayer_authority():
 		dorrah = new_value
-		print("Client updated dorrah to:", new_value)
 		if world:
 			world.update_dorrah_label(new_value)
 
@@ -102,11 +101,11 @@ func _physics_process(delta: float) -> void:
 	# Movement and stamina logic
 	if Input.is_action_pressed("player_run") and stamina > 0:
 		SPEED = 10.0
-		stamina -= stamina_drain * delta
+		stamina -= stamina_depletion_rate * delta
 	else:
 		SPEED = 5.0
 		if stamina < max_stamina:
-			stamina += stamina_drain * delta
+			stamina += stamina_depletion_rate * delta
 
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -118,7 +117,6 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 		
-	print(stamina)
 	
 	if Input.is_action_pressed("player_run") and stamina > 0:
 		is_sprinting = true
