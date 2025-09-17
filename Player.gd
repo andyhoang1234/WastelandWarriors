@@ -20,9 +20,21 @@ var dorrah: int = 0
 var health: int = 100
 
 var SPEED = 5
-var max_stamina = 100
-var stamina = 100
-var stamina_drain = 20.0
+
+@export var max_stamina: float = 100.0
+@export var stamina: float = 100.0
+@export var stamina_depletion_rate: float = 20.0
+@export var sprint_speed: float = 20.0
+@export var stamina_regen_rate: float = 10.0
+@export var walk_speed: float = 5.0
+
+var time_since_stopped_sprinting: float = 0.0
+var stamina_regen_delay: float = 2.0  # seconds
+
+
+
+var is_sprinting: bool 
+var can_sprint: bool 
 
 var gravity = 20.0
 
@@ -31,6 +43,7 @@ func _enter_tree():
 	set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
 
 func _ready():
+	stamina = max_stamina
 	add_to_group("players")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -69,6 +82,7 @@ func request_add_dorrah(amount: int) -> void:
 func request_current_dorrah() -> void:
 	var peer_id = get_multiplayer_authority()
 	var current = Global.get_dorrah(peer_id)
+
 	rpc_id(peer_id, "sync_dorrah", peer_id, current)
 
 # Client RPC: Sync dorrah value from server
@@ -103,8 +117,34 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	if not is_multiplayer_authority():
-		return
+		
+	print(stamina)
+	
+	if Input.is_action_pressed("player_run") and stamina > 0:
+		is_sprinting = true
+		SPEED = sprint_speed
+		stamina -= stamina_depletion_rate * delta
+		time_since_stopped_sprinting = 0.0  # reset delay timer
+	else:
+		if is_sprinting:
+			# just stopped sprinting
+			time_since_stopped_sprinting = 0.0
+			is_sprinting = false
+			SPEED = walk_speed
+
+# Increment timer if not sprinting
+	if not is_sprinting:
+		time_since_stopped_sprinting += delta
+
+# Stamina regeneration after delay
+	if not is_sprinting and time_since_stopped_sprinting >= stamina_regen_delay and stamina < max_stamina:
+		stamina += stamina_regen_rate * delta
+
+
+	
+	if not is_multiplayer_authority(): return
+	
+	# Add the gravity.
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
