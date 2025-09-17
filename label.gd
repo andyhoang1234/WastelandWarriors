@@ -13,7 +13,6 @@ func update_label(new_value: int = -1):
 		if player:
 			var peer_id = player.get_multiplayer_authority()
 			text = "Dorrah: " + str(Global.get_dorrah(peer_id))
-	print("Dorrah label text set to:", text)
 
 func update_dorrah_label(new_value: int):
 	var dorrah_label = $CanvasLayer/DorrahLabel  # Make sure this path is correct!
