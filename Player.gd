@@ -2,6 +2,13 @@ extends CharacterBody3D
 
 signal health_changed(health)
 
+
+const PORT = 9999
+var enet_peer = ENetMultiplayerPeer.new()
+@onready var Player = self
+var player
+var tracked = false
+
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
 @onready var raycast = $Camera3D/RayCast3D
@@ -10,7 +17,7 @@ signal health_changed(health)
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var MainMenuMultiplayer = $CanvasLayer/MainMenuMultiplayer
-
+@onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/AddressEntry")
 @onready var world = get_node("/root/testWorld")
 
 var hit_cooldown := 0.3
@@ -31,7 +38,7 @@ var SPEED = 5
 var time_since_stopped_sprinting: float = 0.0
 var stamina_regen_delay: float = 2.0  # seconds
 
-
+var IpAddress
 
 var is_sprinting: bool 
 var can_sprint: bool 
@@ -58,6 +65,9 @@ func _ready():
 
 	Global.instakill = 1
 
+	var upnp = UPNP.new()
+	upnp.discover(2000, 2, "InternetGatewayDevice")
+	IpAddress = upnp.query_external_address()
 func _unhandled_input(event):
 	if not is_multiplayer_authority():
 		return
@@ -186,3 +196,67 @@ func _on_quit_pressed() -> void:
 #LOSE
 func _on_timer_timeout() -> void:
 	pass # Replace with function body.
+
+# Called when a new peer connects (server only)
+func _on_peer_connected(id: int) -> void:
+	print("Player connected with peer ID:", id)
+	Global.initialize_player(id)
+	add_player(id)
+
+# Called when a peer disconnects (server only)
+func _on_peer_disconnected(id: int) -> void:
+	print("Player disconnected with peer ID:", id)
+	remove_player(id)
+
+#host
+func _on_host_button_pressed() -> void:
+	MainMenuMultiplayer.hide()
+	
+	var err = enet_peer.create_server(PORT)
+	if err != OK:
+		push_error("Failed to create server on port %d" % PORT)
+		return
+	
+	multiplayer.multiplayer_peer = enet_peer
+	
+	# Connect signals for player join/leave
+	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	
+	# Add the server player (peer ID 1)
+	add_player(multiplayer.get_unique_id())
+	
+	# Optional: UPnP port mapping
+	# upnp_setup()
+
+# Join button pressed - connect to server
+
+
+func _on_join_button_pressed() -> void:
+	MainMenuMultiplayer.hide()
+	
+	var err = enet_peer.create_client(address_entry.text, PORT)
+	if err != OK:
+		push_error("Failed to connect to server at %s:%d" % [address_entry.text, PORT])
+		return
+	
+	multiplayer.multiplayer_peer = enet_peer
+	
+	# You can connect to signals here if needed, e.g.:
+	# multiplayer.peer_connected.connect(_on_peer_connected)
+	# multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+
+func add_player(peer_id: int) -> void:
+	if get_node_or_null(str(peer_id)):
+		return # Player already exists
+	player = Player.instantiate()
+	player.name = str(peer_id)
+	add_child(player)
+	tracked = true
+	print("Added player with peer ID:", peer_id)
+
+func remove_player(peer_id: int) -> void:
+	var player_node = get_node_or_null(str(peer_id))
+	if player_node:
+		player_node.queue_free()
+		print("Removed player with peer ID:", peer_id)

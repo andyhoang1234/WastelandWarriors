@@ -107,6 +107,10 @@ playback_default_blend_time = 0.05
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hn37q")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("../CenterContainer")
+
 [node name="MiniMap" parent="." instance=ExtResource("7_uqshk")]
 target = NodePath("..")
 
@@ -226,7 +230,6 @@ horizontal_alignment = 1
 [node name="Timer" type="Timer" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2"]
 
 [node name="MultiplayerMainMenu" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 423.0
@@ -259,15 +262,6 @@ process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="SinglePlayer" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-text = "Single Player"
-
-[node name="MainMenuOptions" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Options"
-
 [node name="HostButton" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Host"
@@ -280,6 +274,15 @@ text = "Join"
 layout_mode = 2
 placeholder_text = "Enter Address to Join Here"
 alignment = 1
+
+[node name="MainMenuOptions" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="SinglePlayer" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Back to single player"
 
 [node name="Quit" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 process_mode = 3
@@ -410,4 +413,6 @@ texture = ExtResource("10_1r62a")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
