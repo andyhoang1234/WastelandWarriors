@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 signal health_changed(health)
+var shooter_peer_id
 
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
