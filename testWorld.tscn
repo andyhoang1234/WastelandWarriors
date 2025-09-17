@@ -145,14 +145,6 @@ process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
-process_mode = 3
-modulate = Color(0, 0, 1, 1)
-layout_mode = 2
-text = "Main Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="SinglePlayer" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
