@@ -1,5 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://xcjrjq5cbn7y"]
-
+[gd_scene load_steps=26 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
@@ -10,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://us5low51ygaq" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
 [ext_resource type="PackedScene" uid="uid://dhypv5vekd2eq" path="res://mini_map.tscn" id="7_uqshk"]
 [ext_resource type="Script" path="res://label.gd" id="9_2317f"]
-[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="10_du1vn"]
-[ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="11_7ivqw"]
 [ext_resource type="Texture2D" uid="uid://080ue7kg7wk0" path="res://Textures/Cross.png" id="10_1r62a"]
-
+[ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="10_du1vn"]
+[ext_resource type="Texture2D" uid="uid://cagu6f1kwno5r" path="res://Textures/menus/201019066-illustration-of-the-city-at-sunset-with-a-river-in-the-foreground.jpg" id="10_u70dl"]
+[ext_resource type="PackedScene" uid="uid://bsxh6v7j0257h" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/toggle_option_control.tscn" id="11_7ivqw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x7q5x"]
 albedo_texture = ExtResource("2_bhhdd")
@@ -146,6 +145,7 @@ script = ExtResource("9_2317f")
 
 [node name="TabMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
+visible = false
 show_behind_parent = true
 clip_contents = true
 layout_mode = 3
@@ -224,7 +224,6 @@ layout_mode = 2
 horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2"]
-wait_time = 10.0
 
 [node name="MultiplayerMainMenu" type="Control" parent="CanvasLayer"]
 visible = false
@@ -234,6 +233,14 @@ offset_left = 423.0
 offset_top = 289.0
 offset_right = 423.0
 offset_bottom = 289.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MultiplayerMainMenu"]
+layout_mode = 2
+offset_left = -422.0
+offset_top = -287.0
+offset_right = 730.0
+offset_bottom = 359.0
+texture = ExtResource("10_u70dl")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MultiplayerMainMenu"]
 process_mode = 3
@@ -251,14 +258,6 @@ theme_override_constants/margin_bottom = 15
 process_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
-process_mode = 3
-modulate = Color(0, 0, 1, 1)
-layout_mode = 2
-text = "Main Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="SinglePlayer" type="Button" parent="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer"]
 process_mode = 3
@@ -400,6 +399,7 @@ text = "Resume"
 process_mode = 3
 layout_mode = 2
 text = "Main Menu"
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -408,6 +408,6 @@ offset_bottom = 648.0
 layout_mode = 2
 texture = ExtResource("10_1r62a")
 
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/MultiplayerMainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

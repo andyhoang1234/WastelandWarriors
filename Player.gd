@@ -5,7 +5,7 @@ signal health_changed(health)
 @onready var camera = $Camera3D
 @onready var anim_player = $AnimationPlayer
 @onready var raycast = $Camera3D/RayCast3D
-@onready var LOSE = get_parent().get_node("CanvasLayer/LOSE")
+@onready var LOSE = $CanvasLayer/LOSE
 @onready var TabMenu = $CanvasLayer/TabMenu
 @onready var hud = $CanvasLayer/HUD
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
@@ -126,10 +126,12 @@ func reduce_health(amount: int) -> void:
 	update_health_bar(health)
 	if health <= 0:
 		die()
+	set_process_input(false)
 
 func die() -> void:
 	LOSE.show()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	hud.hide()
+	
 
 func update_health_bar(health):
 	health_bar.value = health
@@ -142,3 +144,7 @@ func _on_remuse_multiplayer_pressed() -> void:
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
+
+#LOSE
+func _on_timer_timeout() -> void:
+	pass # Replace with function body.
