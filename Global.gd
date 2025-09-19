@@ -4,6 +4,7 @@ var bullet_damage_multiplier: int = 1
 var Lose
 var PauseMenu
 var TabMenu
+var MultiplayerMainMenu
 
 var HMult: float = 0.0
 var DEnemyMult: int = 0
