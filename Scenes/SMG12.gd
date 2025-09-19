@@ -9,6 +9,7 @@ var recoil_rotation_up : float = 0.005
 var recoil_rotation_side = 0.01
 @export var fireRate: float = 0.05
 
+
 var active := false
 var canShoot := true
 var timeSinceLastShot := 0.0

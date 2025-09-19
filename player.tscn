@@ -230,6 +230,7 @@ horizontal_alignment = 1
 [node name="Timer" type="Timer" parent="CanvasLayer/LOSE/PanelContainer/MarginContainer/VBoxContainer/Label2"]
 
 [node name="MultiplayerMainMenu" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 423.0
