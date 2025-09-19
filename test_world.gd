@@ -9,6 +9,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
 @onready var Lose = $CanvasLayer/Lose
+@onready var MultiplayerMainMenu = $CanvasLayer/MultiplayerMainMenu
 
 var IpAddress
 
@@ -18,9 +19,13 @@ var player
 var toggle = true
 var bulletScene = preload("res://Bullet.tscn")
 
+
+
 func _ready() -> void:
 	Global.PauseMenu = $CanvasLayer/PauseMenu
 	Global.Lose = $CanvasLayer/Lose
+	Global.MultiplayerMainMenu = $CanvasLayer/MultiplayerMainMenu
+	print("MultiplayerMainMenu node:", Global.MultiplayerMainMenu)
 	
 	var upnp = UPNP.new()
 	upnp.discover(2000, 2, "InternetGatewayDevice")
@@ -169,3 +174,7 @@ func upnp_setup() -> void:
 	var map_result = upnp.add_port_mapping(PORT)
 	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Error %s" % map_result)
 	
+
+func _on_multiplayer_pressed() -> void:
+	main_menu.hide()
+	MultiplayerMainMenu.show()

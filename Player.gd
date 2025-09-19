@@ -18,7 +18,7 @@ var tracked = false
 @onready var hud = $CanvasLayer/HUD
 @onready var Dorrahcount = $CanvasLayer/HUD/TextureRect/Dorrah
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
-@onready var MainMenuMultiplayer = $CanvasLayer/MainMenuMultiplayer
+@onready var MultiplayerMainMenu = $CanvasLayer/MultiplayerMainMenu
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/AddressEntry")
 @onready var world = get_node("/root/testWorld")
 
@@ -159,7 +159,7 @@ func update_health_bar(health):
 
 #MainMenuMultiplayer
 func _on_remuse_multiplayer_pressed() -> void:
-	MainMenuMultiplayer.hide()
+	MultiplayerMainMenu.hide()
 
 
 func _on_quit_pressed() -> void:
@@ -177,7 +177,7 @@ func _on_peer_disconnected(id: int) -> void:
 
 #host
 func _on_host_button_pressed() -> void:
-	MainMenuMultiplayer.hide()
+	MultiplayerMainMenu.hide()
 	
 	var err = enet_peer.create_server(PORT)
 	if err != OK:
@@ -200,7 +200,7 @@ func _on_host_button_pressed() -> void:
 
 
 func _on_join_button_pressed() -> void:
-	MainMenuMultiplayer.hide()
+	MultiplayerMainMenu.hide()
 	
 	var err = enet_peer.create_client(address_entry.text, PORT)
 	if err != OK:
