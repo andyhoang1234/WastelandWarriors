@@ -57,9 +57,7 @@ func _ready():
 
 	if is_multiplayer_authority():
 		var peer_id = get_multiplayer_authority()
-		if not Global.dorrah_per_player.has(peer_id):
-			Global.set_dorrah(peer_id, 15000) # Starting dorrah for player
-		dorrah = Global.get_dorrah(peer_id)
+		
 	else:
 		# Request current dorrah from server on join
 		rpc_id(1, "request_current_dorrah")
@@ -69,6 +67,7 @@ func _ready():
 	var upnp = UPNP.new()
 	upnp.discover(2000, 2, "InternetGatewayDevice")
 	IpAddress = upnp.query_external_address()
+	
 func _unhandled_input(event):
 	if not is_multiplayer_authority():
 		return
@@ -78,37 +77,9 @@ func _unhandled_input(event):
 	else:
 		TabMenu.hide()
 
-# Server RPC: Player requests to add dorrah (e.g. from earning)
-@rpc("authority", "call_remote")
-func request_add_dorrah(amount: int) -> void:
-	if not is_multiplayer_authority():
-		return
-	var peer_id = get_multiplayer_authority()
-	Global.add_dorrah(peer_id, amount)
-	# Sync updated dorrah back to this player via Global singleton RPC
-	rpc_id(peer_id, "sync_dorrah", peer_id, Global.get_dorrah(peer_id))
-
-# Server RPC: Player requests current dorrah (on join)
-@rpc("authority", "call_remote")
-func request_current_dorrah() -> void:
-	var peer_id = get_multiplayer_authority()
-	var current = Global.get_dorrah(peer_id)
-
-	rpc_id(peer_id, "sync_dorrah", peer_id, current)
-
-# Client RPC: Sync dorrah value from server
-@rpc("any_peer", "call_remote")
-func sync_dorrah(peer_id: int, new_value: int) -> void:
-	if peer_id == get_multiplayer_authority():
-		dorrah = new_value
-		if world:
-			world.update_dorrah_label(new_value)
-
-func earn_dorrah(amount: int) -> void:
-	# Client requests server to add dorrah
-	rpc_id(1, "request_add_dorrah", amount)
 
 func _physics_process(delta: float) -> void:
+	print(dorrah)
 	# Movement and stamina logic
 	if Input.is_action_pressed("player_run") and stamina > 0:
 		SPEED = 10.0
@@ -194,19 +165,13 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 
-#LOSE
-func _on_timer_timeout() -> void:
-	pass # Replace with function body.
-
 # Called when a new peer connects (server only)
 func _on_peer_connected(id: int) -> void:
-	print("Player connected with peer ID:", id)
 	Global.initialize_player(id)
 	add_player(id)
 
 # Called when a peer disconnects (server only)
 func _on_peer_disconnected(id: int) -> void:
-	print("Player disconnected with peer ID:", id)
 	remove_player(id)
 
 #host

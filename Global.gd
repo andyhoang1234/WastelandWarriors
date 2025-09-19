@@ -17,29 +17,28 @@ var dorrah_per_player := {}
 var instakill = 1
 var health
 
-func _ready():
-	dorrah_per_player.clear()
+func _add_dorrah(type, shooter_peer_id):
+	var target_id = shooter_peer_id
+	var player = find_player(target_id)
+	if player:
+		player.dorrah += 50
+	
+	
+# Global.gd (autoload)
 
-func initialize_player(peer_id: int) -> void:
-	if not dorrah_per_player.has(peer_id):
-		set_dorrah(peer_id, 0)
+func find_player(target_id: int) -> Node:
+	var root = get_tree().get_current_scene()
+	if root == null:
+		return null  # No scene loaded yet
+	
+	return _search(root, target_id)
 
-func get_dorrah(peer_id: int) -> int:
-	return dorrah_per_player.get(peer_id, 0)
+func _search(node: Node, target_id: int) -> Node:
 
-func set_dorrah(peer_id: int, value: int) -> void:
-	dorrah_per_player[peer_id] = value
-
-func add_dorrah(peer_id: int, amount: int) -> void:
-	var current = get_dorrah(peer_id)
-	set_dorrah(peer_id, current + amount)
-	print("Player", peer_id, "now has dorrah:", get_dorrah(peer_id))
-
-func subtract_dorrah(peer_id: int, amount: int) -> void:
-	set_dorrah(peer_id, max(0, get_dorrah(peer_id) - amount))
-
-# Server -> Client sync dorrah RPC
-@rpc("any_peer", "call_remote")
-func sync_dorrah(peer_id: int, new_value: int) -> void:
-	dorrah_per_player[peer_id] = new_value
-	print("Synced dorrah for player", peer_id, "to", new_value)
+	if node.get("shooter_peer_id") == target_id:
+		return node
+	for child in node.get_children():
+		var found = _search(child, target_id)
+		if found:
+			return found
+	return null

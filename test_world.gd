@@ -48,7 +48,6 @@ func update_dorrah_label(new_value: int):
 	var label = $CanvasLayer/DorrahLabel  # Adjust path to your label
 	if label:
 		label.update_label(new_value)
-		print("Updating dorrah label to", new_value)
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("pause"):
@@ -65,13 +64,11 @@ func _unhandled_input(_event):
 
 # Called when a new peer connects (server only)
 func _on_peer_connected(id: int) -> void:
-	print("Player connected with peer ID:", id)
 	Global.initialize_player(id)
 	add_player(id)
 
 # Called when a peer disconnects (server only)
 func _on_peer_disconnected(id: int) -> void:
-	print("Player disconnected with peer ID:", id)
 	remove_player(id)
 
 # Main menu buttons 
@@ -94,14 +91,12 @@ func add_player(peer_id: int) -> void:
 	player.shooter_peer_id = peer_id
 	add_child(player)
 	tracked = true
-	print("Added player with peer ID:", peer_id)
 
 
 func remove_player(peer_id: int) -> void:
 	var player_node = get_node_or_null(str(peer_id))
 	if player_node:
 		player_node.queue_free()
-		print("Removed player with peer ID:", peer_id)
 
 # Pause menu buttons 
 
@@ -181,7 +176,6 @@ func upnp_setup() -> void:
 	var map_result = upnp.add_port_mapping(PORT)
 	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Error %s" % map_result)
 	
-	#print("Success! Join Address: %s" % upnp.query_external_address())
 
 func _on_multiplayer_pressed() -> void:
 	main_menu.hide()
