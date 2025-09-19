@@ -34,7 +34,7 @@ func find_player(target_id: int) -> Node:
 
 func _search(node: Node, target_id: int) -> Node:
 
-	if node.get("shooter_peer_id") == target_id:
+	if node.get("player_peer_id") == target_id:
 		return node
 	for child in node.get_children():
 		var found = _search(child, target_id)
