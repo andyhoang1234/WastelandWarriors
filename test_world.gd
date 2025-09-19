@@ -9,7 +9,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 @onready var OptionsMenu = $CanvasLayer/OptionsMenu
 @onready var ControlsMenu = $CanvasLayer/ControlsMenu
 @onready var Lose = $CanvasLayer/Lose
-@onready var MultiplayerMainMenu = player_instance.get_Node($CanvasLayer/MultiplayerMainMenu)
+@onready var MultiplayerMainMenu = $CanvasLayer/MultiplayerMainMenu
 
 var IpAddress
 
@@ -18,9 +18,7 @@ var tracked = false
 var player
 var toggle = true
 var bulletScene = preload("res://Bullet.tscn")
-var player_scene = preload("res://player.tscn")
-var player_instance = player_scene.instantiate()
-add_child(player_instance)
+
 
 
 func _ready() -> void:
