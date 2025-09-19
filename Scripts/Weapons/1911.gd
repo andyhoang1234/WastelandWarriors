@@ -10,6 +10,7 @@ var recoil_rotation_side = -0.005
 @export var fireRate: float = 0.1
 
 # Internal State
+@onready var shooter_peer_id = get_parent().get_parent().get_parent().player_peer_id
 var active := false
 var canShoot := true
 var timeSinceLastShot := 0.0
@@ -44,6 +45,7 @@ func _physics_process(delta):
 		world.add_child(bullet)
 		bullet.global_transform = bulletSpawn.global_transform
 		bullet.scale = Vector3(0.01, 0.01, 0.01)
+		bullet.shooter_peer_id = shooter_peer_id
 		ammo -= 1
 
 		# Apply recoil in local Z-axis

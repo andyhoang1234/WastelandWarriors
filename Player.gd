@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 signal health_changed(health)
-var shooter_peer_id
+var player_peer_id
 
 
 const PORT = 9999
@@ -16,6 +16,7 @@ var tracked = false
 @onready var LOSE = $CanvasLayer/LOSE
 @onready var TabMenu = $CanvasLayer/TabMenu
 @onready var hud = $CanvasLayer/HUD
+@onready var Dorrahcount = $CanvasLayer/HUD/TextureRect/Dorrah
 @onready var health_bar = $CanvasLayer/HUD/HealthBar
 @onready var MainMenuMultiplayer = $CanvasLayer/MainMenuMultiplayer
 @onready var address_entry = get_node_or_null("CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/AddressEntry")
@@ -79,7 +80,7 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta: float) -> void:
-	print(dorrah)
+	Dorrahcount.text = "Dorrah: " + str(dorrah)
 	# Movement and stamina logic
 	if Input.is_action_pressed("player_run") and stamina > 0:
 		SPEED = 10.0
