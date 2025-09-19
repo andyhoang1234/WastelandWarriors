@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://xcjrjq5cbn7y"]
+[gd_scene load_steps=28 format=3 uid="uid://xcjrjq5cbn7y"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_2v3wm"]
 [ext_resource type="Texture2D" uid="uid://01jqno55vsyr" path="res://Textures/Screenshot from 2025-03-26 12-36-13.png" id="2_bhhdd"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bphdutvg0p6g1" path="res://Scripts/Weapons/XM4.tscn" id="6_umhhw"]
 [ext_resource type="PackedScene" uid="uid://us5low51ygaq" path="res://Scripts/Weapons/1911.tscn" id="7_r55j8"]
 [ext_resource type="PackedScene" uid="uid://dhypv5vekd2eq" path="res://mini_map.tscn" id="7_uqshk"]
-[ext_resource type="Script" path="res://label.gd" id="9_2317f"]
 [ext_resource type="Texture2D" uid="uid://080ue7kg7wk0" path="res://Textures/Cross.png" id="10_1r62a"]
 [ext_resource type="PackedScene" uid="uid://cl416gdb1fgwr" path="res://addons/maaacks_options_menus/base/scenes/menus/options_menu/option_control/slider_option_control.tscn" id="10_du1vn"]
 [ext_resource type="Texture2D" uid="uid://cagu6f1kwno5r" path="res://Textures/menus/201019066-illustration-of-the-city-at-sunset-with-a-river-in-the-foreground.jpg" id="10_u70dl"]
@@ -64,6 +63,17 @@ bg_color = Color(1, 0.117647, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqyt7"]
 bg_color = Color(0.00392157, 1, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_73oh5"]
+colors = PackedColorArray(0, 0, 0, 0.392157, 0, 0, 0, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r760k"]
+gradient = SubResource("Gradient_73oh5")
+
+[sub_resource type="LabelSettings" id="LabelSettings_bx247"]
+font_size = 19
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_2v3wm")
@@ -139,13 +149,22 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_tqyt7")
 value = 100.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="CanvasLayer/HUD"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD"]
 layout_mode = 0
-offset_left = 269.0
-offset_top = 618.0
-offset_right = 309.0
-offset_bottom = 641.0
-script = ExtResource("9_2317f")
+offset_left = -2.0
+offset_top = 608.0
+offset_right = 426.0
+offset_bottom = 672.0
+texture = SubResource("GradientTexture2D_r760k")
+
+[node name="Dorrah" type="Label" parent="CanvasLayer/HUD/TextureRect"]
+layout_mode = 0
+offset_left = 277.215
+offset_top = 6.825
+offset_right = 353.215
+offset_bottom = 33.825
+text = "Dorrah: "
+label_settings = SubResource("LabelSettings_bx247")
 
 [node name="TabMenu" type="Control" parent="CanvasLayer"]
 process_mode = 2
