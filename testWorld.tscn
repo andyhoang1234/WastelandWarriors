@@ -568,6 +568,8 @@ transform = Transform3D(-4.37114e-08, 0, 1.42399, 0, 1.38111, 0, -1, 0, -6.22447
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0.366295, -1.32749, -17.4908)
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/MainMenuOptions" to="." method="_on_main_menu_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
