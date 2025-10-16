@@ -150,11 +150,25 @@ process_mode = 3
 layout_mode = 2
 text = "Single Player"
 
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Address to Join Here"
+alignment = 1
+
 [node name="MainMenuOptions" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Options"
 
 [node name="Multiplayer" type="Button" parent="CanvasLayer/MainMenu/Control/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Multiplayer"
 
