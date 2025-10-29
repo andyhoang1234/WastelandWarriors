@@ -16,12 +16,15 @@ var dorrah_per_player := {}
 
 var instakill = 1
 var health
+var amount
 
 func _add_dorrah(type, shooter_peer_id):
 	var target_id = shooter_peer_id
 	var player = find_player(target_id)
 	if player:
-		player.dorrah += 50
+		randomize()
+		give_random_currency()
+		player.dorrah += amount
 	
 	
 # Global.gd (autoload)
@@ -42,3 +45,8 @@ func _search(node: Node, target_id: int) -> Node:
 		if found:
 			return found
 	return null
+	
+func give_random_currency() -> void:
+	# Generate a random integer between min_amount and max_amount (inclusive)
+	amount = randi() % (100 - 50 + 1) + 50
+	
