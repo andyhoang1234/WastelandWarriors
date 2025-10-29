@@ -62,7 +62,6 @@ func _unhandled_input(_event):
 
 # Called when a new peer connects (server only)
 func _on_peer_connected(id: int) -> void:
-	Global.initialize_player(id)
 	add_player(id)
 
 # Called when a peer disconnects (server only)
