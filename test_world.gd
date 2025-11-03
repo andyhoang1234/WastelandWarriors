@@ -35,30 +35,10 @@ func _physics_process(_delta):
 	if tracked:
 		get_tree().call_group("enemy", "update_target_location", player.global_transform.origin)
 
-func _input(_event):
-	if Input.is_action_just_pressed("pause"):
-		if get_tree().paused == false:
-			get_tree().paused = true
-			Global.PauseMenu.show()
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
 func update_dorrah_label(new_value: int):
 	var label = $CanvasLayer/DorrahLabel  # Adjust path to your label
 	if label:
 		label.update_label(new_value)
-
-func _unhandled_input(_event):
-	if Input.is_action_just_pressed("pause"):
-		if toggle:
-			toggle = false
-			get_tree().paused = true
-			PauseMenu.show()
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			toggle = true
-			get_tree().paused = false
-			PauseMenu.hide()
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 # Called when a new peer connects (server only)
 func _on_peer_connected(id: int) -> void:
@@ -79,6 +59,25 @@ func _on_main_menu_options_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+@rpc("any_peer", "call_local")
+func sync_pause(paused: bool):
+	get_tree().paused = paused
+	if paused:
+		PauseMenu.show()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		PauseMenu.hide()
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _unhandled_input(_event):
+	if Input.is_action_just_pressed("pause"):
+		if toggle:
+			toggle = false
+			rpc("sync_pause", true)  # Broadcast pause to all peers
+		else:
+			toggle = true
+			rpc("sync_pause", false)  # Broadcast unpause
 
 func add_player(peer_id: int) -> void:
 	if get_node_or_null(str(peer_id)):
@@ -155,6 +154,8 @@ func _on_join_button_pressed() -> void:
 	if err != OK:
 		push_error("Failed to connect to server at %s:%d" % [address_entry.text, PORT])
 		return
+	else:
+		print("Connected to: " % [address_entry.text, PORT])
 	
 	multiplayer.multiplayer_peer = enet_peer
 	
